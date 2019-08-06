@@ -1,29 +1,15 @@
 <?php
 require 'vendor/autoload.php';
 
-// use Slim\Views\PhpRenderer;
+require_once('./settings.php');
 
-// get env
-$dotenv = Dotenv\Dotenv::create(__DIR__);
-$dotenv->load();
-
-$template = new PhpRenderer("./templates");
-
-// Create and configure Slim app
-$config = ['settings' => [
-    'addContentLengthHeader' => false,
-    'displayErrorDetails' => true,
-    'view' => $template
-    // 'mode' => 'development'
-]];
-$app = new \Slim\App($config);
 
 // Define app routes
-
-$app->get('/', function ($request, $response, $args) use($app) {
-    return $this->view->render('hello.php');
+$app->get('/', function ($request, $response, $args) {
+    // $this->flash->addMessage('Test', 'This is a message');
+    // $csrf = get_csrf_token($request, $this);
+    return $this->view->render($response, 'hello.html');
 });
-
 // Run app
 $app->run();
 
