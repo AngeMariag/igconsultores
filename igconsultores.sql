@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 06-08-2019 a las 03:38:35
--- Versión del servidor: 5.7.24
--- Versión de PHP: 7.1.26
+-- Servidor: localhost
+-- Tiempo de generación: 06-08-2019 a las 19:34:25
+-- Versión del servidor: 10.3.16-MariaDB
+-- Versión de PHP: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,14 +28,12 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `acreedor`
 --
 
-DROP TABLE IF EXISTS `acreedor`;
-CREATE TABLE IF NOT EXISTS `acreedor` (
-  `id_acreedor` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `acreedor` (
+  `id_acreedor` int(11) NOT NULL,
   `tipo_documento` varchar(5) NOT NULL,
   `numero_documento` varchar(20) NOT NULL,
   `acreedor` varchar(50) NOT NULL,
-  `razon_social` varchar(50) NOT NULL,
-  UNIQUE KEY `id_acreedor` (`id_acreedor`)
+  `razon_social` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -44,14 +42,12 @@ CREATE TABLE IF NOT EXISTS `acreedor` (
 -- Estructura de tabla para la tabla `cartera`
 --
 
-DROP TABLE IF EXISTS `cartera`;
-CREATE TABLE IF NOT EXISTS `cartera` (
-  `id_cartera` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cartera` (
+  `id_cartera` int(11) NOT NULL,
   `id_acreedor` int(11) NOT NULL,
   `id_deudor` int(11) NOT NULL,
   `id_documento` int(11) NOT NULL,
-  `fecha_cartera` date NOT NULL,
-  PRIMARY KEY (`id_cartera`)
+  `fecha_cartera` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -60,17 +56,15 @@ CREATE TABLE IF NOT EXISTS `cartera` (
 -- Estructura de tabla para la tabla `codeudor`
 --
 
-DROP TABLE IF EXISTS `codeudor`;
-CREATE TABLE IF NOT EXISTS `codeudor` (
-  `id_codeudor` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `codeudor` (
+  `id_codeudor` int(11) NOT NULL,
   `nombre_codeudor` varchar(30) NOT NULL,
   `apellido_codeudor` varchar(30) NOT NULL,
   `tipodocumento_codeudor` varchar(30) NOT NULL,
   `documento_codeudor` varchar(30) NOT NULL,
   `telefono_codeudor` varchar(15) NOT NULL,
   `direccion_codeudor` varchar(100) NOT NULL,
-  `id_deudor` int(11) NOT NULL,
-  UNIQUE KEY `id_codeudor` (`id_codeudor`)
+  `id_deudor` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -79,17 +73,15 @@ CREATE TABLE IF NOT EXISTS `codeudor` (
 -- Estructura de tabla para la tabla `deudor`
 --
 
-DROP TABLE IF EXISTS `deudor`;
-CREATE TABLE IF NOT EXISTS `deudor` (
-  `id_deudor` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `deudor` (
+  `id_deudor` int(11) NOT NULL,
   `id_acreedor` int(11) NOT NULL,
   `nombre_deudor` varchar(30) NOT NULL,
   `apellido_deudor` varchar(30) NOT NULL,
   `tipodocumento_deudor` varchar(30) NOT NULL,
   `documento_deudor` varchar(30) NOT NULL,
   `telefono_deudor` varchar(15) NOT NULL,
-  `direccion_deudor` varchar(100) NOT NULL,
-  UNIQUE KEY `id_deudor` (`id_deudor`)
+  `direccion_deudor` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -98,13 +90,11 @@ CREATE TABLE IF NOT EXISTS `deudor` (
 -- Estructura de tabla para la tabla `documentos_cartera`
 --
 
-DROP TABLE IF EXISTS `documentos_cartera`;
-CREATE TABLE IF NOT EXISTS `documentos_cartera` (
-  `id_documento` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `documentos_cartera` (
+  `id_documento` int(11) NOT NULL,
   `nombre_documento` varchar(50) NOT NULL,
   `ruta_documento` text NOT NULL,
-  `id_cartera` int(11) NOT NULL,
-  UNIQUE KEY `id_documento` (`id_documento`)
+  `id_cartera` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -113,9 +103,8 @@ CREATE TABLE IF NOT EXISTS `documentos_cartera` (
 -- Estructura de tabla para la tabla `ficha`
 --
 
-DROP TABLE IF EXISTS `ficha`;
-CREATE TABLE IF NOT EXISTS `ficha` (
-  `id_ficha` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ficha` (
+  `id_ficha` int(11) NOT NULL,
   `titulo_ficha` varchar(100) NOT NULL,
   `capital_ficha` varchar(30) NOT NULL,
   `interes` varchar(10) NOT NULL,
@@ -125,8 +114,7 @@ CREATE TABLE IF NOT EXISTS `ficha` (
   `sancion` varchar(20) NOT NULL,
   `total` varchar(20) NOT NULL,
   `id_deudor` int(11) NOT NULL,
-  `estado` int(15) NOT NULL,
-  UNIQUE KEY `id_ficha` (`id_ficha`)
+  `estado` int(15) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -135,16 +123,14 @@ CREATE TABLE IF NOT EXISTS `ficha` (
 -- Estructura de tabla para la tabla `gestion`
 --
 
-DROP TABLE IF EXISTS `gestion`;
-CREATE TABLE IF NOT EXISTS `gestion` (
-  `id_gestion` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `gestion` (
+  `id_gestion` int(11) NOT NULL,
   `gestion` int(11) NOT NULL,
   `fecha_gestion` int(11) NOT NULL,
   `monto_gestion` int(11) NOT NULL,
   `estado_gestion` int(11) NOT NULL,
   `recordatorio` int(11) NOT NULL,
-  `id_ficha` varchar(11) NOT NULL,
-  UNIQUE KEY `id_gestion` (`id_gestion`)
+  `id_ficha` varchar(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -153,14 +139,12 @@ CREATE TABLE IF NOT EXISTS `gestion` (
 -- Estructura de tabla para la tabla `gestor`
 --
 
-DROP TABLE IF EXISTS `gestor`;
-CREATE TABLE IF NOT EXISTS `gestor` (
-  `id_gestor` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `gestor` (
+  `id_gestor` int(11) NOT NULL,
   `codigo_gestor` varchar(10) NOT NULL,
   `identificacion_gestor` varchar(15) NOT NULL,
   `nombre_gestor` varchar(10) NOT NULL,
-  `apellido_gestor` varchar(10) NOT NULL,
-  UNIQUE KEY `id_gestor` (`id_gestor`)
+  `apellido_gestor` varchar(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -169,12 +153,10 @@ CREATE TABLE IF NOT EXISTS `gestor` (
 -- Estructura de tabla para la tabla `observaciones_ficha`
 --
 
-DROP TABLE IF EXISTS `observaciones_ficha`;
-CREATE TABLE IF NOT EXISTS `observaciones_ficha` (
-  `id_observacion` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `observaciones_ficha` (
+  `id_observacion` int(11) NOT NULL,
   `id_ficha` int(11) NOT NULL,
-  `observacion` varchar(350) NOT NULL,
-  UNIQUE KEY `id_observacion` (`id_observacion`)
+  `observacion` varchar(350) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -183,8 +165,7 @@ CREATE TABLE IF NOT EXISTS `observaciones_ficha` (
 -- Estructura de tabla para la tabla `pagos_contabilidad`
 --
 
-DROP TABLE IF EXISTS `pagos_contabilidad`;
-CREATE TABLE IF NOT EXISTS `pagos_contabilidad` (
+CREATE TABLE `pagos_contabilidad` (
   `id_pagos` int(11) NOT NULL,
   `fecha_pago` date NOT NULL,
   `numero_recibo` varchar(30) NOT NULL,
@@ -199,14 +180,148 @@ CREATE TABLE IF NOT EXISTS `pagos_contabilidad` (
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario` varchar(30) NOT NULL,
-  `pass` varchar(30) NOT NULL,
-  `nivel` int(5) NOT NULL,
-  UNIQUE KEY `id_usuario` (`id_usuario`)
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `nivel` int(5) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `username`, `password`, `nivel`) VALUES
+(1, 'jysa', '73a22c28d279ff107cf8ce992ebc3cada6623b6170b38271e6024ca4bd2029995c126b0e9e2004a5f1d11cf36ef01812413ea18e33105f608d752797107fa81a', 1);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `acreedor`
+--
+ALTER TABLE `acreedor`
+  ADD UNIQUE KEY `id_acreedor` (`id_acreedor`);
+
+--
+-- Indices de la tabla `cartera`
+--
+ALTER TABLE `cartera`
+  ADD PRIMARY KEY (`id_cartera`);
+
+--
+-- Indices de la tabla `codeudor`
+--
+ALTER TABLE `codeudor`
+  ADD UNIQUE KEY `id_codeudor` (`id_codeudor`);
+
+--
+-- Indices de la tabla `deudor`
+--
+ALTER TABLE `deudor`
+  ADD UNIQUE KEY `id_deudor` (`id_deudor`);
+
+--
+-- Indices de la tabla `documentos_cartera`
+--
+ALTER TABLE `documentos_cartera`
+  ADD UNIQUE KEY `id_documento` (`id_documento`);
+
+--
+-- Indices de la tabla `ficha`
+--
+ALTER TABLE `ficha`
+  ADD UNIQUE KEY `id_ficha` (`id_ficha`);
+
+--
+-- Indices de la tabla `gestion`
+--
+ALTER TABLE `gestion`
+  ADD UNIQUE KEY `id_gestion` (`id_gestion`);
+
+--
+-- Indices de la tabla `gestor`
+--
+ALTER TABLE `gestor`
+  ADD UNIQUE KEY `id_gestor` (`id_gestor`);
+
+--
+-- Indices de la tabla `observaciones_ficha`
+--
+ALTER TABLE `observaciones_ficha`
+  ADD UNIQUE KEY `id_observacion` (`id_observacion`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `unique` (`username`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `acreedor`
+--
+ALTER TABLE `acreedor`
+  MODIFY `id_acreedor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `cartera`
+--
+ALTER TABLE `cartera`
+  MODIFY `id_cartera` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `codeudor`
+--
+ALTER TABLE `codeudor`
+  MODIFY `id_codeudor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `deudor`
+--
+ALTER TABLE `deudor`
+  MODIFY `id_deudor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `documentos_cartera`
+--
+ALTER TABLE `documentos_cartera`
+  MODIFY `id_documento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ficha`
+--
+ALTER TABLE `ficha`
+  MODIFY `id_ficha` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `gestion`
+--
+ALTER TABLE `gestion`
+  MODIFY `id_gestion` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `gestor`
+--
+ALTER TABLE `gestor`
+  MODIFY `id_gestor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `observaciones_ficha`
+--
+ALTER TABLE `observaciones_ficha`
+  MODIFY `id_observacion` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
