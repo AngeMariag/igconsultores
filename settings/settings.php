@@ -51,11 +51,12 @@ $container['flash'] = function () {
 };
 
 // set middleware global
-// $app->add($container->get('csrf'));
 $app->add(function ($request, $response, $next) {
     $this->view->offsetSet("flash", $this->flash);
     return $next($request, $response);
 });
+
+$app->add($sesion_expired);
 
 define('DB_HOST', $_SERVER['DB_HOST']);
 define('DB_USER', $_SERVER['DB_USER']);
