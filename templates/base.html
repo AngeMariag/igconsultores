@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>IG Consultores</title>
+    <meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IG Consultores | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('static/css/bootstrap.min.css') }}">
+    {% block css %}{% endblock %}
 </head>
-<body>
-{% block content %}
 
-{% endblock %}
+<body>
+    {% block content %}{% endblock %}
+    <script src="{{ asset('static/js/jquery-3.3.1.slim.min.js') }}"></script>
+    <script src="{{ asset('static/js/popper.min.js') }}"></script>
+    <script src="{{ asset('static/js/bootstrap.min.js') }}"></script>
+    {% block js %}{% endblock %}
 </body>
+
 </html>

@@ -12,6 +12,7 @@
         "vlucas/phpdotenv": "^3.4",
         "slim/csrf": "^0.8.3",
         "slim/twig-view": "^2.5",
-        "slim/flash": "^0.4.0"
+        "slim/flash": "^0.4.0",
+        "lovecoding/twig-asset": "^1.1"
     }
 }

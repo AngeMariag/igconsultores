@@ -1,9 +1,10 @@
 <?php
 session_cache_limiter(false);
 session_start();
+ini_set('session_save_path', "../tmp");
 
 // get env
-$dotenv = Dotenv\Dotenv::create(__DIR__);
+$dotenv = Dotenv\Dotenv::create(__DIR__, '../.env');
 $dotenv->load();
 
 // Create and configure Slim app
@@ -29,8 +30,14 @@ $container['view'] = function ($container) {
     $uri = \Slim\Http\Uri::createFromEnvironment(new \Slim\Http\Environment($_SERVER));
     $view->addExtension(new \Slim\Views\TwigExtension($router, $uri));
     $view->addExtension(
-        new CsrfExtension
+        new CsrfExtension($container)
     );
+    $assetManager = new LoveCoding\TwigAsset\TwigAssetManagement([
+        'verion' => '1'
+    ]);
+
+    $assetManager->addPath('static', '/static');
+    $view->addExtension($assetManager->getAssetExtension());
 
     return $view;
 };
@@ -44,5 +51,14 @@ $container['flash'] = function () {
 };
 
 // set middleware global
-$app->add($container->get('csrf'));
+// $app->add($container->get('csrf'));
+$app->add(function ($request, $response, $next) {
+    $this->view->offsetSet("flash", $this->flash);
+    return $next($request, $response);
+});
 
+define('DB_HOST', $_SERVER['DB_HOST']);
+define('DB_USER', $_SERVER['DB_USER']);
+define('DB_PASSWORD', $_SERVER['DB_PASSWORD']);
+define('DB_NAME', $_SERVER['DB_NAME']);
+define('SECRET_KEY', $_SERVER['SECRET_KEY']);
