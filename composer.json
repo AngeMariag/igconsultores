@@ -1,0 +1,15 @@
+{
+    "name": "jysa/cartera",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Junior Sanchez",
+            "email": "r.a.s.g65@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.12",
+        "vlucas/phpdotenv": "^3.4",
+        "slim/php-view": "^2.2"
+    }
+}
