@@ -1,11 +1,15 @@
 <?php
+
 use utils\bd\bd\Conection;
+
 namespace utils\bd\bd;
+
 class ORM extends Conection
 {
     protected static $table;
 
-    private function typeVar($var) {
+    private function typeVar($var)
+    {
         $t = 'b';
         if (is_float($var)) {
             $t = 'd';
@@ -32,41 +36,41 @@ class ORM extends Conection
         }
         $columns = array_keys($filtered);
         if ($this->id) {
-            for ($i=0; $i < count($columns); $i++) {
+            for ($i = 0; $i < count($columns); $i++) {
                 $params .= $columns[$i] . " = ?" . ",";
             }
-            $params =  trim($params,",");
-            $query = "UPDATE " . static ::$table . " SET $params WHERE id =" . $this->id;
+            $params =  trim($params, ",");
+            $query = "UPDATE " . static::$table . " SET $params WHERE id =" . $this->id;
         } else {
-            for ($i=1; $i <= count($columns); $i++) {
+            for ($i = 1; $i <= count($columns); $i++) {
                 $params[] = "?";
             }
             $params = join(", ", $params);
             $columns = join(", ", $columns);
-            $query = "INSERT INTO " . static ::$table . " ($columns) VALUES ($params)";
+            $query = "INSERT INTO " . static::$table . " ($columns) VALUES ($params)";
         }
         try {
-            $pre = $this->getconn()->prepare($query); 
+            $pre = $this->getconn()->prepare($query);
             $a_params = [""];
             $arg = array_values($filtered);
-            for ($i=0; $i < count($arg); $i++) { 
+            for ($i = 0; $i < count($arg); $i++) {
                 $a_params[0] .= self::typeVar($arg[$i]);
-                $a_params[] = & $arg[$i];
+                $a_params[] = &$arg[$i];
             }
             if (call_user_func_array([$pre, 'bind_param'], $a_params)) {
-                if ($pre->execute()){
+                if ($pre->execute()) {
                     $this->id = $pre->insert_id;
                     $this->destroy();
                     return true;
-                }else{
+                } else {
                     die("Falló la ejecución: (" . $pre->errno . ") " . $pre->error);
                 }
-            }else{
+            } else {
                 die("Falló la vinculación de parámetros: (" . $pre->errno . ") " . $pre->error);
             }
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             echo 'Excepción capturada: ',  $e->getMessage(), "\n";
-        }  
+        }
     }
     public function where($columna, $signo, $valor)
     {
@@ -79,28 +83,29 @@ class ORM extends Conection
             if ($pre->execute()) {
                 $result = $pre->get_result();
                 $obj = [];
-                while ($row = $result->fetch_assoc()){
+                while ($row = $result->fetch_assoc()) {
                     $obj[] = new $class($row);
-                }  
+                }
                 self::destroy();
                 return $obj;
-            }else{
+            } else {
                 die("Falló al ejecutar la query: (" . $pre->errno . ") " . $pre->error);
             }
-        }else{
+        } else {
             die("Falló la vinculación de parámetros: (" . $pre->errno . ") " . $pre->error);
         }
     }
     public function find($columna, $signo, $id)
     {
         $resultado = self::where($columna, $signo, $id);
-        if(count($resultado)){
+        if (count($resultado)) {
             return $resultado[0];
-        }else{
+        } else {
             return [];
         }
     }
-    public function all(){
+    public function all()
+    {
         $table = static::$table;
         $query = "SELECT * FROM {$table}";
         $class = get_called_class();
@@ -108,32 +113,32 @@ class ORM extends Conection
         $pre->execute();
         $result = $pre->get_result();
         $obj = [];
-        while ($row = $result->fetch_assoc()){
+        while ($row = $result->fetch_assoc()) {
             $obj[] = new $class($row);
-        }  
+        }
         self::destroy();
         return $obj;
     }
-    public function delete($valor=null,$columna=null)
+    public function delete($valor = null, $columna = null)
     {
         $table = static::$table;
-        $colum = (is_null($columna)?"id":$columna);
+        $colum = (is_null($columna) ? "id" : $columna);
         $query = "DELETE FROM {$table} WHERE {$colum} = ?";
         $pre = $this->getconn()->prepare($query);
         $rs = null;
-        if(!is_null($valor)){
+        if (!is_null($valor)) {
             $pre->bind_param(self::typeVar($valor), $valor);
-        }else{
+        } else {
             if (is_null($this->id)) {
                 $rs = $pre->query("DELETE FROM {$table}");
-            }else{
+            } else {
                 $pre->bind_param("i", $this->id);
             }
         }
-        if($pre->execute()){
+        if ($pre->execute()) {
             self::destroy();
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -145,19 +150,19 @@ class ORM extends Conection
         }
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
-        }else{
+        } else {
             $page = 1;
         }
-        $total = ($page-1) * $x_page;
+        $total = ($page - 1) * $x_page;
         $query = "SELECT * FROM {$table} LIMIT {$total}, {$x_page}";
         $class = get_called_class();
         $pre = $this->getconn()->prepare($query);
         $pre->execute();
         $result = $pre->get_result();
         $obj = [];
-        while ($row = $result->fetch_assoc()){
+        while ($row = $result->fetch_assoc()) {
             $obj[] = new $class($row);
-        }  
+        }
         self::destroy();
         $pagina = self::paginate_template($x_page);
         return [$obj, $pagina];
@@ -173,9 +178,9 @@ class ORM extends Conection
         $class = get_called_class();
         $pre = $this->getconn()->query($query);
         $obj = [];
-        while ($row = $pre->fetch_object()){
+        while ($row = $pre->fetch_object()) {
             $obj[] = $row;
-        }  
+        }
         self::destroy();
         return $obj;
     }

@@ -6,7 +6,7 @@ class CsrfExtension extends \Twig_Extension implements Twig_Extension_GlobalsInt
      * @var \Slim\Csrf\Guard
      */
     protected $csrf;
-    
+
     public function __construct($container)
     {
         $this->csrf = $container->get('csrf');
