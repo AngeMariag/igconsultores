@@ -4,19 +4,19 @@
     </button>
     
     <a class="navbar-brand" href="#">
-        <img src="{{ asset('static/img/icono.png') }}" width="60" height="40" class="d-inline-block align-top" alt="">
+        <img src="{{base_url()}}/{{ asset('static/img/icono.png') }}" width="60" height="40" class="d-inline-block align-top" alt="">
         IG CONSULTORES
     </a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <div class="navbar-nav mr-auto ml-auto text-center">
-        <a class="nav-item nav-link active" href="?op=inicio">INICIO</a>
+        <a class="nav-item nav-link active" href="{{path_for('dashboard')}}">INICIO</a>
 
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             REGISTROS
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">CARTERA</a>
+                <a class="dropdown-item" href="{{path_for('cartera_new_get')}}">CARTERA</a>
                 <a class="dropdown-item" href="">GESTIÓN</a>
                 <a class="dropdown-item" href="">PAGOS</a>
                 <a class="dropdown-item" href="#">CONTABILIDAD</a>

@@ -27,7 +27,10 @@ $app->post('/', function ($request, $response) {
     }
 
     sessionLocal('is_authenticated', true);
-    sessionLocal('user', $user);
+    sessionLocal('user', [
+        'username' => $user->username,
+        'nivel' => $user->nivel
+    ]);
     return $response->withRedirect($this->router->pathFor('dashboard'));
 });
 

@@ -58,6 +58,11 @@ $app->add(function ($request, $response, $next) {
 // 
 $app->add($sesion_expired);
 
+$app->add(function ($request, $response, $next) {
+    $this->view->offsetSet("user", sessionLocal('user'));
+    return $next($request, $response);
+});
+
 define('DB_HOST', $_SERVER['DB_HOST']);
 define('DB_USER', $_SERVER['DB_USER']);
 define('DB_PASSWORD', $_SERVER['DB_PASSWORD']);
