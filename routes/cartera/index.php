@@ -55,6 +55,7 @@ $app->group('/cartera', function () use ($app) {
         $acreedor->documento = $document;
         $acreedor->razon_social = $name;
         $acreedor->save();
+        unset($_SESSION['acreedor']);
         return $response->withRedirect($this->router->pathFor('cartera_list'));
     })->setName('cartera_new_post');
 

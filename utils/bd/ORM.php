@@ -25,7 +25,6 @@ class ORM extends Conection
     {
         $values = $this->getColumns();
         $filtered = null;
-        $params = "";
         foreach ($values as $key => $value) {
             if ($value !== null && !is_integer($key) && $value !== '' && strpos($key, 'obj_') === false && $key !== 'id') {
                 if ($value === false) {
@@ -36,15 +35,17 @@ class ORM extends Conection
         }
         $columns = array_keys($filtered);
         if ($this->id) {
+            $params = "";
             for ($i = 0; $i < count($columns); $i++) {
                 $params .= $columns[$i] . " = ?" . ",";
             }
             $params =  trim($params, ",");
             $query = "UPDATE " . static::$table . " SET $params WHERE id =" . $this->id;
         } else {
+            $params = [];
             for ($i = 1; $i <= count($columns); $i++) {
-                $params[] = "?";
-            }
+                $params[] =  "?";
+            }           
             $params = join(", ", $params);
             $columns = join(", ", $columns);
             $query = "INSERT INTO " . static::$table . " ($columns) VALUES ($params)";
@@ -63,10 +64,10 @@ class ORM extends Conection
                     $this->destroy();
                     return true;
                 } else {
-                    die("Falló la ejecución: (" . $pre->errno . ") " . $pre->error);
+                    die("Falló la ejecución: (" . $pre->error . ") " . $pre->error);
                 }
             } else {
-                die("Falló la vinculación de parámetros: (" . $pre->errno . ") " . $pre->error);
+                die("Falló la vinculación de parámetros: (" . $pre->error . ") " . $pre->error);
             }
         } catch (Exception $e) {
             echo 'Excepción capturada: ',  $e->getMessage(), "\n";

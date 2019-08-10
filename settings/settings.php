@@ -61,7 +61,7 @@ $app->add(function ($request, $response, $next) {
     return $next($request, $response);
 });
 // 
-$app->add($container->get('csrf'));
+// $app->add($container->get('csrf'));
 $app->add($sesion_expired);
 
 $app->add(function ($request, $response, $next) {
