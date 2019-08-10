@@ -7,7 +7,7 @@
         <div class="col-12 text-center mt-5 mb-3">
             <h2>CARTERA</h2>
         </div>
-        <div class="col-12 col-lg-6 offset-lg-6 col-md-12 col-sm-12 ">
+        <div class="col-12 col-lg-6 offset-lg-6 col-md-12 col-sm-12 mb-2 ">
             <form action="" method="get">
                 <label for="">
                     Buscar Por Codigo de la Cartera o por Documento o Razón Social/Nombre:
@@ -29,7 +29,14 @@
                 </div>
             </form>
         </div>
-        <div class="col-12 mt-2 text-uppercase">
+        {% if msg %}
+        <div class="col-12 ">
+            <div class="alert alert-danger text-center">
+                {{ msg }}
+            </div>
+        </div>
+        {% endif %}
+        <div class="col-12 text-uppercase">
             <div id="accordion">
                 {% for data in carteras %}
                 <div class="card">
@@ -59,7 +66,7 @@
                         <div class="card-body">
                             <div class="mt-2">
                                 <h4>ACREEDOR</h4>
-                                <table class="table table-hover">
+                                <table class="table table-hover text-center">
                                     <thead>
                                         <tr>
                                             <th>Tipo Documento</th>
@@ -94,7 +101,7 @@
                             </div>
                             <div class="mt-3">
                                 <h4>Documento De Respaldo</h4>
-                                <table class="table table-hover">
+                                <table class="table table-hover text-center">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -109,7 +116,11 @@
                                         <tr>
                                             <td>{{ loop.index }}</td>
                                             <td>{{ doc.nombre }}</td>
-                                            <td>{{ doc.ruta }}</td>
+                                            <td>
+                                                <a href="{{ doc.ruta }}" class="btn btn-dark">
+                                                    <i class="fas fa-download"></i>
+                                                </a>
+                                            </td>
                                             <td>
                                                 <a href="#" class="btn btn-danger btn-sm text-white" title="Eliminar">
                                                     <i class="fas fa-trash"></i>

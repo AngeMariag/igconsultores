@@ -8,26 +8,52 @@ $app->group('/cartera', function () use ($app) {
     $app->get('', function($request, $response){
         $cartera = new CarteraModel;
         $doc_cartera = new DocumentoCarteraModel;
-        $model = new AcreedorModel;
-        // $arg = [];
-        // $re = $request->getQueryParams();
-        // if (isset($re['q']) && $re['q'] != ''){
-        //     $q = $request->getQueryParams()['q'];
-        //     $result = $model->search_by_document_or_name($q);
-        //     if(!$result){
-        //         $arg["msg"] = "No hay concurrencia con el dato {$q}";
-        //     } else {
-        //         $arg['acreedores'] = $result;
-        //         return $this->view->render($response, 'cartera/list.html', $arg);
-        //     }
-        // }
+        $acredor = new AcreedorModel();
+        $arg = [];
+        $re = $request->getQueryParams();
+        if (isset($re['q']) && $re['q'] != ''){
+            $q = $request->getQueryParams()['q'];
+            $cartera_search = $cartera->find('token', '=', $q);
+            if (!$cartera_search){
+                $result = $acredor->search_by_document_or_name($q)[0];
+                if(!$result){
+                    $arg["msg"] = "No hay concurrencia con el dato {$q}";
+                } else {
+                    try {
+                        $data = [];
+                        $car = $cartera->find('id_acreedor', '=', $result['id']);
+                        $docu_cartera = $doc_cartera->where('id_cartera', '=', $car['id']);
+                        array_push($data, [
+                            'cartera' => $car, 
+                            'acreedor' => $result, 
+                            'docs' => $docu_cartera
+                            ]
+                        );
+                        $arg['carteras'] = $data;
+                        return $this->view->render($response, 'cartera/list.html', $arg);
+                    } catch (Exception $e) {
+                        $arg["msg"] = "No hay concurrencia con el dato {$q}";
+                    }
+                }
+            } else {
+                $data = [];
+                $acreedor = $acredor->find('id', '=', $cartera_search['id_acreedor']);
+                $docu_cartera = $doc_cartera->where('id_cartera', '=', $cartera_search['id']);
+                array_push($data, [
+                    'cartera' => $cartera_search, 
+                    'acreedor' => $acreedor, 
+                    'docs' => $docu_cartera
+                    ]
+                );
+                $arg['carteras'] = $data;
+                return $this->view->render($response, 'cartera/list.html', $arg);
+            }
+        }
         // aqui en el metodo paginate puedes pasar un numero 
         // esto es para saber cuanto datos se mostraran en pantalla
-        
         $carteras = $cartera->paginate();
         $data = [];
         if ($carteras){
-            $acredor = new AcreedorModel();
             foreach ($carteras[0] as $cartera) {
                 $acreedor = $acredor->find('id', '=', $cartera['id_acreedor']);
                 $docu_cartera = $doc_cartera->where('id_cartera', '=', $cartera['id']);

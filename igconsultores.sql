@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-08-2019 a las 18:14:10
+-- Tiempo de generación: 11-08-2019 a las 00:08:12
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
@@ -40,8 +40,7 @@ CREATE TABLE `acreedor` (
 --
 
 INSERT INTO `acreedor` (`id`, `tipo_documento`, `documento`, `razon_social`) VALUES
-(1, 'CC', '25520841', 'Ramon Sanchez'),
-(2, 'CC', '25520842', 'Jesus Perez');
+(10, 'CC', '25520841', 'Ramon Sanchez');
 
 -- --------------------------------------------------------
 
@@ -50,12 +49,19 @@ INSERT INTO `acreedor` (`id`, `tipo_documento`, `documento`, `razon_social`) VAL
 --
 
 CREATE TABLE `cartera` (
-  `id_cartera` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `token` varchar(50) NOT NULL,
   `id_acreedor` int(11) NOT NULL,
-  `id_deudor` int(11) NOT NULL,
-  `id_documento` int(11) NOT NULL,
-  `fecha_cartera` date NOT NULL
+  `fecha` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `cartera`
+--
+
+INSERT INTO `cartera` (`id`, `token`, `id_acreedor`, `fecha`) VALUES
+(1, '48d7545d-bba5-11e9-94ce-7a04b3ab7f73', 10, '2019-08-01'),
+(2, '102ac020-bbaf-11e9-94ce-7a04b3ab7f73', 10, '2019-08-08');
 
 -- --------------------------------------------------------
 
@@ -98,11 +104,18 @@ CREATE TABLE `deudor` (
 --
 
 CREATE TABLE `documentos_cartera` (
-  `id_documento` int(11) NOT NULL,
-  `nombre_documento` varchar(50) NOT NULL,
-  `ruta_documento` text NOT NULL,
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `ruta` text NOT NULL,
   `id_cartera` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `documentos_cartera`
+--
+
+INSERT INTO `documentos_cartera` (`id`, `nombre`, `ruta`, `id_cartera`) VALUES
+(1, 'nose', 'qwqwwqdqwd', 1);
 
 -- --------------------------------------------------------
 
@@ -215,7 +228,7 @@ ALTER TABLE `acreedor`
 -- Indices de la tabla `cartera`
 --
 ALTER TABLE `cartera`
-  ADD PRIMARY KEY (`id_cartera`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `codeudor`
@@ -233,7 +246,7 @@ ALTER TABLE `deudor`
 -- Indices de la tabla `documentos_cartera`
 --
 ALTER TABLE `documentos_cartera`
-  ADD UNIQUE KEY `id_documento` (`id_documento`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indices de la tabla `ficha`
@@ -274,13 +287,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `acreedor`
 --
 ALTER TABLE `acreedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `cartera`
 --
 ALTER TABLE `cartera`
-  MODIFY `id_cartera` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `codeudor`
@@ -298,7 +311,7 @@ ALTER TABLE `deudor`
 -- AUTO_INCREMENT de la tabla `documentos_cartera`
 --
 ALTER TABLE `documentos_cartera`
-  MODIFY `id_documento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `ficha`

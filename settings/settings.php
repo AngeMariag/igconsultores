@@ -2,7 +2,7 @@
 session_cache_limiter(false);
 session_start();
 ini_set('session_save_path', "../temp");
-
+// error_reporting(0);
 // get env
 $dotenv = Dotenv\Dotenv::create(__DIR__, '../.env');
 $dotenv->load();
