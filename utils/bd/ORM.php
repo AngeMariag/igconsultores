@@ -77,7 +77,6 @@ class ORM extends Conection
     {
         $table = static::$table;
         $query = "SELECT * FROM {$table} WHERE {$columna} {$signo} ?";
-        $class = get_called_class();
         $pre = $this->getconn()->prepare($query);
         $result = null;
         if ($pre->bind_param(self::typeVar($valor), $valor)) {
@@ -143,12 +142,9 @@ class ORM extends Conection
             return false;
         }
     }
-    public function paginate($x_page = null)
+    public function paginate($x_page=10)
     {
         $table = static::$table;
-        if ($x_page == null) {
-            $x_page = 10;
-        }
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
         } else {

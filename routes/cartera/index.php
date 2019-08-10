@@ -1,29 +1,46 @@
 <?php
-use \models\AcreedorModel;
+use \models\{AcreedorModel, CarteraModel, DocumentoCarteraModel};
 
 
 $app->group('/cartera', function () use ($app) {
 
     // listado de acreedores 
     $app->get('', function($request, $response){
+        $cartera = new CarteraModel;
+        $doc_cartera = new DocumentoCarteraModel;
         $model = new AcreedorModel;
-        $arg = [];
-        $re = $request->getQueryParams();
-        if (isset($re['q']) && $re['q'] != ''){
-            $q = $request->getQueryParams()['q'];
-            $result = $model->search_by_document_or_name($q);
-            if(!$result){
-                $arg["msg"] = "No hay concurrencia con el dato {$q}";
-            } else {
-                $arg['acreedores'] = $result;
-                return $this->view->render($response, 'cartera/list.html', $arg);
-            }
-        }
+        // $arg = [];
+        // $re = $request->getQueryParams();
+        // if (isset($re['q']) && $re['q'] != ''){
+        //     $q = $request->getQueryParams()['q'];
+        //     $result = $model->search_by_document_or_name($q);
+        //     if(!$result){
+        //         $arg["msg"] = "No hay concurrencia con el dato {$q}";
+        //     } else {
+        //         $arg['acreedores'] = $result;
+        //         return $this->view->render($response, 'cartera/list.html', $arg);
+        //     }
+        // }
         // aqui en el metodo paginate puedes pasar un numero 
         // esto es para saber cuanto datos se mostraran en pantalla
-        $acreedores = $model->paginate();
-        $arg['acreedores'] = $acreedores[0];
-        $arg['paginate'] = $acreedores[1];
+        
+        $carteras = $cartera->paginate();
+        $data = [];
+        if ($carteras){
+            $acredor = new AcreedorModel();
+            foreach ($carteras[0] as $cartera) {
+                $acreedor = $acredor->find('id', '=', $cartera['id_acreedor']);
+                $docu_cartera = $doc_cartera->where('id_cartera', '=', $cartera['id']);
+                array_push($data, [
+                    'cartera' => $cartera, 
+                    'acreedor' => $acreedor, 
+                    'docs' => $docu_cartera
+                    ]
+                );
+            }
+        }
+        $arg['carteras'] = $data;
+        $arg['paginate'] = $carteras[1];
         return $this->view->render($response, 'cartera/list.html', $arg);
     })->setName('cartera_list');
 
