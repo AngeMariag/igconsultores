@@ -1,7 +1,7 @@
 <?php
 session_cache_limiter(false);
 session_start();
-ini_set('session_save_path', "../tmp");
+ini_set('session_save_path', "../temp");
 
 // get env
 $dotenv = Dotenv\Dotenv::create(__DIR__, '../.env');
@@ -11,7 +11,7 @@ $dotenv->load();
 $config = ['settings' => [
     'addContentLengthHeader' => false,
     'displayErrorDetails' => true,
-    'debug' => false
+    'debug' => true
 ]];
 $app = new \Slim\App($config);
 
@@ -60,6 +60,11 @@ $app->add($sesion_expired);
 
 $app->add(function ($request, $response, $next) {
     $this->view->offsetSet("user", sessionLocal('user'));
+    return $next($request, $response);
+});
+
+$app->add(function ($request, $response, $next) {
+    $this->view->offsetSet("get", $_GET);
     return $next($request, $response);
 });
 

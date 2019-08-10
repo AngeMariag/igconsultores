@@ -84,7 +84,7 @@ class ORM extends Conection
                 $result = $pre->get_result();
                 $obj = [];
                 while ($row = $result->fetch_assoc()) {
-                    $obj[] = new $class($row);
+                    $obj[] = $row;
                 }
                 self::destroy();
                 return $obj;
@@ -108,14 +108,14 @@ class ORM extends Conection
     {
         $table = static::$table;
         $query = "SELECT * FROM {$table}";
-        $class = get_called_class();
         $pre = $this->getconn()->prepare($query);
         $pre->execute();
         $result = $pre->get_result();
-        $obj = [];
+        $obj =[];
         while ($row = $result->fetch_assoc()) {
-            $obj[] = new $class($row);
+            $obj[] = $row;
         }
+        $result->free();
         self::destroy();
         return $obj;
     }
@@ -155,13 +155,12 @@ class ORM extends Conection
         }
         $total = ($page - 1) * $x_page;
         $query = "SELECT * FROM {$table} LIMIT {$total}, {$x_page}";
-        $class = get_called_class();
         $pre = $this->getconn()->prepare($query);
         $pre->execute();
         $result = $pre->get_result();
         $obj = [];
         while ($row = $result->fetch_assoc()) {
-            $obj[] = new $class($row);
+            $obj[] = $row;
         }
         self::destroy();
         $pagina = self::paginate_template($x_page);
@@ -178,7 +177,7 @@ class ORM extends Conection
         $class = get_called_class();
         $pre = $this->getconn()->query($query);
         $obj = [];
-        while ($row = $pre->fetch_object()) {
+        while ($row = $pre->fetch_assoc()) {
             $obj[] = $row;
         }
         self::destroy();

@@ -1,0 +1,92 @@
+{% extends "base_interno.html" %}
+{% block title %} Acreedores {% endblock%}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center mt-5">
+            <h2>ACREEDORES</h2>
+        </div>
+        <div class="col-md-6 offset-md-6 col-sm-12 mt-3">
+            <form action="" method="get">
+                <div class="input-group">
+                    <input type="search" name="q" class="form-control"
+                        placeholder="Buscar por Documento o Razón Social/Nombre">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit">
+                            BUSCAR
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <a href="{{path_for('cartera_new_get')}}" class="btn btn-outline-success">
+                            AGREGAR
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-12 mt-2 text-uppercase">
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tipo Documento</th>
+                                <th>Documento</th>
+                                <th>Razón Social/Nombre</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for acreedor in acreedores %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>
+                                    {{ acreedor.tipo_documento }}
+                                    {% if acreedor.tipo_documento == 'nit' %}
+                                    <span class="badge badge-secondary">Juridica</span>
+                                    {% else %}
+                                    <span class="badge badge-secondary">Narural</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ acreedor.documento }}</td>
+                                <td>{{ acreedor.razon_social }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-warning btn-sm text-white" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-sm text-white" title="Eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <th colspan="5">
+                                    <h2 class="alert alert-danger text-center">
+                                        No Hay Acreedores Registrados
+                                    </h2>
+                                </th>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {%if msg %}
+                    <h2 class="alert alert-danger text-center">
+                        {{ msg }}
+                    </h2>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mt-4">
+                {% include 'partial/paginate.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

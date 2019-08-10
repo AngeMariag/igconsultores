@@ -21,16 +21,13 @@ $app->post('/', function ($request, $response) {
         $this->flash->addMessage('error', 'Usuario o Contraseña Invalida');
         return $response->withRedirect($this->router->pathFor('login_get'));
     }
-    if ($user->password != encrypt($password)) {
+    if ($user['password'] != encrypt($password)) {
         $this->flash->addMessage('error', 'Usuario o Contraseña Invalida');
         return $response->withRedirect($this->router->pathFor('login_get'));
     }
 
     sessionLocal('is_authenticated', true);
-    sessionLocal('user', [
-        'username' => $user->username,
-        'nivel' => $user->nivel
-    ]);
+    sessionLocal('user', $user);
     return $response->withRedirect($this->router->pathFor('dashboard'));
 });
 
