@@ -1,149 +1,62 @@
-{% extends "base_interno.html" %}
-{% block title %} Crear Cartera {% endblock%}
-
-{% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-12 text-center mt-5">
-            <h2>REGISTRO DE CARTERA</h2>
-        </div>
-        <div class="col-12 mt-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="ACREEDOR">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="button">BUSCAR</button>
-                    <button class="btn btn-outline-success" type="button">AGREGAR</button>
+<div class="modal fade" id="addnewacreedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="{{path_for('cartera_new_post')}}" method="post">
+                <input type="hidden" name="{{csrf.keys.name}}" value="{{csrf.name}}">
+                <input type="hidden" name="{{csrf.keys.value}}" value="{{csrf.value}}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Añadir Acreedor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-        </div>
-        <div class="col-12 mt-5 text-uppercase">
-            <form action="" method="post">
-                <div class="card">
-                    <div class="card-body p-0">
-                        <div class="alert alert-primary text-center">
-                            <h5 class="card-title lead m-0">DATOS DEL DEUDOR</h5>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="id_typedocument">Tipo de Documento</label>
+                                <select id="" class="form-control" name="typedocument" id="id_typedocument" required autofocus autocomplete="off">
+                                    <option selected>Selecciona...</option>
+                                    <option {% if session.acreedor.typedocument == 'cc' %}  selected {% endif %} value="cc">CC</option>
+                                    <option {% if session.acreedor.typedocument == 'ce' %}  selected {% endif %} value="ce">CE</option>
+                                    <option {% if session.acreedor.typedocument == 'nit' %} selected {% endif %} value="nit">NIT</option>    
+                                </select>
+                            </div>
                         </div>
-                        <div class="container m-4">
-                            <div class="row mr-4">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="id_acreedor">ACREEDOR</label>
-                                        <input type="text" class="form-control" id="id_acreedor" name="acreedor"
-                                            placeholder="ACREEDOR" autofocus autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="id_tipo_documento_deudor">Tipo de Documento</label>
-                                        <select id="id_tipo_documento_deudor" class="form-control"
-                                            name="tipo_documento_deudor">
-                                            <option selected>Selecciona...</option>
-                                            <option value="cc">CC</option>
-                                            <option value="ce">CE</option>
-                                            <option value="nit">NIT</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="inputCity">Nro. Documento</label>
-                                        <input type="text" class="form-control" id="" name="documento_deudor">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="inputEmail4">NOMBRE</label>
-                                        <input type="text" class="form-control" id="" placeholder="Nombre"
-                                            name="nombre_codeudor">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="inputPassword4">APELLIDO</label>
-                                        <input type="text" class="form-control" id="" placeholder="Apellido"
-                                            name="apellido_codeudor">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="inputEmail4">TELEFONO</label>
-                                        <input type="text" class="form-control" id="inputEmail4" placeholder="Telefono"
-                                            name="telefono_codeudor">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="inputPassword4">DIRECCIÓN</label>
-                                        <input type="text" class="form-control" id="" placeholder="Dirección"
-                                            name="direccion_codeudor">
-                                    </div>
-                                </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="id_document">Documento</label>
+                                <input type="text" value="{{ session.acreedor.document }}" class="form-control" id="id_document" name="document" required autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="id_name">Razón Social/Nombre</label>
+                                <input type="text" value="{{ session.acreedor.name }}" class="form-control" id="id_name" name="name"  autocomplete="off">
                             </div>
                         </div>
                     </div>
-                    <div class="card-body p-0">
-                        <div class="alert alert-primary text-center">
-                            <h5 class="card-title lead m-0">DATOS DEL CODEUDOR</h5>
+                    {% if flash.getMessage('error') %}
+                       <div class="alert alert-danger text-center">
+                            {% for error in flash.getMessage('error') %}
+                            {{ error }}
+                            {% endfor %}
                         </div>
-                        <div class="container m-4">
-                            <div class="row mr-4">
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="id_tipo_documento_deudor">Tipo de Documento</label>
-                                        <select id="id_tipo_documento_deudor" class="form-control"
-                                            name="tipo_documento_deudor">
-                                            <option selected>Selecciona...</option>
-                                            <option value="cc">CC</option>
-                                            <option value="ce">CE</option>
-                                            <option value="nit">NIT</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="inputCity">Nro. Documento</label>
-                                        <input type="text" class="form-control" id="" name="documento_deudor">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="inputEmail4">NOMBRE</label>
-                                        <input type="text" class="form-control" id="" placeholder="Nombre"
-                                            name="nombre_codeudor">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="inputPassword4">APELLIDO</label>
-                                        <input type="text" class="form-control" id="" placeholder="Apellido"
-                                            name="apellido_codeudor">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="inputEmail4">TELEFONO</label>
-                                        <input type="text" class="form-control" id="inputEmail4" placeholder="Telefono"
-                                            name="telefono_codeudor">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="inputPassword4">DIRECCIÓN</label>
-                                        <input type="text" class="form-control" id="" placeholder="Dirección"
-                                            name="direccion_codeudor">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="alert alert-primary text-center">
-                            <h5 class="card-title lead m-0">DATOS DEL DEUDOR</h5>
-                        </div>
-                    </div>
+                        {{ session|unset('acreedor') }}
+                    {% endif %}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        <i class="far fa-save"></i>
+                        Guardar
+                    </button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger">
+                        <i class="fas fa-eraser"></i>
+                        Atras
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-{% endblock %}

@@ -38,6 +38,11 @@ $container['view'] = function ($container) {
 
     $assetManager->addPath('static', '/static');
     $view->addExtension($assetManager->getAssetExtension());
+    $view->getEnvironment()->addFilter(new \Twig\TwigFilter('unset', function ($string, $var) {
+        unset($_SESSION[$var]);
+        return "";
+    }));
+
 
     return $view;
 };
@@ -56,6 +61,7 @@ $app->add(function ($request, $response, $next) {
     return $next($request, $response);
 });
 // 
+$app->add($container->get('csrf'));
 $app->add($sesion_expired);
 
 $app->add(function ($request, $response, $next) {
@@ -65,6 +71,11 @@ $app->add(function ($request, $response, $next) {
 
 $app->add(function ($request, $response, $next) {
     $this->view->offsetSet("get", $_GET);
+    return $next($request, $response);
+});
+
+$app->add(function ($request, $response, $next) {
+    $this->view->offsetSet("session", $_SESSION);
     return $next($request, $response);
 });
 

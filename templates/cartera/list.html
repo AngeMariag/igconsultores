@@ -17,10 +17,11 @@
                             BUSCAR
                             <i class="fas fa-search"></i>
                         </button>
-                        <a href="{{path_for('cartera_new_get')}}" class="btn btn-outline-success">
+                        <button type="button" id="btn_modal" class="btn btn-outline-success" data-toggle="modal"
+                            data-target="#addnewacreedor">
                             AGREGAR
                             <i class="fas fa-plus"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </form>
@@ -71,10 +72,11 @@
                                     <h2 class="alert alert-dark text-center">
                                         No Hay Acreedores Registrados
                                         <p>¿Desea Añadir Un Acreedor?</p>
-                                        <a href="{{path_for('cartera_new_get')}}" class="btn btn-success">
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#addnewacreedor">
                                             AGREGAR
                                             <i class="fas fa-plus"></i>
-                                        </a>
+                                        </button>
                                     </h2>
                                 </th>
                             </tr>
@@ -94,4 +96,13 @@
         </div>
     </div>
 </div>
+{% include 'cartera/new.html' %}
+
+{% endblock %}
+{% block js %}
+{% if flash.getMessage('error') %}
+<script>
+    $('#btn_modal').click()
+</script>
+{% endif %}
 {% endblock %}
