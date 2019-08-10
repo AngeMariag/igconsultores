@@ -40,7 +40,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for acreedor in acreedores %}
+                            <!-- acreedores -->
+                            {% for acreedor in [] %}
                             <tr>
                                 <td>{{ loop.index }}</td>
                                 <td>
@@ -68,8 +69,13 @@
                             {% else %}
                             <tr>
                                 <th colspan="5">
-                                    <h2 class="alert alert-danger text-center">
+                                    <h2 class="alert alert-dark text-center">
                                         No Hay Acreedores Registrados
+                                        <p>¿Desea Añadir Un Acreedor?</p>
+                                        <a href="{{path_for('cartera_new_get')}}" class="btn btn-success">
+                                            AGREGAR
+                                            <i class="fas fa-plus"></i>
+                                        </a>
                                     </h2>
                                 </th>
                             </tr>
