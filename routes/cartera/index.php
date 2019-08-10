@@ -57,4 +57,8 @@ $app->group('/cartera', function () use ($app) {
         $acreedor->save();
         return $response->withRedirect($this->router->pathFor('cartera_list'));
     })->setName('cartera_new_post');
+
+    $app->get('/acreedor', function($request, $response) {
+
+    })->setName('acreedor_detail');
 })->add($checkUserNotAuthenticated);

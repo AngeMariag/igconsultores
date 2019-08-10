@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-08-2019 a las 19:34:25
+-- Tiempo de generación: 10-08-2019 a las 18:14:10
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
@@ -29,12 +29,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `acreedor` (
-  `id_acreedor` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `tipo_documento` varchar(5) NOT NULL,
-  `numero_documento` varchar(20) NOT NULL,
-  `acreedor` varchar(50) NOT NULL,
+  `documento` varchar(20) NOT NULL,
   `razon_social` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `acreedor`
+--
+
+INSERT INTO `acreedor` (`id`, `tipo_documento`, `documento`, `razon_social`) VALUES
+(1, 'CC', '25520841', 'Ramon Sanchez'),
+(2, 'CC', '25520842', 'Jesus Perez');
 
 -- --------------------------------------------------------
 
@@ -202,7 +209,7 @@ INSERT INTO `usuario` (`id`, `username`, `password`, `nivel`) VALUES
 -- Indices de la tabla `acreedor`
 --
 ALTER TABLE `acreedor`
-  ADD UNIQUE KEY `id_acreedor` (`id_acreedor`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indices de la tabla `cartera`
@@ -267,7 +274,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `acreedor`
 --
 ALTER TABLE `acreedor`
-  MODIFY `id_acreedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `cartera`
