@@ -164,8 +164,23 @@ $app->group('/cartera', function () use ($app) {
                 }
             }
         }
+        unset($_SESSION['acreedor']);
         return $response->withRedirect($this->router->pathFor('cartera_list'));
     })->setName('cartera_new_post');
+
+    $app->get('/api/get-user', function(Request $request, Response $response){
+        $re = $request->getQueryParams();
+        $document = $re['document'];
+        $acree = new AcreedorModel;
+        $acredor = $acree->find('documento', '=', $document);
+        if (!$acredor) {
+            return json_encode(['status' => false]);
+        }
+        return json_encode([
+            'status' => true,
+            'user' => json_encode($acredor)
+        ]);
+    })->setName('cartera_api_get_user');
 
     $app->get('/acreedor', function ($request, $response) { })->setName('acreedor_detail');
 })->add($checkUserNotAuthenticated);

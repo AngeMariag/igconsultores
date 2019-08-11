@@ -45,7 +45,7 @@
                         <div class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#{{ data.cartera.token }}"
                                 aria-expanded="true" aria-controls="{{ data.cartera.token }}">
-                                {{ loop.index }}.) CARTERA: {{ data.cartera.token }}
+                                {{ loop.index }}.) CARTERA: {{ data.cartera.token }} <br> FECHA: {{ data.cartera.fecha|date("d-m-Y") }}
                             </button>
 
                         </div>
@@ -173,6 +173,9 @@
     $('#btn_modal').click()
 </script>
 {% endif %}
+<script>
+    var base_url = "{{ base_url() }}"
+</script>
 
 <script src="{{base_url()}}/{{ asset('static/js/jquery.smartWizard.min.js') }}"></script>
 <script src="{{base_url()}}/{{ asset('static/js/wizard.js') }}"></script>

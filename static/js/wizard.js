@@ -64,3 +64,17 @@ $("#container_form").on('click', function (e) {
         return false
     }
 })
+
+$("#id_document").on('blur', function(e){
+    var value = $("#id_document").val()
+    if (value == "") return false
+    $.getJSON(`${base_url}/cartera/api/get-user?document=${value}`)
+    .then(function(data) {
+        if(!data.status) return false;
+        var user = JSON.parse(data.user)
+        $("#id_typedocument").val(user.tipo_documento)
+        $("#id_document").val(user.documento)
+        $("#id_name").val(user.razon_social)
+        $("#remove_hidden").removeAttr('hidden')
+    })
+})
