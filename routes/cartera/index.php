@@ -145,7 +145,8 @@ $app->group('/cartera', function () use ($app) {
         } else {
             $acredor_find = $find['id'];
         }
-        $cartera->token = Uuid::uuid4()->toString();
+        $token = Uuid::uuid4()->toString();
+        $cartera->token = $token;
         $cartera->id_acreedor = $acredor_find;
         $cartera->fecha = date("Y-m-d", strtotime($date));
         $cartera_id = $cartera->save();
@@ -165,10 +166,10 @@ $app->group('/cartera', function () use ($app) {
             }
         }
         unset($_SESSION['acreedor']);
-        return $response->withRedirect($this->router->pathFor('cartera_list'));
+        return $response->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $token]));
     })->setName('cartera_new_post');
 
-    $app->get('/api/get-user', function(Request $request, Response $response){
+    $app->get('/api/get-user', function (Request $request, Response $response) {
         $re = $request->getQueryParams();
         $document = $re['document'];
         $acree = new AcreedorModel;
@@ -182,5 +183,11 @@ $app->group('/cartera', function () use ($app) {
         ]);
     })->setName('cartera_api_get_user');
 
-    $app->get('/acreedor', function ($request, $response) { })->setName('acreedor_detail');
+    $app->get('/{token}/detail', function (Request $request, Response $response, $args) {
+        $response = new \Slim\Http\Response(404);
+        return $response->write("Page not found");
+        // $notFoundHandler = $this->container->get('notFoundHandler');
+        // return $notFoundHandler($request, $response);
+        // return $this->view->render($response, 'cartera/detail.html');
+    })->setName('acreedor_detail_get');
 })->add($checkUserNotAuthenticated);

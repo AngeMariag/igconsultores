@@ -65,16 +65,21 @@ $("#container_form").on('click', function (e) {
     }
 })
 
-$("#id_document").on('blur', function(e){
+$("#id_document").on('blur', function (e) {
     var value = $("#id_document").val()
     if (value == "") return false
     $.getJSON(`${base_url}/cartera/api/get-user?document=${value}`)
-    .then(function(data) {
-        if(!data.status) return false;
-        var user = JSON.parse(data.user)
-        $("#id_typedocument").val(user.tipo_documento)
-        $("#id_document").val(user.documento)
-        $("#id_name").val(user.razon_social)
-        $("#remove_hidden").removeAttr('hidden')
-    })
+        .then(function (data) {
+            if (!data.status) {
+                $("#id_name").val()
+                $("#remove_hidden").attr('hidden')
+                return false
+            };
+            var user = JSON.parse(data.user)
+            $("#id_typedocument").val(user.tipo_documento)
+            $("#id_document").val(user.documento)
+            $("#id_name").val(user.razon_social)
+            $("#remove_hidden").removeAttr('hidden')
+            return false
+        })
 })
