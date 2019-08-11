@@ -40,7 +40,8 @@
             <div id="accordion">
                 {% for data in carteras %}
                 <div class="card">
-                    <div class="card-header" id="headingOne" style="display: flex; justify-content: space-between;align-items: center;">
+                    <div class="card-header" id="headingOne"
+                        style="display: flex; justify-content: space-between;align-items: center;">
                         <div class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#{{ data.cartera.token }}"
                                 aria-expanded="true" aria-controls="{{ data.cartera.token }}">
@@ -50,14 +51,14 @@
                         </div>
                         <div class="mb-0">
                             <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="#" class="btn btn-warning btn-sm text-white" title="Editar">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="#" class="btn btn-danger btn-sm text-white" title="Eliminar">
-                                    <i class="fas fa-trash"></i>
-                                </a>
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="#" class="btn btn-warning btn-sm text-white" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-sm text-white" title="Eliminar">
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </div>
                     </div>
 
@@ -117,7 +118,7 @@
                                             <td>{{ loop.index }}</td>
                                             <td>{{ doc.nombre }}</td>
                                             <td>
-                                                <a href="{{ doc.ruta }}" class="btn btn-dark">
+                                                <a href="{{ doc.ruta }}" target="_blank" class="btn btn-dark">
                                                     <i class="fas fa-download"></i>
                                                 </a>
                                             </td>
@@ -165,10 +166,21 @@
 {% include 'cartera/new.html' %}
 
 {% endblock %}
+
 {% block js %}
 {% if flash.getMessage('error') %}
 <script>
     $('#btn_modal').click()
 </script>
 {% endif %}
+
+<script src="{{base_url()}}/{{ asset('static/js/jquery.smartWizard.min.js') }}"></script>
+<script src="{{base_url()}}/{{ asset('static/js/wizard.js') }}"></script>
+{% endblock %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{{base_url()}}/{{ asset('static/css/smart_wizard.min.css') }}">
+<link rel="stylesheet" href="{{base_url()}}/{{ asset('static/css/smart_wizard_theme_arrows.min.css') }}">
+
 {% endblock %}

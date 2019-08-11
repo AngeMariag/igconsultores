@@ -62,7 +62,7 @@ class ORM extends Conection
                 if ($pre->execute()) {
                     $this->id = $pre->insert_id;
                     $this->destroy();
-                    return true;
+                    return $this->id;
                 } else {
                     die("Falló la ejecución: (" . $pre->error . ") " . $pre->error);
                 }

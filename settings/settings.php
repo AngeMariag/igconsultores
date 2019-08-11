@@ -18,6 +18,10 @@ $app = new \Slim\App($config);
 // get container on slim
 $container = $app->getContainer();
 
+$container['upload_directory'] = function($container){
+   return __DIR__ . '/../media';
+};
+
 // set template view
 require_once('./utils/csrf_extension.php');
 $container['view'] = function ($container) {
