@@ -11,15 +11,14 @@ $dotenv->load();
 $config = ['settings' => [
     'addContentLengthHeader' => false,
     'displayErrorDetails' => true,
-    'debug' => true
 ]];
 $app = new \Slim\App($config);
 
 // get container on slim
 $container = $app->getContainer();
 
-$container['upload_directory'] = function($container){
-   return __DIR__ . '/../media';
+$container['upload_directory'] = function ($container) {
+    return __DIR__ . '/../media';
 };
 
 // set template view
@@ -64,8 +63,9 @@ $app->add(function ($request, $response, $next) {
     $this->view->offsetSet("flash", $this->flash);
     return $next($request, $response);
 });
-// 
+
 // $app->add($container->get('csrf'));
+
 $app->add($sesion_expired);
 
 $app->add(function ($request, $response, $next) {

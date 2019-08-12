@@ -1,7 +1,12 @@
 <?php
 
-use\models\{AcreedorModel, CarteraModel, DocumentoCarteraModel,
-            DeudorModel, CoDeudorModel};
+use\models\{
+    AcreedorModel,
+    CarteraModel,
+    DocumentoCarteraModel,
+    DeudorModel,
+    CoDeudorModel
+};
 
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -216,10 +221,6 @@ $app->group('/cartera', function () use ($app) {
         $ctx['docs'] = $docu_cartera;
         $ctx['deudores'] = $data;
 
-
-
-        // var_dump($ctx[0]);
-        // die();
         return $this->view->render($response, 'cartera/detail.html', $ctx);
     })->setName('acreedor_detail_get');
 })->add($checkUserNotAuthenticated);
