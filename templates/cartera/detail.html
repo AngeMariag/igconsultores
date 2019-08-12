@@ -1,0 +1,208 @@
+{% extends "base_interno.html" %}
+{% block title %} Cartera {{ cartera.token }} {% endblock%}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header" id="headingOne"
+                    style="display: flex; justify-content: space-between;align-items: center;">
+                    <div class="mb-0">
+                        <button class="btn btn-link">
+                            CARTERA: {{ cartera.token }} <br> FECHA:
+                            {{ cartera.fecha|date("d-m-Y") }}
+                        </button>
+
+                    </div>
+                    <div class="mb-0">
+                        <a href="#" class="btn btn-danger btn-sm text-white" title="Eliminar">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="mt-2">
+                        <h4>ACREEDOR</h4>
+                        <table class="table table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>Tipo Documento</th>
+                                    <th>Documento</th>
+                                    <th>Razón Social/Nombre</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        {{ acreedor.tipo_documento }}
+                                        {% if acreedor.tipo_documento == 'nit' %}
+                                        <span class="badge badge-secondary">Juridica</span>
+                                        {% else %}
+                                        <span class="badge badge-secondary">Natural</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ acreedor.documento }}</td>
+                                    <td>{{ acreedor.razon_social }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-warning btn-sm text-white" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <h4>Documento De Respaldo</h4>
+                        <table class="table table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Descargar</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if docs %}
+                                {% for doc in docs%}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ doc.nombre }}</td>
+                                    <td>
+                                        <a href="{{ doc.ruta }}" target="_blank" class="btn btn-dark">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-danger btn-sm text-white" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {% else %}
+                                <tr>
+                                    <td colspan="4">
+                                        <h2 class="alert alert-dark text-center">
+                                            No Hay Documento De Respaldo Registrado
+                                        </h2>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <h4>
+                            DEUDORES
+                            <button class="btn btn-info">
+                                Añadir Deudor
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </h4>
+                        {% for data in deudores %}
+                        <div class="col-12 mt-3">
+                            <h3>Deudor {{ loop.index }}</h3>
+                        </div>
+                        <table class="table table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>Tipo Documento</th>
+                                    <th>Documento</th>
+                                    <th>Nombre y Apellido</th>
+                                    <th>Telefono</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        {{ data.deudor.tipodocumento }}
+                                        {% if data.deudor.tipodocumento == 'nit' %}
+                                        <span class="badge badge-secondary">Juridica</span>
+                                        {% else %}
+                                        <span class="badge badge-secondary">Natural</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ data.deudor.documento }}</td>
+                                    <td>{{ data.deudor.nombre }} {{ data.deudor.apellido }}</td>
+                                    <td>{{ data.deudor.telefono }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-warning btn-sm text-white" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="container mt-3 mb-5">
+                            <h4>
+                                CODEUDORES De {{ data.deudor.nombre }} {{ data.deudor.apellido }}
+                                <button class="btn btn-info">
+                                    Añadir CoDeudor
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </h4>
+                            {% for codeudor in data.codeudores%}
+                            <table class="table table-hover text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo Documento</th>
+                                        <th>Documento</th>
+                                        <th>Nombre y Apellido</th>
+                                        <th>Telefono</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{ codeudor.tipodocumento }}
+                                            {% if codeudor.tipodocumento == 'nit' %}
+                                            <span class="badge badge-secondary">Juridica</span>
+                                            {% else %}
+                                            <span class="badge badge-secondary">Natural</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ codeudor.documento }}</td>
+                                        <td>{{ codeudor.nombre }} {{ codeudor.apellido }}</td>
+                                        <td>{{ codeudor.telefono }}</td>
+                                        <td>
+                                            <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-warning btn-sm text-white" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {% else %}
+                            <div class="col-12 mt-4">
+                                <h3>No Hay Codeudores Registrado</h3>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="col-12 mt-4">
+                            <h3>El Acreedor {{ acreedor.razon_social }} No Tiene Deudores</h3>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

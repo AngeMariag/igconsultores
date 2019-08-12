@@ -1,0 +1,37 @@
+<?php
+
+namespace models;
+
+use utils\bd\bd\Model;
+
+class DeudorModel extends Model
+{
+    protected static $table = "deudor";
+
+    public function findManyDeudor($id_cartera)
+    {
+        $query = "SELECT d.id, d.nombre, d.apellido, d.tipodocumento, 
+            d.documento, d.telefono, d.direccion  FROM deudor as d
+            LEFT JOIN cartera_deudor_codeudor as car
+            ON d.id = car.id_deudor
+            WHERE car.id_cartera = {$id_cartera} AND car.id_codeudor is Null";
+        return $this->execute_query($query);
+    }
+}
+
+
+class CoDeudorModel extends Model
+{
+    protected static $table = "codeudor";
+
+    public function findManyCoDeudor($id_cartera, $id_deudor)
+    {
+        $query = "SELECT co.id, co.nombre, co.apellido, co.tipodocumento, 
+            co.documento, co.telefono, co.direccion 
+            FROM codeudor as co
+            LEFT JOIN cartera_deudor_codeudor as car
+            ON car.id_codeudor=co.id
+            WHERE car.id_cartera={$id_cartera} AND car.id_deudor={$id_deudor}";
+        return $this->execute_query($query);
+    }
+}

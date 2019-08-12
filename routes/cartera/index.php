@@ -1,6 +1,7 @@
 <?php
 
-use\models\{AcreedorModel, CarteraModel, DocumentoCarteraModel};
+use\models\{AcreedorModel, CarteraModel, DocumentoCarteraModel,
+            DeudorModel, CoDeudorModel};
 
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -169,6 +170,7 @@ $app->group('/cartera', function () use ($app) {
         return $response->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $token]));
     })->setName('cartera_new_post');
 
+    // get data acreedor
     $app->get('/api/get-user', function (Request $request, Response $response) {
         $re = $request->getQueryParams();
         $document = $re['document'];
@@ -183,11 +185,41 @@ $app->group('/cartera', function () use ($app) {
         ]);
     })->setName('cartera_api_get_user');
 
+    // view detail of cartera
     $app->get('/{token}/detail', function (Request $request, Response $response, $args) {
-        $response = new \Slim\Http\Response(404);
-        return $response->write("Page not found");
-        // $notFoundHandler = $this->container->get('notFoundHandler');
-        // return $notFoundHandler($request, $response);
-        // return $this->view->render($response, 'cartera/detail.html');
+        $carteraModel = new CarteraModel;
+        $docCarteraModel = new DocumentoCarteraModel;
+        $acreedorModel = new AcreedorModel;
+        $deudorModel = new DeudorModel;
+        $coDeudorModel = new CoDeudorModel;
+        $ctx = [];
+
+        // validando si el token sea correcto de lo contrario lo redirije al token
+        $cartera = $carteraModel->find('token', '=', $args['token']);
+        if (!$cartera) return $response->withRedirect($this->router->pathFor('dashboard'));
+
+        $acreedor = $acreedorModel->find('id', '=', $cartera['id_acreedor']);
+        $docu_cartera = $docCarteraModel->where('id_cartera', '=', $cartera['id']);
+        $deudores = $deudorModel->findManyDeudor($cartera['id']);
+        $data = [];
+
+        foreach ($deudores as $deudor) {
+            $coDeudor = $coDeudorModel->findManyCoDeudor($cartera['id'], $deudor['id']);
+            array_push($data, [
+                'deudor' => $deudor,
+                'codeudores' => $coDeudor,
+            ]);
+        }
+
+        $ctx['cartera'] = $cartera;
+        $ctx['acreedor'] = $acreedor;
+        $ctx['docs'] = $docu_cartera;
+        $ctx['deudores'] = $data;
+
+
+
+        // var_dump($ctx[0]);
+        // die();
+        return $this->view->render($response, 'cartera/detail.html', $ctx);
     })->setName('acreedor_detail_get');
 })->add($checkUserNotAuthenticated);
