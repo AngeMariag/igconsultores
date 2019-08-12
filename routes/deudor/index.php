@@ -4,7 +4,8 @@ use\models\{
     CarteraModel,
     DeudorModel,
     CoDeudorModel,
-    CarteraDeudorCoDeudor
+    CarteraDeudorCoDeudor,
+    GestorModel
 };
 
 use Slim\Http\Request;
@@ -16,15 +17,22 @@ $app->group('/cartera/{token}', function () use ($app) {
 
     $app->get('/deudor/add', function (Request $req, Response $res, $args) {
         $carteraModel = new CarteraModel;
+        $gestorModel = new GestorModel;
+        $gestores = $gestorModel->all();
         $cartera = $carteraModel->find('token', '=', $args['token']);
         if (!$cartera) return $res->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $args['token']]));
-        return $this->view->render($res, 'deudor/add.html', ['object' => $cartera]);
+        return $this->view->render($res, 'deudor/add.html', [
+            'object' => $cartera,
+            'gestores' => $gestores
+        ]);
     })->setName('deudor_add_get');
 
     $app->post('/deudor/add', function (Request $req, Response $res, $args) {
         $carteraModel = new CarteraModel;
         $deudorModel = new DeudorModel;
         $carteDeudorModel = new CarteraDeudorCoDeudor;
+        $gestorModel = new GestorModel;
+        $gestores = $gestorModel->all();
         $cartera = $carteraModel->find('token', '=', $args['token']);
         if (!$cartera) return $res->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $args['token']]));
 
@@ -35,15 +43,17 @@ $app->group('/cartera/{token}', function () use ($app) {
         $last_name = (isset($post['last_name'])) ? $post['last_name'] : '';
         $tlf = (isset($post['tlf'])) ? $post['tlf'] : '';
         $address = (isset($post['address'])) ? $post['address'] : '';
+        $gestor = (isset($post['gestor'])) ? $post['gestor'] : '';
 
         if (
             !$typedocument || !$document || !$name ||
-            !$last_name || !$tlf || !$address
+            !$last_name || !$tlf || !$address || !$gestor
         ) {
             return $this->view->render($res, 'deudor/add.html', [
                 'object' => $cartera,
                 'deudor' => $post,
-                'msg' => "Algunos Campos Son Requeridos"
+                'msg' => "Algunos Campos Son Requeridos",
+                'gestores' => $gestores
             ]);
         }
 
@@ -57,7 +67,8 @@ $app->group('/cartera/{token}', function () use ($app) {
                 return $this->view->render($res, 'deudor/add.html', [
                     'object' => $cartera,
                     'deudor' => $post,
-                    'msg' => "Deudor Ya Esta Registrado Con Este Acreedor"
+                    'msg' => "Deudor Ya Esta Registrado Con Este Acreedor",
+                    'gestores' => $gestores
                 ]);
             }
             $save_id = $find_deudor['id'];
@@ -72,6 +83,7 @@ $app->group('/cartera/{token}', function () use ($app) {
         }
         $carteDeudorModel->id_cartera = $cartera['id'];
         $carteDeudorModel->id_deudor = $save_id;
+        $carteDeudorModel->id_gestor = $gestor;
         $carteDeudorModel->save();
         return $res->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $args['token']]));
     });

@@ -26,22 +26,20 @@
                                 <select id="id_typedocument" class="form-control" name="typedocument"
                                     id="id_typedocument" required autofocus autocomplete="off">
                                     <option selected value="">Selecciona...</option>
-                                    <option {% if deudor.typedocument == 'cc' %} selected {% endif %}
-                                        value="cc">
+                                    <option {% if deudor.typedocument == 'cc' %} selected {% endif %} value="cc">
                                         CC</option>
-                                    <option {% if deudor.typedocument == 'ce' %} selected {% endif %}
-                                        value="ce">
+                                    <option {% if deudor.typedocument == 'ce' %} selected {% endif %} value="ce">
                                         CE</option>
-                                    <option {% if deudor.typedocument == 'nit' %} selected {% endif %}
-                                        value="nit">NIT</option>
+                                    <option {% if deudor.typedocument == 'nit' %} selected {% endif %} value="nit">NIT
+                                    </option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="id_document">Documento</label>
-                                <input type="text" value="{{ deudor.document }}" class="form-control"
-                                    id="id_document" name="document" required autocomplete="off">
+                                <input type="text" value="{{ deudor.document }}" class="form-control" id="id_document"
+                                    name="document" required autocomplete="off">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -61,15 +59,31 @@
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="id_tlf">Telefono</label>
-                                <input type="text" value="{{ deudor.tlf }}" class="form-control" id="id_tlf"
-                                    name="tlf" required autocomplete="off">
+                                <input type="text" value="{{ deudor.tlf }}" class="form-control" id="id_tlf" name="tlf"
+                                    required autocomplete="off">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="id_addres">Direccion</label>
                                 <input type="text" value="{{ deudor.address }}" class="form-control" id="id_addres"
-                                    name="address"  autocomplete="off">
+                                    name="address" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="id_gestor">Gestor</label>
+                                <select id="id_gestor" class="form-control" name="gestor" required autofocus
+                                    autocomplete="off">
+                                    <option selected value="">Selecciona...</option>
+                                    {% for gestor in gestores %}
+                                    <option {% if deudor.gestor == gestor.id %} selected {% endif %}
+                                        value="{{ gestor.id }}">
+                                        {{ gestor.codigo }} {{ gestor.nombre }}
+                                        {{ gestor.apellido }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-12 text-center mt-3">
@@ -78,7 +92,8 @@
                                     Guardar
                                     <i class="fas fa-save"></i>
                                 </button>
-                                <a href="{{ path_for('acreedor_detail_get', {'token': object.token}) }}"  class="btn btn-danger">
+                                <a href="{{ path_for('acreedor_detail_get', {'token': object.token}) }}"
+                                    class="btn btn-danger">
                                     Regresar
                                     <i class="fas fa-reply"></i>
                                 </a>

@@ -118,6 +118,7 @@
                                     <th>Documento</th>
                                     <th>Nombre y Apellido</th>
                                     <th>Telefono</th>
+                                    <th>Gestor Encargado</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
@@ -134,6 +135,12 @@
                                     <td>{{ data.deudor.documento }}</td>
                                     <td>{{ data.deudor.nombre }} {{ data.deudor.apellido }}</td>
                                     <td>{{ data.deudor.telefono }}</td>
+                                    <td> {% if data.deudor.gcodigo %}
+                                        {{ data.deudor.gcodigo }} {{ data.deudor.gnombre }} {{ data.deudor.gapellido }}
+                                        {% else %}
+                                        No tiene Asignado
+                                        {% endif %}
+                                    </td>
                                     <td>
                                         <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
                                             <i class="fas fa-eye"></i>
@@ -148,7 +155,8 @@
                         <div class="container mt-3 mb-5">
                             <h4>
                                 CODEUDORES De {{ data.deudor.nombre }} {{ data.deudor.apellido }}
-                                <a href="{{ path_for('codeudor_add', {'token': cartera.token, 'id': data.deudor.id}) }}" class="btn btn-info">
+                                <a href="{{ path_for('codeudor_add', {'token': cartera.token, 'id': data.deudor.id}) }}"
+                                    class="btn btn-info">
                                     Añadir CoDeudor
                                     <i class="fas fa-plus"></i>
                                 </a>
