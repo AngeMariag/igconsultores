@@ -42,6 +42,14 @@ class CoDeudorModel extends Model
             WHERE car.id_cartera={$id_cartera} AND car.id_deudor={$id_deudor}";
         return $this->execute_query($query);
     }
+
+    public function findCoDeudorOnCartera($id_cartera, $id_deudor, $id_codeudor)
+    {
+        $query = "SELECT * FROM cartera_deudor_codeudor 
+            WHERE id_cartera = {$id_cartera} and id_deudor = {$id_deudor} and 
+            id_codeudor = {$id_codeudor}";
+        return $this->execute_query($query);
+    }
 }
 
 class CarteraDeudorCoDeudor extends Model 
