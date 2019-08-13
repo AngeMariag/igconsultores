@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 12-08-2019 a las 23:34:33
+-- Tiempo de generación: 13-08-2019 a las 02:03:49
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
@@ -157,9 +157,9 @@ INSERT INTO `documentos_cartera` (`id`, `nombre`, `ruta`, `id_cartera`) VALUES
 --
 
 CREATE TABLE `ficha` (
-  `id_ficha` int(11) NOT NULL,
-  `titulo_ficha` varchar(100) NOT NULL,
-  `capital_ficha` varchar(30) NOT NULL,
+  `id` int(11) NOT NULL,
+  `titulo` varchar(100) NOT NULL,
+  `capital` varchar(30) NOT NULL,
   `interes` varchar(10) NOT NULL,
   `honorarios` varchar(10) NOT NULL,
   `gastos` varchar(10) NOT NULL,
@@ -167,8 +167,16 @@ CREATE TABLE `ficha` (
   `sancion` varchar(20) NOT NULL,
   `total` varchar(20) NOT NULL,
   `id_deudor` int(11) NOT NULL,
+  `id_cartera` int(11) NOT NULL,
   `estado` int(15) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ficha`
+--
+
+INSERT INTO `ficha` (`id`, `titulo`, `capital`, `interes`, `honorarios`, `gastos`, `descuento`, `sancion`, `total`, `id_deudor`, `id_cartera`, `estado`) VALUES
+(1, 'wefwef', '23', '23', '23%', '12%', '23', '20', '46.23', 8, 14, 0);
 
 -- --------------------------------------------------------
 
@@ -215,10 +223,18 @@ INSERT INTO `gestor` (`id`, `codigo`, `identificacion`, `nombre`, `apellido`) VA
 --
 
 CREATE TABLE `observaciones_ficha` (
-  `id_observacion` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `id_ficha` int(11) NOT NULL,
   `observacion` varchar(350) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `observaciones_ficha`
+--
+
+INSERT INTO `observaciones_ficha` (`id`, `id_ficha`, `observacion`) VALUES
+(1, 1, 'wefwef'),
+(2, 1, 'wefwef');
 
 -- --------------------------------------------------------
 
@@ -303,7 +319,7 @@ ALTER TABLE `documentos_cartera`
 -- Indices de la tabla `ficha`
 --
 ALTER TABLE `ficha`
-  ADD UNIQUE KEY `id_ficha` (`id_ficha`);
+  ADD UNIQUE KEY `id_ficha` (`id`);
 
 --
 -- Indices de la tabla `gestion`
@@ -321,7 +337,7 @@ ALTER TABLE `gestor`
 -- Indices de la tabla `observaciones_ficha`
 --
 ALTER TABLE `observaciones_ficha`
-  ADD UNIQUE KEY `id_observacion` (`id_observacion`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indices de la tabla `usuario`
@@ -374,7 +390,7 @@ ALTER TABLE `documentos_cartera`
 -- AUTO_INCREMENT de la tabla `ficha`
 --
 ALTER TABLE `ficha`
-  MODIFY `id_ficha` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `gestion`
@@ -392,7 +408,7 @@ ALTER TABLE `gestor`
 -- AUTO_INCREMENT de la tabla `observaciones_ficha`
 --
 ALTER TABLE `observaciones_ficha`
-  MODIFY `id_observacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
