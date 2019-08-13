@@ -1,0 +1,21 @@
+{% macro input(name, value, type = "text", required="yes") %}
+{% if required == 'yes' %}
+<input type="{{ type }}" value="{{ value|e }}" class="form-control" id="id_{{ name }}" name="{{ name }}" required
+    autocomplete="off">
+{% else %}
+<input type="{{ type }}" value="{{ value|e }}" class="form-control" id="id_{{ name }}" name="{{ name }}"
+    autocomplete="off">
+{% endif %}
+{% endmacro %}
+
+{% macro wrapped_input(label_name, name, value, type="text", required="yes") %}
+{% import _self as forms %}
+<div class="form-group">
+    <label for="id_{{ name }}">{{ label_name }}</label>
+    {{ forms.input(name, value, type, required) }}
+</div>
+{% endmacro %}
+
+{% macro textarea(name, value, rows = 10, cols = 40) %}
+<textarea name="{{ name }}" rows="{{ rows }}" cols="{{ cols }}">{{ value|e }}</textarea>
+{% endmacro %}

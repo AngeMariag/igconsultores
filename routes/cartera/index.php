@@ -5,7 +5,8 @@ use\models\{
     CarteraModel,
     DocumentoCarteraModel,
     DeudorModel,
-    CoDeudorModel
+    CoDeudorModel,
+    GestorModel
 };
 
 use Slim\Http\Request;
@@ -197,12 +198,14 @@ $app->group('/cartera', function () use ($app) {
         $acreedorModel = new AcreedorModel;
         $deudorModel = new DeudorModel;
         $coDeudorModel = new CoDeudorModel;
+        $gestorModel = new GestorModel;
         $ctx = [];
-
+        
         // validando si el token sea correcto de lo contrario lo redirije al token
         $cartera = $carteraModel->find('token', '=', $args['token']);
         if (!$cartera) return $response->withRedirect($this->router->pathFor('dashboard'));
-
+        
+        $gestores = $gestorModel->all();
         $acreedor = $acreedorModel->find('id', '=', $cartera['id_acreedor']);
         $docu_cartera = $docCarteraModel->where('id_cartera', '=', $cartera['id']);
         $deudores = $deudorModel->findManyDeudor($cartera['id']);
@@ -220,6 +223,7 @@ $app->group('/cartera', function () use ($app) {
         $ctx['acreedor'] = $acreedor;
         $ctx['docs'] = $docu_cartera;
         $ctx['deudores'] = $data;
+        $ctx['gestores'] = $gestores;
 
         return $this->view->render($response, 'cartera/detail.html', $ctx);
     })->setName('acreedor_detail_get');
