@@ -109,7 +109,13 @@
                         </h4>
                         {% for data in deudores %}
                         <div class="col-12 mt-3">
-                            <h3>Deudor {{ loop.index }}</h3>
+                            <h3>
+                                Deudor {{ loop.index }}
+                                <a href="{{ path_for('factura_add', {'token': cartera.token, 'id': data.deudor.id}) }}" class="btn btn-secondary">
+                                    Añadir Factura
+                                    <i class="fas fa-file-invoice"></i>
+                                </a>
+                            </h3>
                         </div>
                         <table class="table table-hover text-center">
                             <thead>

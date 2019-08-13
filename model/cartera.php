@@ -26,3 +26,15 @@ class AcreedorModel extends Model
         return $this->execute_query($query);
     }
 }
+
+
+class FacturaModel extends Model
+{
+    protected static $table = "ficha";
+}
+
+
+class ObservacionesFacturaModel extends Model
+{
+    protected static $table = "observaciones_ficha";
+}

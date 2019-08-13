@@ -5,7 +5,9 @@ use\models\{
     DeudorModel,
     CoDeudorModel,
     CarteraDeudorCoDeudor,
-    GestorModel
+    GestorModel,
+    FacturaModel,
+    ObservacionesFacturaModel
 };
 
 use Slim\Http\Request;
@@ -149,4 +151,77 @@ $app->group('/cartera/{token}', function () use ($app) {
         $carteDeudorModel->save();
         return $res->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $args['token']]));
     })->setName('codeudor_add');
+
+    $app->map(['GET', 'POST'], '/{id}/factura/add', function (Request $req, Response $res, $args) {
+        $method = $this->request->getMethod();
+        $carteraModel = new CarteraModel;
+        $deudorModel = new DeudorModel;
+        $facturaModel = new FacturaModel;
+
+        $cartera = $carteraModel->find('token', '=', $args['token']);
+        $deudor = $deudorModel->find('id', '=', $args['id']);
+        if (!$cartera || !$deudor) return $res->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $args['token']]));
+
+        $ctx = [];
+        $ctx['cartera'] = $cartera;
+        $ctx['deudor'] = $deudor;
+
+        if ($method == 'GET') {
+            return $this->view->render($res, 'deudor/factura_add.html', $ctx);
+        }
+
+        $post = $req->getParsedBody();
+        $titulo = (isset($post['titulo'])) ? $post['titulo'] : '';
+        $capital = (isset($post['capital'])) ? $post['capital'] : 0;
+        $interes = (isset($post['interes'])) ? $post['interes'] : 0;
+        $honorarios = (isset($post['honorarios'])) ? $post['honorarios'] : 0;
+        $gastos = (isset($post['gastos'])) ? $post['gastos'] : 0;
+        $descuento = (isset($post['descuento'])) ? $post['descuento'] : 0;
+        $sancion = (isset($post['sancion'])) ? $post['sancion'] : 0;
+        $observaciones = (isset($post['observacion'])) ? $post['observacion'] : '';
+
+        // var_dump($post);
+        // die();
+
+        if (
+            !$titulo || !$capital || !$interes || !$honorarios ||
+            !$gastos || !$descuento || !$sancion
+        ) {
+            $ctx['factura'] = $post;
+            $ctx['msg'] = "Algunos Campos Requerido";
+            return $this->view->render($res, 'deudor/factura_add.html', $ctx);
+        }
+
+
+        $per_capital = floatval($capital);
+        $per_interes = ($capital * floatval($interes)) / 100;
+        $per_honorarios = ($capital * floatval($honorarios)) / 100;
+        $per_gastos = ($capital * floatval($gastos)) / 100;
+        $per_descuento = ($capital * floatval($descuento)) / 100;
+        $per_sancion = ($capital * floatval($sancion)) / 100;
+        $total = $per_capital + $per_interes + $per_honorarios + $per_gastos + $per_descuento + $per_sancion;
+    
+        $facturaModel->titulo = $titulo;
+        $facturaModel->capital = $capital;
+        $facturaModel->interes = $interes;
+        $facturaModel->honorarios = $honorarios;
+        $facturaModel->gastos = $gastos;
+        $facturaModel->descuento = $descuento;
+        $facturaModel->sancion = $sancion;
+        $facturaModel->total = $total;
+        $facturaModel->id_deudor = $deudor['id'];
+        $facturaModel->id_cartera = $cartera['id'];
+        $facturaModel->estado = 0;
+        $save_id = $facturaModel->save();
+
+        if ($observaciones){
+            foreach ($observaciones as $observacion) {
+                $observacionesFacturaModel = new ObservacionesFacturaModel;
+                $observacionesFacturaModel->id_ficha = $save_id;
+                $observacionesFacturaModel->observacion = $observacion;
+                $observacionesFacturaModel->save();          
+            }
+        }
+        return $res->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $args['token']]));
+    })->setName('factura_add');
 })->add($checkUserNotAuthenticated);
