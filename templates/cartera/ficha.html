@@ -14,6 +14,15 @@
                     </a>
                 </div>
                 <div class="modal-body">
+                    {% if flash.getMessage('error') %}
+                    <div class="alert alert-danger text-center">
+                        {% for error in flash.getMessage('error') %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                    <br>
+                    {{ session|unset('ficha') }}
+                    {% endif %}
                     {% include 'deudor/add.html' %}
                     {% include 'deudor/co_add.html' %}
                     {% include 'deudor/factura_add.html' %}

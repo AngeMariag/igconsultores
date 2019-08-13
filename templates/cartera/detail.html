@@ -102,20 +102,16 @@
                     <div class="mt-3">
                         <h4>
                             FICHAS
-                            <button data-toggle="modal" data-target="#exampleModalScrollable" class="btn btn-info" id="btn_modal">
+                            <button data-toggle="modal" data-target="#exampleModalScrollable" class="btn btn-info"
+                                id="btn_modal">
                                 Añadir
                                 <i class="fas fa-plus"></i>
                             </button>
                         </h4>
                         {% for data in deudores %}
-                        <!-- <div class="col-12 mt-3">
+                        <div class="col-12 mt-3">
                             <h3>
                                 Deudor {{ loop.index }}
-                                <a href="{{ path_for('factura_add', {'token': cartera.token, 'id': data.deudor.id}) }}"
-                                    class="btn btn-secondary">
-                                    Añadir Factura
-                                    <i class="fas fa-file-invoice"></i>
-                                </a>
                             </h3>
                         </div>
                         <table class="table table-hover text-center">
@@ -158,59 +154,7 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table> -->
-                        <!-- <div class="container mt-3 mb-5">
-                            <h4>
-                                CODEUDORES De {{ data.deudor.nombre }} {{ data.deudor.apellido }}
-                                <a href="{{ path_for('codeudor_add', {'token': cartera.token, 'id': data.deudor.id}) }}"
-                                    class="btn btn-info">
-                                    Añadir CoDeudor
-                                    <i class="fas fa-plus"></i>
-                                </a>
-                            </h4>
-                            <table class="table table-hover text-center">
-                                <thead>
-                                    <tr>
-                                        <th>Tipo Documento</th>
-                                        <th>Documento</th>
-                                        <th>Nombre y Apellido</th>
-                                        <th>Telefono</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for codeudor in data.codeudores%}
-                                    <tr>
-                                        <td>
-                                            {{ codeudor.tipodocumento }}
-                                            {% if codeudor.tipodocumento == 'nit' %}
-                                            <span class="badge badge-secondary">Juridica</span>
-                                            {% else %}
-                                            <span class="badge badge-secondary">Natural</span>
-                                            {% endif %}
-                                        </td>
-                                        <td>{{ codeudor.documento }}</td>
-                                        <td>{{ codeudor.nombre }} {{ codeudor.apellido }}</td>
-                                        <td>{{ codeudor.telefono }}</td>
-                                        <td>
-                                            <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-warning btn-sm text-white" title="Editar">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    {% else %}
-                                    <tr>
-                                        <td colspan="5">
-                                            <h3>No Hay Codeudores Registrado</h3>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div> -->
+                        </table>
                         {% else %}
                         <div class="col-12 mt-4">
                             <h3>El Acreedor {{ acreedor.razon_social }} No Tiene Deudores</h3>
@@ -226,7 +170,17 @@
 {% endblock %}
 
 {% block js %}
+{% if flash.getMessage('error') %}
 <script>
     $('#btn_modal').click()
+</script>
+{% endif %}
+<script>
+    // Evento que selecciona la fila y la elimina
+    $(document).on("click", '.eliminar', function () {
+        debugger;
+        var parent = $(this).parent().parent().get(0);
+        $(parent).remove();
+    });
 </script>
 {% endblock %}

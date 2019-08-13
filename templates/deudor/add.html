@@ -15,30 +15,30 @@
                             <select id="id_typedocument_deudor" class="form-control" name="typedocument_deudor"
                                 id="id_typedocument_deudor" required autofocus autocomplete="off">
                                 <option selected value="">Selecciona...</option>
-                                <option {% if deudor.typedocument_deudor == 'cc' %} selected {% endif %} value="cc">
+                                <option {% if session.ficha.typedocument_deudor == 'cc' %} selected {% endif %} value="cc">
                                     CC</option>
-                                <option {% if deudor.typedocument_deudor == 'ce' %} selected {% endif %} value="ce">
+                                <option {% if session.ficha.typedocument_deudor == 'ce' %} selected {% endif %} value="ce">
                                     CE</option>
-                                <option {% if deudor.typedocument_deudor == 'nit' %} selected {% endif %} value="nit">
+                                <option {% if session.ficha.typedocument_deudor == 'nit' %} selected {% endif %} value="nit">
                                     NIT
                                 </option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        {{ wrapped_input('Documento (*)', 'document_deudor') }}
+                        {{ wrapped_input('Documento (*)', 'document_deudor', session.ficha.document_deudor) }}
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        {{ wrapped_input('Nombre (*)', 'name_deudor') }}
+                        {{ wrapped_input('Nombre (*)', 'name_deudor', session.ficha.name_deudor) }}
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        {{ wrapped_input('Apellido (*)', 'last_name_deudor') }}
+                        {{ wrapped_input('Apellido (*)', 'last_name_deudor', session.ficha.last_name_deudor) }}
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        {{ wrapped_input('Telefono (*)', 'tlf_deudor') }}
+                        {{ wrapped_input('Telefono (*)', 'tlf_deudor', session.ficha.tlf_deudor) }}
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        {{ wrapped_input('Direccion (*)', 'address_deudor') }}
+                        {{ wrapped_input('Direccion (*)', 'address_deudor', session.ficha.address_deudor) }}
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
@@ -47,7 +47,7 @@
                                 autocomplete="off">
                                 <option selected value="">Selecciona...</option>
                                 {% for gestor in gestores %}
-                                <option {% if deudor.gestor == gestor.id %} selected {% endif %}
+                                <option {% if session.ficha.gestor_deudor == gestor.id %} selected {% endif %}
                                     value="{{ gestor.id }}">
                                     {{ gestor.codigo }} {{ gestor.nombre }}
                                     {{ gestor.apellido }}
