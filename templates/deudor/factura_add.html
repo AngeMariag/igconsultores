@@ -19,7 +19,8 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <label for="inputEmail4">TITULO</label>
-                            <input required type="text" class="form-control" id="" placeholder="TITULO" name="titulo">
+                            <input required type="text" value="{{ session.ficha.titulo }}" class="form-control" id=""
+                                placeholder="TITULO" name="titulo">
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
@@ -28,7 +29,7 @@
                             <div class="input-group">
                                 <input required type="text" class="form-control"
                                     aria-label="Dollar amount (with dot and two decimal places)" name="capital"
-                                    id="capital">
+                                    id="capital" value="{{ session.ficha.capital }}">
                                 <div class="input-group-append">
                                     <span class="input-group-text">$ PCO</span>
                                 </div>
@@ -41,7 +42,8 @@
                             <div class="input-group">
                                 <input required type="number" class="form-control"
                                     aria-label="Dollar amount (with dot and two decimal places)" name="interes"
-                                    id="interes">
+                                    id="interes"
+                                    value="{% if session.ficha.interes %}{{ session.ficha.interes }}{% else %}0{% endif %}">
                                 <div class="input-group-append">
                                     <span class="input-group-text">%</span>
                                 </div>
@@ -78,7 +80,8 @@
                             <div class="input-group">
                                 <input required type="number" class="form-control"
                                     aria-label="Dollar amount (with dot and two decimal places)" name="descuento"
-                                    id="descuento">
+                                    id="descuento"
+                                    value="{% if session.ficha.descuento %}{{ session.ficha.descuento }}{% else %}0{% endif %}">
                                 <div class="input-group-append">
                                     <span class="input-group-text">%</span>
                                 </div>
@@ -112,10 +115,27 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label class="col-md-6 control-label" for="nombres">OBSERVACIONES:</label>
-                            <input required type="button" class="btn btn-success pull-right" value="+"
+                            <input required type="button" class="mb-4 btn btn-success pull-right" value="+"
                                 onclick="crearnp(this)">
                             <center>
-                                <div id="tablanp" class=""></div>
+                                <div id="tablanp" class="">
+                                    {% if session.ficha.observacion %}
+                                    {% for i in session.ficha.observacion %}
+                                    <div style="display: flex; align-items: center;">
+                                        <div style="width:100%;">
+                                            <input required type="text" class="form-control col-md-12 col-lg-12 my-2"
+                                                name="observacion[]" placeholder="OBSERVACIONES"
+                                                aria-describedby="inputGroup-sizing-sm" value="{{ i }}" />
+                                        </div>
+                                        <div>
+                                            <button type="button" class="eliminar btn-md btn btn-danger">
+                                                <i class="fas fa-eraser"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
                             </center>
                             <span class="help-block right"></span>
                         </div>
@@ -241,17 +261,22 @@
     function crearnp(obj) {
 
         incremento++;
-        var fila = '<tr><td>&nbsp;</td>' +
-            '<td style="width:100%;"><input required type="text" class="form-control col-md-12 col-lg-12 my-2" name="observacion[]" placeholder="OBSERVACIONES" aria-describedby="inputGroup-sizing-sm"></td>' +
-            '<td input type="button" class="eliminar btn-md btn btn-danger rounded-circle"><i class="fas fa-eraser"></i></td></tr>';
+        var fila = `
+        <div style="display: flex; align-items: center;">
+            <div style="width:100%;">
+                <input required type="text" class="form-control col-md-12 col-lg-12 my-2"
+                    name="observacion[]" placeholder="OBSERVACIONES"
+                    aria-describedby="inputGroup-sizing-sm" />
+            </div>
+            <div>
+                <button type="button" class="eliminar btn-md btn btn-danger">
+                    <i class="fas fa-eraser"></i>
+                </button>
+            </div>
+        </div>
+        `
 
         $('#tablanp').append(fila);
-
-        // Evento que selecciona la fila y la elimina 
-        $(document).on("click", ".eliminar", function () {
-            var parent = $(this).parents().get(0);
-            $(parent).remove();
-        });
-
     }
+
 </script>

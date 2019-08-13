@@ -6,7 +6,10 @@ use\models\{
     DocumentoCarteraModel,
     DeudorModel,
     CoDeudorModel,
-    GestorModel
+    GestorModel,
+    FacturaModel,
+    CarteraDeudorCoDeudor,
+    ObservacionesFacturaModel
 };
 
 use Slim\Http\Request;
@@ -200,11 +203,11 @@ $app->group('/cartera', function () use ($app) {
         $coDeudorModel = new CoDeudorModel;
         $gestorModel = new GestorModel;
         $ctx = [];
-        
+
         // validando si el token sea correcto de lo contrario lo redirije al token
         $cartera = $carteraModel->find('token', '=', $args['token']);
         if (!$cartera) return $response->withRedirect($this->router->pathFor('dashboard'));
-        
+
         $gestores = $gestorModel->all();
         $acreedor = $acreedorModel->find('id', '=', $cartera['id_acreedor']);
         $docu_cartera = $docCarteraModel->where('id_cartera', '=', $cartera['id']);
@@ -227,4 +230,169 @@ $app->group('/cartera', function () use ($app) {
 
         return $this->view->render($response, 'cartera/detail.html', $ctx);
     })->setName('acreedor_detail_get');
+
+    $app->post('/{token}/detail', function (Request $request, Response $response, $args) {
+        $carteraModel = new CarteraModel;
+        $deudorModel = new DeudorModel;
+        $codeudorModel = new CoDeudorModel;
+        $facturaModel = new FacturaModel;
+        $cartera = $carteraModel->find('token', '=', $args['token']);
+        if (!$cartera) return $response->withRedirect($this->router->pathFor('dashboard'));
+        $post = $request->getParsedBody();
+
+        // deudor
+        $typedocument_deudor = (isset($post['typedocument_deudor'])) ? $post['typedocument_deudor'] : '';
+        $document_deudor = (isset($post['document_deudor'])) ? $post['document_deudor'] : '';
+        $name_deudor = (isset($post['name_deudor'])) ? $post['name_deudor'] : '';
+        $last_name_deudor = (isset($post['last_name_deudor'])) ? $post['last_name_deudor'] : '';
+        $tlf_deudor = (isset($post['tlf_deudor'])) ? $post['tlf_deudor'] : '';
+        $address_deudor = (isset($post['address_deudor'])) ? $post['address_deudor'] : '';
+        $gestor_deudor = (isset($post['gestor_deudor'])) ? $post['gestor_deudor'] : '';
+
+        // codeudor 1
+        $typedocument_codeudor_1 = (isset($post['typedocument_codeudor_1'])) ? $post['typedocument_codeudor_1'] : '';
+        $document_codeudor_1 = (isset($post['document_codeudor_1'])) ? $post['document_codeudor_1'] : '';
+        $name_codeudor_1 = (isset($post['name_codeudor_1'])) ? $post['name_codeudor_1'] : '';
+        $last_name_codeudor_1 = (isset($post['last_name_codeudor_1'])) ? $post['last_name_codeudor_1'] : '';
+        $tlf_codeudor_1 = (isset($post['tlf_codeudor_1'])) ? $post['tlf_codeudor_1'] : '';
+        $address_codeudor_1 = (isset($post['address_codeudor_1'])) ? $post['address_codeudor_1'] : '';
+
+        // codeudor 2
+        $typedocument_codeudor_2 = (isset($post['typedocument_codeudor_2'])) ? $post['typedocument_codeudor_2'] : '';
+        $document_codeudor_2 = (isset($post['document_codeudor_2'])) ? $post['document_codeudor_2'] : '';
+        $name_codeudor_2 = (isset($post['name_codeudor_2'])) ? $post['name_codeudor_2'] : '';
+        $last_name_codeudor_2 = (isset($post['last_name_codeudor_2'])) ? $post['last_name_codeudor_2'] : '';
+        $tlf_codeudor_2 = (isset($post['tlf_codeudor_2'])) ? $post['tlf_codeudor_2'] : '';
+        $address_codeudor_2 = (isset($post['address_codeudor_2'])) ? $post['address_codeudor_2'] : '';
+
+        // ficha
+        $titulo = (isset($post['titulo'])) ? $post['titulo'] : '';
+        $capital = (isset($post['capital'])) ? $post['capital'] : 0;
+        $interes = (isset($post['interes'])) ? $post['interes'] : 0;
+        $honorarios = (isset($post['honorarios'])) ? $post['honorarios'] : 0;
+        $gastos = (isset($post['gastos'])) ? $post['gastos'] : 0;
+        $descuento = (isset($post['descuento'])) ? $post['descuento'] : 0;
+        $sancion = (isset($post['sancion'])) ? $post['sancion'] : 0;
+
+        // observaciones
+        $observaciones = (isset($post['observacion'])) ? $post['observacion'] : [];
+
+        // var_dump($post);
+        // die();
+        // if (
+        //     !$typedocument_deudor || !$document_deudor || !$name_deudor || !$last_name_deudor ||
+        //     !$tlf_deudor || !$address_deudor || !$gestor_deudor || !$typedocument_codeudor_1 ||
+        //     !$document_codeudor_1 || !$name_codeudor_1 || !$last_name_codeudor_1 || !$tlf_codeudor_1 ||
+        //     !$address_codeudor_1 || !$titulo || !$capital || !$interes || !$honorarios || !$gastos ||
+        //     !$descuento || !$sancion
+        // ) {
+        //     sessionLocal('ficha', $post);
+        //     $this->flash->addMessage('error', 'Algunos Campos son Requeridos Intente de Nuevo');
+        //     return $response->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $cartera['token']]));
+        // }
+
+
+        // sacar total de los porcentajes :D
+        $per_capital = floatval($capital);
+        $per_interes = ($capital * floatval($interes)) / 100;
+        $per_honorarios = ($capital * floatval($honorarios)) / 100;
+        $per_gastos = ($capital * floatval($gastos)) / 100;
+        $per_descuento = ($capital * floatval($descuento)) / 100;
+        $per_sancion = ($capital * floatval($sancion)) / 100;
+        $total = $per_capital + $per_interes + $per_honorarios + $per_gastos + $per_descuento + $per_sancion;
+
+        $find_deudor = $deudorModel->find('documento', '=', $document_deudor);
+        if ($find_deudor) {
+            $exist_deudor_on_cartera = $deudorModel->findDeudorOnCartera(
+                $cartera['id'],
+                $find_deudor['id']
+            );
+            if ($exist_deudor_on_cartera) {
+                sessionLocal('ficha', $post);
+                $this->flash->addMessage('error', 'Deudor Ya Esta Registrado Con Este Acreedor');
+                return $response->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $cartera['token']]));
+            }
+            $save_id_deudor = $find_deudor['id'];
+        } else {
+            $deudorModel->tipodocumento = $typedocument_deudor;
+            $deudorModel->documento = $document_deudor;
+            $deudorModel->nombre = $name_deudor;
+            $deudorModel->apellido = $last_name_deudor;
+            $deudorModel->telefono = $tlf_deudor;
+            $deudorModel->direccion = $address_deudor;
+            $save_id_deudor = $deudorModel->save();
+        }
+        $carteDeudorModel = new CarteraDeudorCoDeudor;
+        $carteDeudorModel->id_cartera = $cartera['id'];
+        $carteDeudorModel->id_deudor = $save_id_deudor;
+        $carteDeudorModel->id_gestor = $gestor_deudor;
+        $carteDeudorModel->save();
+
+        $find_codeudor = $codeudorModel->find('documento', '=', $document_codeudor_1);
+        if ($find_codeudor) {
+            $save_id_codeudor_1 = $find_codeudor['id'];
+        } else {
+            $codeudorModel->tipodocumento = $typedocument_codeudor_1;
+            $codeudorModel->documento = $document_codeudor_1;
+            $codeudorModel->nombre = $name_codeudor_1;
+            $codeudorModel->apellido = $last_name_codeudor_1;
+            $codeudorModel->telefono = $tlf_codeudor_1;
+            $codeudorModel->direccion = $address_codeudor_1;
+            $save_id_codeudor_1 = $codeudorModel->save();
+        }
+        $carteDeudorModel = new CarteraDeudorCoDeudor;
+        $carteDeudorModel->id_cartera = $cartera['id'];
+        $carteDeudorModel->id_deudor = $save_id_deudor['id'];
+        $carteDeudorModel->id_codeudor = $save_id_codeudor_1;
+        $carteDeudorModel->save();
+
+        if (
+            $typedocument_codeudor_2 && $document_codeudor_2 && $name_codeudor_2 &&
+            $last_name_codeudor_2 && $tlf_codeudor_2 && $address_codeudor_2
+
+        ) {
+            $codeudorModel2 = new CoDeudorModel;
+            $find_codeudor2 = $codeudorModel2->find('documento', '=', $document_codeudor_2);
+            if ($find_codeudor2) {
+                $save_id_codeudor_2 = $find_codeudor2['id'];
+            } else {
+                $codeudorModel->tipodocumento = $typedocument_codeudor_2;
+                $codeudorModel->documento = $document_codeudor_2;
+                $codeudorModel->nombre = $name_codeudor_2;
+                $codeudorModel->apellido = $last_name_codeudor_2;
+                $codeudorModel->telefono = $tlf_codeudor_2;
+                $codeudorModel->direccion = $address_codeudor_2;
+                $save_id_codeudor_2 = $codeudorModel->save();
+            }
+            $carteDeudorModel = new CarteraDeudorCoDeudor;
+            $carteDeudorModel->id_cartera = $cartera['id'];
+            $carteDeudorModel->id_deudor = $save_id_deudor['id'];
+            $carteDeudorModel->id_codeudor = $save_id_codeudor_2;
+            $carteDeudorModel->save();
+        }
+
+        $facturaModel->titulo = $titulo;
+        $facturaModel->capital = $capital;
+        $facturaModel->interes = $interes;
+        $facturaModel->honorarios = $honorarios;
+        $facturaModel->gastos = $gastos;
+        $facturaModel->descuento = $descuento;
+        $facturaModel->sancion = $sancion;
+        $facturaModel->total = $total;
+        $facturaModel->id_deudor = $save_id_deudor;
+        $facturaModel->id_cartera = $cartera['id'];
+        $facturaModel->estado = 0;
+        $save_id_factura = $facturaModel->save();
+
+        if ($observaciones) {
+            foreach ($observaciones as $observacion) {
+                $observacionesFacturaModel = new ObservacionesFacturaModel;
+                $observacionesFacturaModel->id_ficha = $save_id_factura;
+                $observacionesFacturaModel->observacion = $observacion;
+                $observacionesFacturaModel->save();
+            }
+        }
+        unset($_SESSION['ficha']);
+        return $response->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $cartera['token']]));
+    });
 })->add($checkUserNotAuthenticated);
