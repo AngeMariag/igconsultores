@@ -1,92 +1,95 @@
-{% extends "base_interno.html" %}
-{% block title %} Acreedores {% endblock%}
-
-{% block content %}
-<div class="container mt-5">
-    <div class="row">
-        <form action="" method="post" class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3>
-                        Añadir CoDeudor a {{ deudor.nombre }} {{ deudor.apellido }}
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <input type="hidden" name="{{csrf.keys.name}}" value="{{csrf.name}}">
-                    <input type="hidden" name="{{csrf.keys.value}}" value="{{csrf.value}}">
-                    <div class="row">
-                        {% if msg %}
-                        <div class="col-12 alert alert-danger">
-                            <h3>{{ msg }}</h3>
+{% from "macro.html" import wrapped_input %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3>
+                    Añadir CoDeudor 1
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="id_typedocument_codeudor_1">Tipo de Documento (*)</label>
+                            <select id="id_typedocument_codeudor_1" class="form-control" name="typedocument_codeudor_1"
+                                id="id_typedocument_codeudor_1" required autofocus autocomplete="off">
+                                <option selected value="">Selecciona...</option>
+                                <option {% if codeudor.typedocument_codeudor_1 == 'cc' %} selected {% endif %}
+                                    value="cc">
+                                    CC</option>
+                                <option {% if codeudor.typedocument_codeudor_1 == 'ce' %} selected {% endif %}
+                                    value="ce">
+                                    CE</option>
+                                <option {% if codeudor.typedocument_codeudor_1 == 'nit' %} selected {% endif %}
+                                    value="nit">NIT
+                                </option>
+                            </select>
                         </div>
-                        {% endif %}
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="id_typedocument">Tipo de Documento</label>
-                                <select id="id_typedocument" class="form-control" name="typedocument"
-                                    id="id_typedocument" required autofocus autocomplete="off">
-                                    <option selected value="">Selecciona...</option>
-                                    <option {% if codeudor.typedocument == 'cc' %} selected {% endif %} value="cc">
-                                        CC</option>
-                                    <option {% if codeudor.typedocument == 'ce' %} selected {% endif %} value="ce">
-                                        CE</option>
-                                    <option {% if codeudor.typedocument == 'nit' %} selected {% endif %} value="nit">NIT
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="id_document">Documento</label>
-                                <input type="text" value="{{ codeudor.document }}" class="form-control" id="id_document"
-                                    name="document" required autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="id_name">Nombre</label>
-                                <input type="text" value="{{ codeudor.name }}" class="form-control" id="id_name"
-                                    name="name" required autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="id_last_name">Apellido</label>
-                                <input type="text" value="{{ codeudor.last_name }}" class="form-control"
-                                    id="id_last_name" name="last_name" required autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="id_tlf">Telefono</label>
-                                <input type="text" value="{{ codeudor.tlf }}" class="form-control" id="id_tlf"
-                                    name="tlf" required autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="id_addres">Direccion</label>
-                                <input type="text" value="{{ codeudor.address }}" class="form-control" id="id_addres"
-                                    name="address" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-lg-12 text-center mt-3">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-success">
-                                    Guardar
-                                    <i class="fas fa-save"></i>
-                                </button>
-                                <a href="{{ path_for('acreedor_detail_get', {'token': cartera.token}) }}"
-                                    class="btn btn-danger">
-                                    Regresar
-                                    <i class="fas fa-reply"></i>
-                                </a>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Documento (*)', 'document_codeudor_1') }}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Nombre (*)', 'name_codeudor_1') }}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Apellido (*)', 'last_name_codeudor_1') }}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Telefono (*)', 'tlf_codeudor_1') }}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Direccion (*)', 'address_codeudor_1') }}
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3>
+                    Añadir CoDeudor 2
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="id_typedocument_codeudor_2">Tipo de Documento</label>
+                            <select id="id_typedocument_codeudor_2" class="form-control" name="typedocument_codeudor_2"
+                                id="id_typedocument_codeudor_2"  autocomplete="off">
+                                <option selected value="">Selecciona...</option>
+                                <option {% if codeudor.typedocument_codeudor_2 == 'cc' %} selected {% endif %}
+                                    value="cc">
+                                    CC</option>
+                                <option {% if codeudor.typedocument_codeudor_2 == 'ce' %} selected {% endif %}
+                                    value="ce">
+                                    CE</option>
+                                <option {% if codeudor.typedocument_codeudor_2 == 'nit' %} selected {% endif %}
+                                    value="nit">NIT
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Documento', 'document_codeudor_2', '', 'text', 'no') }}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Nombre', 'name_codeudor_2', '', 'text', 'no') }}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Apellido', 'last_name_codeudor_2', '', 'text', 'no') }}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Telefono', 'tlf_codeudor_2', '', 'text', 'no') }}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Direccion', 'address_codeudor_2', '', 'text', 'no') }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-{% endblock %}
