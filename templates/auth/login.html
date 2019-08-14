@@ -60,7 +60,7 @@
 
         <div class="container">
 
-    <form method="post">
+    <form method="POST">
         <div class="form-group row">
             <label for="nombre" class="col-sm-4 form-control-label">Código de Gestor</label>
             <div class="col-sm-8">
@@ -92,14 +92,14 @@
             <div class="col-sm-8">
               <input class="form-control" id="claveprueba" placeholder="Inserta tu código de usuario" type="text" name="claveprueba" onblur="validaregistrop()">
             </div>
-            <span class="help-block pull-right"></span>
+            
         </div>
         <div class="form-group row">
             <label for="nombre" class="col-sm-4 form-control-label">Repetir Contraseña</label>
             <div class="col-sm-8">
               <input class="form-control" id="claveconfirmada" placeholder="Inserta tu código de usuario" type="text" name="password" onblur="validaregistrop()">
             </div>
-            <span class="help-block pull-right"></span>
+            
         </div>
 
       </form>
@@ -108,39 +108,32 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">ATRAS</button>
-        <button type="button" class="btn btn-primary" id="btnregistrarp">REGISTRAR</button>
+        <button type="button" class="btn btn-primary" id="btnregistrarp" onclick="validaregistrop()">REGISTRAR</button>
       </div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
-    
-function inicio(){
-
-    $("span.help-block").hide();
-    //$("#btnsession").click(validarsesion);
-    $("#btnregistrarp").click(validaregistrop);//VALIDACION REGISTRAR PERSONA
-    
-}    
+        
 function validaregistrop(){
 
-var valor7= document.getElementById('claveprueba').value;
-var valor8= document.getElementById('claveconfirmada').value;
+var pass1= document.getElementById('claveprueba').value;
+var pass2= document.getElementById('claveconfirmada').value;
     
 
-    if( valor7 == null || valor7.length == 0 || /^\s+$/.test(valor7)  ) {
+    if( pass1 == null || pass1.length == 0 || /^\s+$/.test(pass1)  ) {
     $("#claveprueba").parent().parent().attr("class","form-group has-error");
      $("#claveprueba").parent().children("span").text("Campo Vacio").show();
      return false;
-    }else if( valor8 == null || valor8.length == 0 || /^\s+$/.test(valor8)  ) {
+    }else if( pass2 == null || pass2.length == 0 || /^\s+$/.test(pass2)  ) {
     $("#claveconfirmada").parent().parent().attr("class","form-group has-error");
      $("#claveconfirmada").parent().children("span").text("Campo Vacio").show();
      return false;
-    }else if (valor7.length < 8){
+    }else if (pass1.length < 8){
       $("#claveconfirmada").parent().children("span").text("Clave muy corta debe tener al menos 8 caracteres").show();
       return false;
    
-    }else if (!(valor7 == valor8)) {
+    }else if (!(pass1 == pass2)) {
         $("#claveconfirmada").parent().children("span").text("Error Claves no coinciden").show();
         return false;   
     }else{
@@ -148,7 +141,6 @@ var valor8= document.getElementById('claveconfirmada').value;
          $("#claveprueba").parent().children("span").text("").hide();
     
     }
-
 }
 
 </script>
