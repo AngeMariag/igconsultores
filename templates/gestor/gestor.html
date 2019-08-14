@@ -2,49 +2,50 @@
 {% block title %} Menú Principal {% endblock%}
 
 {% block content %}
-<div class="container">
-  <p class=" text-center alert alert-primary my-5" role="alert">SELECCIONA UNA GESTIÓN</p>
-
-
+<div class="container mt-5">
   <div class="card">
-    <div class="table-responsive">
-      <table class="table table-hover">
+    <div class="card-header text-white bg-info ">
+        SELECCIONA UNA GESTIÓN
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
 
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Código</th>
-            <th>Documento Deudor</th>
-            <th>Deudor</th>
-            <th>Acreedor</th>
-            <th>Opciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for data in datas %}
-          <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ data.codigo}}</td>
-            <td>{{ data.tipodocumento|upper }}-{{ data.documento }}</td>
-            <td>{{ data.nombre }}-{{ data.apellido }}</td>
-            <td>{{ data.razon_social }}</td>
-            <td>
-              <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
-                <i class="fas fa-eye"></i>
-              </a>
-              <a href="#" class="btn btn-warning btn-sm text-white" title="Editar" data-toggle="modal"
-                data-target="#exampleModal3">
-                <i class="fas fa-edit"></i>
-              </a>
-              <a href="#" class="btn btn-danger btn-sm text-white" title="Eliminar">
-                <i class="fas fa-trash"></i>
-              </a>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Código</th>
+              <th>Documento Deudor</th>
+              <th>Deudor</th>
+              <th>Acreedor</th>
+              <th>Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in datas %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ data.codigo}}</td>
+              <td>{{ data.tipodocumento|upper }}-{{ data.documento }}</td>
+              <td>{{ data.nombre }}-{{ data.apellido }}</td>
+              <td>{{ data.razon_social }}</td>
+              <td>
+                <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
+                  <i class="fas fa-eye"></i>
+                </a>
+                <a href="#" class="btn btn-warning btn-sm text-white" title="Editar" data-toggle="modal"
+                  data-target="#exampleModal3">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a href="#" class="btn btn-danger btn-sm text-white" title="Eliminar">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div> <!-- container-->
