@@ -171,7 +171,6 @@ class ORM extends Conection
     }
     public function execute_query($query)
     {
-        $class = get_called_class();
         $pre = $this->getconn()->query($query);
         $obj = [];
         while ($row = $pre->fetch_assoc()) {
