@@ -1,0 +1,138 @@
+{% block content %}
+<div class="container">
+  <p class=" text-center alert alert-primary my-5" role="alert">SELECCIONA UNA GESTIÓN</p>
+
+
+  <div class="card">
+                  <div class="table-responsive">
+                      <table class="table table-hover">
+
+                          <thead>
+                              <tr>
+                                  <th>#</th>
+                                  <th>Código</th>
+                                  <th>Documento Deudor</th>
+                                  <th>Deudor</th>
+                                  <th>Acreedor</th>
+                                  <th>Opciones</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                              	 <td>#</td> 
+                                  <td>{{ data.gestor.codigo}}</td>
+                                  <td>{{ data.deudor.documento }}</td>
+                                  <td>{{ data.deudor.nombre}}</td>
+                                  <td>{{ data.acreedor.razon_social }}</td>
+                                  <td>
+                                      <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
+                                          <i class="fas fa-eye"></i>
+                                      </a>
+                                      <a href="#" class="btn btn-warning btn-sm text-white" title="Editar" data-toggle="modal" data-target="#exampleModal3">
+                                          <i class="fas fa-edit"></i>
+                                      </a>
+                                      <a href="#" class="btn btn-danger btn-sm text-white" title="Eliminar">
+                                          <i class="fas fa-trash"></i>
+                                      </a>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  
+                              </tr>
+                          </tbody>
+                      </table>
+                      
+                  </div>
+  </div>
+</div>   <!-- container-->
+
+
+<!-- Modal -->
+<div class="modal fade bg " id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal3Label">REGISTRO DE GESTIÓN</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        
+        <div class="form-row">
+          <div class="form-inline col-sm-12 my-3">
+            <label for="" class="col-md-2 col-sm-12">ACUERDO</label>
+            <textarea name="" placeholder="Detalle el acuerdo" class="form-control col-md-10 col-sm-12"></textarea>
+          </div>
+ </div>
+
+      <div class="form-row">
+      <div class="form-row float-center">
+          <button class="btn btn-outline-success m-2 " onclick="pago(this)">AGREGAR PAGOS</button>
+
+      </div>
+
+      </div>
+        <div class="table-hover" id="pagos">
+            
+        </div>
+
+      <div class="col-12 my-3 text-center">
+      <h2>AGREGAR RECORDATORIO</h2>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4 my-2">
+        <label for="">Fecha de Recordatotio</label>
+        <input type="date" class="form-control form-control-sm" id="" placeholder="" name="fecha_gestion">
+        </div>
+        <div class="form-group col-md-8 my-2">
+        <label for="">Motivo</label>
+        <input type="text" class="form-control form-control-sm" id="" placeholder="" name="gestion">
+        </div>
+         
+    </div>
+
+  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
+        <button type="button" class="btn btn-success">AGREGAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript">
+	incremento=0;
+function pago(obj){
+
+  incremento++;
+
+  var fila='<tr class="mr-5"><td></td>'+
+         '<td class=""><input type="text"   class="form-control form-control-sm " name="observacion[]" maxlength="" placeholder="Observación"></td>'+
+         
+        '<td><input type="text"  class="form-control form-control-sm " name="monto[]"  placeholder="MONTO" maxlength=""></td>'+
+
+        '<td><input type="date"  class="form-control form-control-sm " name="fecha_pago[]" max="<?php $hoy=date("Y-m-d"); echo $hoy;?></td>'+
+        '<td><select name="estatus[]" class="form-control form-control-sm" required>'+
+          '<option value="        ">     </option>'+
+          '<option value="RENUENTE">RENUENTE</option>'+ 
+          '<option value="EN ACUERDO">EN ACUERDO</option>'+
+          '<option value="EN ACUERDO">PENDIENTE</option>'+
+        '</select></td>'+
+        ' <td input type="submit" class="eliminar btn btn-danger  btn-sm "><i class="fas fa-trash"></i></td></tr>';
+        $('#pagos').append(fila);
+
+        // Evento que selecciona la fila y la elimina 
+        $(document).on("click",".eliminar",function(){
+          var parent = $(this).parents().get(0);
+          $(parent).remove();
+        });
+}
+
+</script>
+
+{% endblock %}
