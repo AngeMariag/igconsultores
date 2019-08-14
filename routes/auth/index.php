@@ -1,35 +1,52 @@
-<?php 
+<?php
 
-use\models\{
-    AuthModel,
-    GestorModel
-};
+use models\{AuthModel, GestorModel};
+use Slim\Http\{Request, Response};
 
 // vista para ejecutar el guardado del acreedor
-    $app->post('/signup', function (Request $request, Response $response) {
-        $post = $request->getParsedBody();
+$app->post('/signup', function (Request $request, Response $response) {
+    $post = $request->getParsedBody();
 
-        $codigo = $post['codigo'];
-        $identificacion = $post['identificacion'];
-        $nombre = $post['nombre'];
-        $apellido = $post['apellido'];
-        $pass = $post['password'];
-        
-        if (!$codigo || !$identificacion || !$name || !$apellido|| !$pass) {
-            $this->flash->addMessage('error', 'Algunos Campos son Requeridos Intente de Nuevo');
-            return $response->withRedirect($this->router->pathFor('cartera_list'));
-        }
-       	$authModel = new AuthModel
-		$gestorModel = new GestorModel
-        
-            $authModel->codigo = $typedocument;
-            $authModel->identificacion = $document;
-            $authModel->nombre = $name;
-            $authModel->apellido = $name;
-            $save_id = $authModel->save();
-            
-        
-        // unset($_SESSION['gestor']);
-        // return $response->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $token]));
-    })->setName('getor_new_post');
- ?> --> 
+    $codigo = $post['codigo'];
+    $identificacion = $post['identificacion'];
+    $nombre = $post['nombre_gestor'];
+    $apellido = $post['apellido_gestor'];
+    $pass1 = $post['pass1'];
+    $pass2 = $post['pass2'];
+
+
+    sessionLocal('signup', $post);
+    unset($post['pass1']);
+    unset($post['pass2']);
+    if (!$codigo || !$identificacion || !$nombre || !$apellido || !$pass1 || !$pass2) {
+        $this->flash->addMessage('error1', 'Algunos Campos son Requeridos Intente de Nuevo');
+        return $response->withRedirect($this->router->pathFor('login_get'));
+    }
+
+    if ($pass1 != $pass2) {
+        $this->flash->addMessage('error1', 'Contraseña No Coinciden');
+        return $response->withRedirect($this->router->pathFor('login_get'));
+    }
+
+    $authModel = new AuthModel;
+    $gestorModel = new GestorModel;
+    $find_gestor = $gestorModel->find('codigo', '=', $codigo);
+    if ($find_gestor) {
+        $this->flash->addMessage('error1', 'Gestor ya existe');
+        return $response->withRedirect($this->router->pathFor('login_get'));
+    }
+
+    $gestorModel->codigo = $codigo;
+    $gestorModel->identificacion = $identificacion;
+    $gestorModel->nombre = $nombre;
+    $gestorModel->apellido = $apellido;
+    $gestorModel->save();
+
+
+    $authModel->username = $codigo;
+    $authModel->password = encrypt($pass1);
+    $authModel->nivel = 3;
+    $authModel->save();
+    unset($_SESSION['signup']);
+    return $response->withRedirect($this->router->pathFor('login_get'));
+})->setName('getor_new_post');
