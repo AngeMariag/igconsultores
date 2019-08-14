@@ -30,16 +30,17 @@ $container['view'] = function ($container) {
 
     // Instantiate and add Slim specific extension
     $router = $container->get('router');
-    $uri = \Slim\Http\Uri::createFromEnvironment(new \Slim\Http\Environment($_SERVER));
+    // $uri = \Slim\Http\Uri::createFromEnvironment(new \Slim\Http\Environment($_SERVER));
+    $uri = rtrim(str_ireplace('index.php', '', $container->get('request')->getUri()->getBasePath()), '/');
+    // var_dump($uri);
+    // die();
     $view->addExtension(new \Slim\Views\TwigExtension($router, $uri));
     $view->addExtension(
         new CsrfExtension($container)
     );
-    $assetManager = new LoveCoding\TwigAsset\TwigAssetManagement([
-        'verion' => '1'
-    ]);
+    $assetManager = new LoveCoding\TwigAsset\TwigAssetManagement;
 
-    $assetManager->addPath('static', '/static');
+    $assetManager->addPath('static', '/static/');
     $view->addExtension($assetManager->getAssetExtension());
     $view->getEnvironment()->addFilter(new \Twig\TwigFilter('unset', function ($string, $var) {
         unset($_SESSION[$var]);
