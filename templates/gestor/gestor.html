@@ -56,8 +56,8 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModal3Label">REGISTRO DE GESTIÓN</h5>
+      <div class="modal-header text-white bg-info">
+        <h5 class="modal-title text-center" id="exampleModal3Label">REGISTRO DE GESTIÓN</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -73,26 +73,27 @@
         </div>
 
         <div class="form-row">
-          <div class="form-row float-center">
-            <button class="btn btn-outline-success m-2 " onclick="pago(this)">AGREGAR PAGOS</button>
+          <div class="form-row m-auto">
+            <button class="btn btn-info m-2 " onclick="pago(this)">AGREGAR PAGOS</button>
 
           </div>
 
-        </div>
-        <div class="table-hover" id="pagos">
+          <div class=" ml-5 table-responsive my-2" id="pagos">
 
         </div>
+        </div>
+        
 
-        <div class="col-12 my-3 text-center">
+        <div class="col-12 my-4 text-center">
           <h2>AGREGAR RECORDATORIO</h2>
         </div>
         <div class="form-row">
           <div class="form-group col-md-4 my-2">
-            <label for="">Fecha de Recordatotio</label>
+            <label for="">FECHA DE RECORDATORIO</label>
             <input type="date" class="form-control form-control-sm" id="" placeholder="" name="fecha_gestion">
           </div>
           <div class="form-group col-md-8 my-2">
-            <label for="">Motivo</label>
+            <label for="">MOTIVO</label>
             <input type="text" class="form-control form-control-sm" id="" placeholder="" name="gestion">
           </div>
 
@@ -116,7 +117,7 @@
 
     incremento++;
 
-    var fila = '<tr class="mr-5"><td></td>' +
+    var fila = '<tr class=""><td></td>' +
       '<td class=""><input type="text"   class="form-control form-control-sm " name="observacion[]" maxlength="" placeholder="Observación"></td>' +
 
       '<td><input type="text"  class="form-control form-control-sm " name="monto[]"  placeholder="MONTO" maxlength=""></td>' +
