@@ -5,7 +5,7 @@
 <div class="container mt-5">
   <div class="card">
     <div class="card-header text-white bg-info ">
-        SELECCIONA UNA GESTIÓN
+      SELECCIONA UNA GESTIÓN
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -65,25 +65,25 @@
       </div>
 
       <div class="modal-body">
-
-        <div class="form-row">
-          <div class="form-inline col-sm-12 my-3">
-            <label for="" class="col-md-2 col-sm-12">ACUERDO</label>
-            <textarea name="" placeholder="Detalle el acuerdo" class="form-control col-md-10 col-sm-12"></textarea>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group col-sm-12">
+              <label for="">ACUERDO</label>
+              <textarea rows="1" name="" placeholder="Detalle el acuerdo" class="form-control"></textarea>
+            </div>
           </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-row m-auto">
+          <div class="col-12 text-center">
             <button class="btn btn-info m-2 " onclick="pago(this)">AGREGAR PAGOS</button>
-
           </div>
+          <div class="col-12" id="pagos"></div>
+        </div>
 
+
+<<<<<<< HEAD
          <div class=" col-md-12 m-auto" id="pagos">
+=======
+>>>>>>> b9c546c1248b4901e90283ebd633a2e2dbe1f417
 
-        </div>
-        </div>
-        
 
         <div class="col-12 my-4 text-center">
           <h2>AGREGAR RECORDATORIO</h2>
@@ -160,8 +160,12 @@
     incremento++;
 
     var fila = `
+<<<<<<< HEAD
     
         <div class="row" style="justify-content: space-between; align-items: center; display: flex;margin: 20px 5px;">
+=======
+    <div class="row" style="justify-content: space-between; align-items: center; display: flex;margin: 20px 5px;">
+>>>>>>> b9c546c1248b4901e90283ebd633a2e2dbe1f417
       <div>
         <input type="text" class="form-control form-control-sm " name="observacion[]" maxlength=""
           placeholder="Observación">
@@ -178,7 +182,11 @@
           <option value=""></option>
           <option value="RENUENTE">RENUENTE</option>
           <option value="EN ACUERDO">EN ACUERDO</option>
+<<<<<<< HEAD
           <option value="PENDIENTE">PENDIENTE</option>
+=======
+          <option value="EN ACUERDO">EN ACUERDO</option>
+>>>>>>> b9c546c1248b4901e90283ebd633a2e2dbe1f417
         </select>
       </div>
       <div>
@@ -187,11 +195,19 @@
         </button>
       </div>
     </div>
+<<<<<<< HEAD
         `
     $('#pagos').append(fila);
 
 
 $(document).on("click", ".eliminar", function () {
+=======
+    `
+    $('#pagos').append(fila);
+
+    // Evento que selecciona la fila y la elimina 
+    $(document).on("click", ".eliminar", function () {
+>>>>>>> b9c546c1248b4901e90283ebd633a2e2dbe1f417
       var parent = $(this).parents().parent().get(9);
       $(parent).remove();
     });

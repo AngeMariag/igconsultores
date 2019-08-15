@@ -22,8 +22,5 @@ class GestorModel extends Model
             ON acreedor.id=cartera.id_acreedor
             WHERE codigo = {$codigo}";
         return $this->execute_query($query);
-
-
-     
     }
 }
