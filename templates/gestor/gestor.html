@@ -5,7 +5,7 @@
 <div class="container mt-5">
   <div class="card">
     <div class="card-header text-white bg-info ">
-        SELECCIONA UNA GESTIÓN
+      SELECCIONA UNA GESTIÓN
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -64,25 +64,21 @@
       </div>
 
       <div class="modal-body">
-
-        <div class="form-row">
-          <div class="form-inline col-sm-12 my-3">
-            <label for="" class="col-md-2 col-sm-12">ACUERDO</label>
-            <textarea name="" placeholder="Detalle el acuerdo" class="form-control col-md-10 col-sm-12"></textarea>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group col-sm-12">
+              <label for="">ACUERDO</label>
+              <textarea rows="1" name="" placeholder="Detalle el acuerdo" class="form-control"></textarea>
+            </div>
           </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-row m-auto">
+          <div class="col-12 text-center">
             <button class="btn btn-info m-2 " onclick="pago(this)">AGREGAR PAGOS</button>
-
           </div>
-
-          <div class=" ml-5 table-responsive my-2" id="pagos">
-
+          <div class="col-12" id="pagos"></div>
         </div>
-        </div>
-        
+
+
+
 
         <div class="col-12 my-4 text-center">
           <h2>AGREGAR RECORDATORIO</h2>
@@ -117,24 +113,39 @@
 
     incremento++;
 
-    var fila = '<tr class=""><td></td>' +
-      '<td class=""><input type="text"   class="form-control form-control-sm " name="observacion[]" maxlength="" placeholder="Observación"></td>' +
-
-      '<td><input type="text"  class="form-control form-control-sm " name="monto[]"  placeholder="MONTO" maxlength=""></td>' +
-
-      '<td><input type="date"  class="form-control form-control-sm " name="fecha_pago[]" max="<?php $hoy=date("Y-m-d"); echo $hoy;?></td>' +
-      '<td><select name="estatus[]" class="form-control form-control-sm" required>' +
-      '<option value="        ">     </option>' +
-      '<option value="RENUENTE">RENUENTE</option>' +
-      '<option value="EN ACUERDO">EN ACUERDO</option>' +
-      '<option value="EN ACUERDO">PENDIENTE</option>' +
-      '</select></td>' +
-      ' <td input type="submit" class="eliminar btn btn-danger  btn-sm "><i class="fas fa-trash"></i></td></tr>';
+    var fila = `
+    <div class="row" style="justify-content: space-between; align-items: center; display: flex;margin: 20px 5px;">
+      <div>
+        <input type="text" class="form-control form-control-sm " name="observacion[]" maxlength=""
+          placeholder="Observación">
+      </div>
+      <div>
+        <input type="text" class="form-control form-control-sm " name="monto[]" placeholder="MONTO"
+          maxlength="">
+      </div>
+      <div>
+        <input type="date" class="form-control form-control-sm " name="fecha_pago[]" max="<?php $hoy=date("Y-m-d"); echo $hoy;?>
+      </div>
+      <div class=" ">
+        <select name="estatus[]" class="form-control form-control-sm" required>
+          <option value=""></option>
+          <option value="RENUENTE">RENUENTE</option>
+          <option value="EN ACUERDO">EN ACUERDO</option>
+          <option value="EN ACUERDO">EN ACUERDO</option>
+        </select>
+      </div>
+      <div>
+        <button class="eliminar btn btn-danger btn-sm">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+    `
     $('#pagos').append(fila);
 
     // Evento que selecciona la fila y la elimina 
     $(document).on("click", ".eliminar", function () {
-      var parent = $(this).parents().get(0);
+      var parent = $(this).parents().parent().get(9);
       $(parent).remove();
     });
   }
