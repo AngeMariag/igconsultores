@@ -52,7 +52,10 @@
 
 
 <!-- Modal -->
-<form action="" method="post">
+<form action="{{ path_for('gestion_add_post') }}" method="post">
+  <input type="hidden" name="{{csrf.keys.name}}" value="{{csrf.name}}">
+  <input type="hidden" name="{{csrf.keys.value}}" value="{{csrf.value}}">
+  <input type="hidden" name="id" value="" id="id_name_input_hidden_id">
   <div class="modal fade bg " id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -102,7 +105,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
-          <button type="button" class="btn btn-success">AGREGAR</button>
+          <button type="submit" class="btn btn-success">AGREGAR</button>
         </div>
       </div>
     </div>
@@ -201,6 +204,7 @@
         .then(function (data) {
           capital = parseFloat(data.capital)
 
+          document.getElementById('id_name_input_hidden_id').value = id
           document.getElementById('id_total').innerText = parseFloat(data.total).toFixed(2)
           document.getElementById('set_total').innerHTML =
             `<div>

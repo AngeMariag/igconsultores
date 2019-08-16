@@ -26,3 +26,14 @@ class GestorModel extends Model
         return $this->execute_query($query);
     }
 }
+
+
+class GestionModel extends Model
+{
+    protected static $table = "gestion";
+}
+
+class RecordatoriosModel extends Model
+{
+    protected static $table = "recordatorios";
+}
