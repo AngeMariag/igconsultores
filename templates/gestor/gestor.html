@@ -33,7 +33,7 @@
                 <a href="#" class="btn btn-info btn-sm text-white" title="Ver" data-toggle="modal" data-target="#vista">
                   <i class="fas fa-eye"></i>
                 </a>
-                <a href="#" onclick="modalShow(5)" class="btn btn-warning btn-sm text-white" title="Editar"
+                <a href="#" onclick="modalShow({{ data.id }})" class="btn btn-warning btn-sm text-white" title="Editar"
                   data-toggle="modal" data-target="#exampleModal3">
                   <i class="fas fa-edit"></i>
                 </a>
@@ -66,6 +66,12 @@
 
         <div class="modal-body">
           <div class="row">
+            <div class="col-12">
+              <div class="form-group col-sm-12">
+                <label for="">Deuda Total: <b><span id="id_total"></span></b></label>
+                <div id="set_total"></div>
+              </div>
+            </div>
             <div class="col-12">
               <div class="form-group col-sm-12">
                 <label for="">ACUERDO</label>
@@ -188,7 +194,41 @@
   }
 
   function modalShow(id) {
-    console.log(id)
+    if (id) {
+      base_url = '{{ base_url() }}'
+      url = `${base_url}/gestion/ficha?id=${id}`
+      $.getJSON(url)
+        .then(function (data) {
+          capital = parseFloat(data.capital)
+
+          document.getElementById('id_total').innerText = parseFloat(data.total).toFixed(2)
+          document.getElementById('set_total').innerHTML =
+            `<div>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>CAPITAL</th>
+                    <th>INTERES</th>
+                    <th>HONORARIOS</th>
+                    <th>GASTOS</th>
+                    <th>DESCUENTOS</th>
+                    <th>SANCION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>${data.capital}</td>
+                    <td>${(capital * parseFloat(data.interes) / 100).toFixed(2)}</td>
+                    <td>${(capital * parseFloat(data.honorarios) / 100).toFixed(2)}</td>
+                    <td>${(capital * parseFloat(data.gastos) / 100).toFixed(2)}</td>
+                    <td>${(capital * parseFloat(data.descuento) / 100).toFixed(2)}</td>
+                    <td>${(capital * parseFloat(data.sancion) / 100).toFixed(2)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>`
+        })
+    }
   }
 </script>
 {% endblock %}

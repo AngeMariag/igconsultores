@@ -15,7 +15,23 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-$app->post('gestion/new', function (Request $req, Response $res) {
+use models\FacturaModel;
+
+$app->get('/gestion/ficha', function(Request $req, Response $res) {
+    $ficha_id = $req->getQueryParams();
+    if (!isset($ficha_id['id'])){
+        return $res->withRedirect($this->router->pathFor('dashboard'));
+    }
+
+    $fichaModel = new FacturaModel;
+    $ficha = $fichaModel->find('id', '=', $ficha_id['id']);
+    if (!$ficha){
+        return $res->withRedirect($this->router->pathFor('dashboard'));
+    }
+    return json_encode($ficha);
+});
+
+$app->post('/gestion/new', function (Request $req, Response $res) {
     $post = $req->getParsedBody();
     $acuerdo = (isset($post['acuerdo'])) ? $post['acuerdo'] : '';
     $observacion = (isset($post['observacion'])) ? $post['observacion'] : [];
