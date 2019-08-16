@@ -25,7 +25,7 @@
                                     <td>{{ data.acuerdo}}</td>
                                     <td>{{ data.gestion }}</td>
                                     <td>{{ data.monto }}</td>
-                                    <td>{{ data.fecha }}</td>
+                                    <td>{{ data.fecha|date('d-m-Y') }}</td>
                                     <td>{{ data.estado }}</td>
                                 </tr>
                                 {% endfor %}
