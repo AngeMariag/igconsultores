@@ -71,7 +71,13 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group col-sm-12">
-                <label for="">Deuda Total: <b><span id="id_total"></span></b></label>
+                <h3 for="">Deudor</h3>
+                <div id="set_deudor"></div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group col-sm-12">
+                <h3 for="">Deuda Total: <b><span id="id_total"></span></b></h3>
                 <div id="set_total"></div>
               </div>
             </div>
@@ -202,10 +208,29 @@
       url = `${base_url}/gestion/ficha?id=${id}`
       $.getJSON(url)
         .then(function (data) {
-          capital = parseFloat(data.capital)
+          capital = parseFloat(data.ficha.capital)
 
           document.getElementById('id_name_input_hidden_id').value = id
-          document.getElementById('id_total').innerText = parseFloat(data.total).toFixed(2)
+          document.getElementById('id_total').innerText = parseFloat(data.ficha.total).toFixed(2)
+          document.getElementById('set_deudor').innerHTML =
+            `<div>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>DOCUMENTO</th>
+                    <th>NOMBRE Y APELLIDO</th>
+                    <th>TELEFONO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>${data.deudor.tipodocumento.toUpperCase()}-${data.deudor.documento}</td>
+                    <td>${data.deudor.nombre.toUpperCase()} ${data.deudor.apellido.toUpperCase()}</td>
+                    <td>${data.deudor.telefono}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>`
           document.getElementById('set_total').innerHTML =
             `<div>
               <table class="table table-bordered">
@@ -221,12 +246,12 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>${data.capital}</td>
-                    <td>${(capital * parseFloat(data.interes) / 100).toFixed(2)}</td>
-                    <td>${(capital * parseFloat(data.honorarios) / 100).toFixed(2)}</td>
-                    <td>${(capital * parseFloat(data.gastos) / 100).toFixed(2)}</td>
-                    <td>${(capital * parseFloat(data.descuento) / 100).toFixed(2)}</td>
-                    <td>${(capital * parseFloat(data.sancion) / 100).toFixed(2)}</td>
+                    <td>${data.ficha.capital}</td>
+                    <td>${(capital * parseFloat(data.ficha.interes) / 100).toFixed(2)}</td>
+                    <td>${(capital * parseFloat(data.ficha.honorarios) / 100).toFixed(2)}</td>
+                    <td>${(capital * parseFloat(data.ficha.gastos) / 100).toFixed(2)}</td>
+                    <td>${(capital * parseFloat(data.ficha.descuento) / 100).toFixed(2)}</td>
+                    <td>${(capital * parseFloat(data.ficha.sancion) / 100).toFixed(2)}</td>
                   </tr>
                 </tbody>
               </table>

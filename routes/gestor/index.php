@@ -15,7 +15,8 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-use models\{FacturaModel, GestionModel, RecordatoriosModel};
+use models\{FacturaModel, GestionModel, RecordatoriosModel, DeudorModel};
+
 
 $app->get('/gestion/ficha', function(Request $req, Response $res) {
     $ficha_id = $req->getQueryParams();
@@ -28,7 +29,16 @@ $app->get('/gestion/ficha', function(Request $req, Response $res) {
     if (!$ficha){
         return $res->withRedirect($this->router->pathFor('dashboard'));
     }
-    return json_encode($ficha);
+    $deudorModel = new DeudorModel;
+    $deudor = $deudorModel->find('id', '=', $ficha['id_deudor']);
+    if (!$deudor){
+        return $res->withRedirect($this->router->pathFor('dashboard'));
+    }
+    $ctx = [
+        'ficha' => $ficha,
+        'deudor' => $deudor
+    ];
+    return json_encode($ctx);
 });
 
 $app->post('/gestion/new', function (Request $req, Response $res) {
