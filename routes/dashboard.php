@@ -24,3 +24,4 @@ $app->get('/dashboard', function (Request $req, Response $res) {
     // print_r($request->getQueryParams());
 
 })->setName('dashboard')->add($checkUserNotAuthenticated);
+
