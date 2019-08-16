@@ -22,7 +22,7 @@
                                     {% for data in recordatorios %}
                                     <tr>
                                         <td>{{ loop.index }}</td>
-                                        <td>{{ data.fecha}}</td>
+                                        <td>{{ data.fecha|date('d-m-Y') }}</td>
                                         <td>{{ data.recordatorio }}</td>
                                         <td>{{ data.tipodocumento|upper }}-{{ data.documento }}</td>
                                         <td>{{ data.nombre|upper }} {{ data.apellido|upper }}</td>

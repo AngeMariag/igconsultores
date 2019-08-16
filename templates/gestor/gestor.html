@@ -110,6 +110,82 @@
     }
   }
 
-
+  function modalShow1(id) {
+    if(id){
+      base_url = '{{ base_url() }}'
+      url = `${base_url}/gestion/detail?id=${id}`
+      $.getJSON(url)
+        .then(function (data) {
+          document.getElementById('input_acuerdo').value = ''
+          if (data.gestion.length != 0){
+            document.getElementById('input_acuerdo').value = data.gestion[0].acuerdo
+          }
+          document.getElementById('infoPagos').innerHTML = `
+            <table class="table table-bordered table-sm text-center">
+              <thead>
+                <tr>
+                  <th>OBSERVACIONES</th>
+                  <th>MONTO</th>
+                  <th>FECHA</th>
+                  <th>ESTATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${data.gestion.length != 0 ? 
+                  data.gestion.map(function(gestion){
+                  return `
+                  <tr>
+                    <td>${gestion.gestion}</td>
+                    <td>${gestion.monto}</td>
+                    <td>${gestion.fecha}</td>
+                    <td>${gestion.estado}</td>
+                  </tr>
+                  `
+                }) : 
+                  `
+                  <tr>
+                    <td>No</td>
+                    <td>Hay</td>
+                    <td colspan="2">Acuerdos</td>
+                  </tr>
+                  `
+                }
+                
+              </tbody>
+            </table>     
+          `
+          document.getElementById('infoRecordatorios').innerHTML = `
+            <table class="table table-bordered table-sm text-center">
+              <thead>
+                <tr>
+                  <th>RECORDATORIO</th>
+                  <th>FECHA</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${data.recordatorios.length != 0 ? 
+                  data.recordatorios.map(function(recordatorio){
+                  return `
+                  <tr>
+                    <td>${recordatorio.recordatorio}</td>
+                    <td>${recordatorio.fecha}</td>
+                  </tr>
+                  `
+                }) : 
+                  `
+                  <tr>
+                    <td>No</td>
+                    <td>Hay Recordatorio</td>
+                  </tr>
+                  `
+                }
+                
+              </tbody>
+            </table>     
+          `
+          console.log(data)
+        })
+    }
+  }
 </script>
 {% endblock %}

@@ -42,7 +42,7 @@
                             <td>{{ data.nombre }}-{{ data.apellido }}</td>
                             <td>{{ data.razon_social }}</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm text-white" title="Ver" data-toggle="modal"
+                                <a href="#" onclick="modalShow1({{ data.id }})" class="btn btn-info btn-sm text-white" title="Ver" data-toggle="modal"
                                     data-target="#vista">
                                     <i class="fas fa-eye"></i>
                                 </a>
@@ -50,9 +50,9 @@
                                     title="Editar" data-toggle="modal" data-target="#exampleModal3">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm text-white" title="Eliminar">
+                                <!-- <a href="#" class="btn btn-danger btn-sm text-white" title="Eliminar">
                                     <i class="fas fa-trash"></i>
-                                </a>
+                                </a> -->
                             </td>
                         </tr>
                         {% endfor %}
@@ -152,10 +152,19 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="" class="col-md-2 col-sm-12">ACUERDO</label>
-                            <textarea placeholder="Detalle el acuerdo" class="form-control" readonly></textarea>
+                            <textarea placeholder="Detalle el acuerdo" class="form-control" readonly id="input_acuerdo"></textarea>
                         </div>
                     </div>
                     <div class="col-12">
+                        <h3>ACUERDO DE PAGOS</h3>
+                        <div id="infoPagos"></div>
+                    </div>
+                    <div class="col-12">
+                        <h3>RECORDATORIOS</h3>
+                        <div id="infoRecordatorios"></div>
+                    </div>
+                    <div class="col-12">
+                        
                         <h3>PAGOS AGREGADOS</h3>
                     </div>
                 </div>
