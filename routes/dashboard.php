@@ -3,7 +3,7 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-use models\GestorModel;
+use models\{FacturaModel, GestorModel, GestionModel};
 
 function gestorView($req, $res, $app)
 {
@@ -11,6 +11,8 @@ function gestorView($req, $res, $app)
     $user = sessionLocal('user');
     $ctx = [];
     $gestorModel = new GestorModel;
+    $gestionModel = new GestionModel;
+    $fichaModel = new FacturaModel;
     $datas = $gestorModel->getDataTableGestor($user['username']);
     if (isset($q['q']) && $q['q'] != ''){
         $datas = $gestorModel->getDataSearchGestorByDocumentDeudor($q['q']);
@@ -19,7 +21,9 @@ function gestorView($req, $res, $app)
         }
     }
 
+    $gestiones = $gestionModel->allGestion();
 
+    $ctx['gestiones'] = $gestiones; 
     $ctx['datas'] = $datas;
     return $app->view->render($res, 'gestor/gestor.html', $ctx);
 }

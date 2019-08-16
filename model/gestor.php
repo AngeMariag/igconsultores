@@ -67,6 +67,14 @@ class GestorModel extends Model
 class GestionModel extends Model
 {
     protected static $table = "gestion";
+
+    public function allGestion()
+    {
+        $query = "SELECT * FROM gestion 
+        LEFT JOIN ficha
+        ON ficha.id = gestion.id_ficha";
+        return $this->execute_query($query);
+    }
 }
 
 class RecordatoriosModel extends Model

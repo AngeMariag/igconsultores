@@ -1,0 +1,39 @@
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header text-white bg-info ">
+            GESTIONES AÑADIDAS
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Acuerdo</th>
+                                    <th>Observaciones</th>
+                                    <th>Monto</th>
+                                    <th>Fecha</th>
+                                    <th>Estatus</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in gestiones %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ data.acuerdo}}</td>
+                                    <td>{{ data.gestion }}</td>
+                                    <td>{{ data.monto }}</td>
+                                    <td>{{ data.fecha }}</td>
+                                    <td>{{ data.estado }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
