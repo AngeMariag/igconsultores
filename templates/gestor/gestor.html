@@ -121,8 +121,6 @@
 
 
 <!-- modal para visualizar los datos agg del deudor con su respectiv gestión -->
-
-
 <div class="modal fade bg " id="vista" tabindex="-1" role="dialog" aria-labelledby="vistaLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -134,26 +132,20 @@
       </div>
 
       <div class="modal-body">
-
-        <div class="form-row">
-          <div class="form-inline col-sm-12 my-3">
-            <label for="" class="col-md-2 col-sm-12">ACUERDO</label>
-            <textarea name="" placeholder="Detalle el acuerdo" class="form-control col-md-10 col-sm-12"
-              readonly=""></textarea>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="" class="col-md-2 col-sm-12">ACUERDO</label>
+              <textarea placeholder="Detalle el acuerdo" class="form-control" readonly></textarea>
+            </div>
           </div>
-        </div>
-
-        <div class="form-row">
-          <div class="" id="pagos">
+          <div class="col-12">
             <h3>PAGOS AGREGADOS</h3>
-
           </div>
         </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
-        <!-- <button type="button" class="btn btn-success">AGREGAR</button> -->
       </div>
     </div>
   </div>
@@ -259,5 +251,7 @@
         })
     }
   }
+
+
 </script>
 {% endblock %}
