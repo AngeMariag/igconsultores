@@ -67,9 +67,27 @@ class GestorModel extends Model
 class GestionModel extends Model
 {
     protected static $table = "gestion";
+
+    public function allGestion()
+    {
+        $query = "SELECT  gestion.id, gestion.acuerdo, gestion.gestion, gestion.fecha, gestion.monto, gestion.estado, ficha.total FROM gestion 
+        LEFT JOIN ficha
+        ON ficha.id = gestion.id_ficha";
+        return $this->execute_query($query);
+    }
 }
 
 class RecordatoriosModel extends Model
 {
     protected static $table = "recordatorios";
+
+    public function allRecordatorios()
+    {
+        $query = "SELECT recordatorios.recordatorio, recordatorios.fecha, recordatorios.id, deudor.nombre, deudor.apellido, deudor.telefono, deudor.tipodocumento, deudor.documento FROM recordatorios
+        LEFT JOIN ficha
+        ON ficha.id=recordatorios.id_ficha
+        LEFT JOIN deudor
+        ON deudor.id=ficha.id_deudor";
+        return $this->execute_query($query);
+    }
 }

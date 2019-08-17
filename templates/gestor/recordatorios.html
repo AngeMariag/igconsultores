@@ -1,0 +1,39 @@
+<div class="container mt-3">
+        <div class="card">
+            <div class="card-header text-white bg-info ">
+                RECORDATORIOS
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Fecha</th>
+                                        <th>Recordatorio</th>
+                                        <th>Documento Deudor</th>
+                                        <th>Nombre Deudor</th>
+                                        <th>Telefono</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in recordatorios %}
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td>{{ data.fecha|date('d-m-Y') }}</td>
+                                        <td>{{ data.recordatorio }}</td>
+                                        <td>{{ data.tipodocumento|upper }}-{{ data.documento }}</td>
+                                        <td>{{ data.nombre|upper }} {{ data.apellido|upper }}</td>
+                                        <td>{{ data.telefono }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

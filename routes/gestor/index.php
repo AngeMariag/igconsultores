@@ -89,3 +89,24 @@ $app->post('/gestion/new', function (Request $req, Response $res) {
     }
     return $res->withRedirect($this->router->pathFor('dashboard'));
 })->setName('gestion_add_post');
+
+$app->get('/gestion/detail', function (Request $req, Response $res){
+    $id = $req->getQueryParams();
+    if (!isset($id['id'])){
+        return $res->withRedirect($this->router->pathFor('dashboard'));
+    }
+    $id = $id['id'];
+    $ctx = [];
+
+    $gestionModel = new GestionModel;
+    $recordatoriosModel = new RecordatoriosModel;
+
+    $gestion = $gestionModel->where('id_ficha', '=', $id);
+    $recordatorios = $recordatoriosModel->where('id_ficha', '=', $id);
+
+    $ctx['gestion'] = $gestion;
+    $ctx['recordatorios'] = $recordatorios;
+
+    return json_encode($ctx);
+    
+})->setName('gestion_detail');
