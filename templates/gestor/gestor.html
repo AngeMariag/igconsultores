@@ -3,156 +3,29 @@
 
 {% block content %}
 <div class="container mt-5">
-	<nav>
+  <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-            aria-controls="nav-home" aria-selected="true">GESTION</a>
-        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-            aria-controls="nav-profile" aria-selected="false">NOTIFICACIONES</a>
-        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-            aria-controls="nav-contact" aria-selected="false">RECORDATORIOS</a>
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+        aria-controls="nav-home" aria-selected="true">GESTION</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+        aria-controls="nav-profile" aria-selected="false">NOTIFICACIONES</a>
+      <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+        aria-controls="nav-contact" aria-selected="false">RECORDATORIOS</a>
     </div>
-</nav>
-<div>
-
-<div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+  </nav>
+  <div>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         {% include('gestor/listgestion.html') %}
-    </div>
-    <div class="tab-pane fade " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      </div>
+      <div class="tab-pane fade " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
         {% include('gestor/gestion.html') %}
-    </div>
-    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-            {% include('gestor/recordatorios.html') %}
-    </div>
-</div>
-
-
-
-<!-- Modal -->
-<form action="{{ path_for('gestion_add_post') }}" method="post">
-  <input type="hidden" name="{{csrf.keys.name}}" value="{{csrf.name}}">
-  <input type="hidden" name="{{csrf.keys.value}}" value="{{csrf.value}}">
-  <input type="hidden" name="id" value="" id="id_name_input_hidden_id">
-  <div class="modal fade bg " id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header text-white bg-info">
-          <h5 class="modal-title text-center" id="exampleModal3Label">REGISTRO DE GESTIÓN</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-12">
-              <div class="form-group col-sm-12">
-                <h4 for="" class="text-left my-3">DATOS DEUDOR</h4>
-                <div id="set_deudor"></div>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group col-sm-12">
-                <h4 for="" class="text-left my-3">DEUDA TOTAL: <b><span id="id_total"></span></b></h4>
-                <div id="set_total"></div>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-group col-sm-12">
-                <label for="">ACUERDO</label>
-                <textarea rows="1" name="acuerdo" placeholder="Detalle el acuerdo" class="form-control"></textarea>
-              </div>
-            </div>
-            <div class="col-12 text-center">
-              <button type="button" class="btn btn-info m-2 " onclick="pago(this)">AGREGAR PAGOS</button>
-            </div>
-            <div class="col-12 mb-3" id="pagos"></div>
-            <div class="col-12  text-center">
-              <h2>AGREGAR RECORDATORIO</h2>
-            </div>
-            <div class="col-md-4 col-sm-12">
-              <div class="form-group">
-                <label for="">FECHA DE RECORDATORIO</label>
-                <input type="date" class="form-control form-control-sm" id="" placeholder="" name="fecha_gestion">
-              </div>
-            </div>
-            <div class="col-md-8 col-sm-12">
-              <div class="form-group">
-                <label for="">MOTIVO</label>
-                <input type="text" class="form-control form-control-sm" id="" placeholder="" name="gestion">
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
-          <button type="submit" class="btn btn-success">AGREGAR</button>
-        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+        {% include('gestor/recordatorios.html') %}
       </div>
     </div>
   </div>
-</form>
-
-
-
-<!-- modal para visualizar los datos agg del deudor con su respectiv gestión -->
-<div class="modal fade bg " id="vista" tabindex="-1" role="dialog" aria-labelledby="vistaLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-white bg-info">
-        <h5 class="modal-title text-center" id="vistaLabel">GESTIÓN DEL DEUDOR</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-12 form-row form-inline">
-            <label class=" col-md-3">Deudor:</label>
-            <input type="text" name="nombre_deudor" readonly="" class="form-control col-md-9 my-2">
-          </div>
-          <div class="col-12 form-row form-inline">
-            <label class="col-md-3">Fecha de Registro:</label>
-            <input type="text" name="nombre_deudor" readonly="" class="form-control col-md-9 my-2">
-          </div>
-          <div class="col-12 form-row form-inline">
-            <label class="col-md-3">Deuda Total:</label>
-            <input type="text" name="nombre_deudor" readonly="" class="form-control col-md-9 my-2">
-          </div>
-          <div class="col-12 form-row form-inline">
-            <label class="col-md-3">Acreedor:</label>
-            <input type="text" name="nombre_deudor" readonly="" class="form-control col-md-9 my-2">
-          </div>
-           <div class="col-12 form-row form-inline">
-            <label for="" class="col-md-3 col-sm-12">Acuerdo</label>
-              <textarea placeholder="Detalle el acuerdo" class="form-control col-md-9 my-2" readonly></textarea>
-           </div>
-          <div class="col-12 my-3">
-            <h3 class="text-center">PAGOS ACORDADOS</h3>
-            <!-- AQUI SE DEBERIA DE MOSTRAR LOS PAGOS QUE SE ACORDARON EN EL MOMENTO DE LA GESTION LOS CAMPOS SERIAN GESTION, MONTO, FECHA Y ESTATUS -->
-         </div>
-        </div>
-
-        <!-- OBSERVACIONES DE LOS PAGOS Y LAS FICHAS -->
-        <div class="col-12 my-3">
-            <h3 class="text-center">OBSERVACIONES DE LA FICHA:</h3>
-            <!-- AQUI SE DEBERIA DE MOSTRAR LOS PAGOS QUE SE ACORDARON EN EL MOMENTO DE LA GESTION LOS CAMPOS SERIAN GESTION, MONTO, FECHA Y ESTATUS -->
-         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
-      </div>
-<!-- ======= -->
-  <div class="row">
-    <div class="col-12">
-      {% include('gestor/tab.html') %}
-   </div>
-  </div>
-</div>
 </div>
 
 {% endblock %}
@@ -256,13 +129,13 @@
   }
 
   function modalShow1(id) {
-    if(id){
+    if (id) {
       base_url = '{{ base_url() }}'
       url = `${base_url}/gestion/detail?id=${id}`
       $.getJSON(url)
         .then(function (data) {
           document.getElementById('input_acuerdo').value = ''
-          if (data.gestion.length != 0){
+          if (data.gestion.length != 0) {
             document.getElementById('input_acuerdo').value = data.gestion[0].acuerdo
           }
           document.getElementById('infoPagos').innerHTML = `
@@ -273,33 +146,117 @@
                   <th>MONTO</th>
                   <th>FECHA</th>
                   <th>ESTATUS</th>
+                  <th>OPCIONES</th>
                 </tr>
               </thead>
               <tbody>
-                ${data.gestion.length != 0 ? 
-                  data.gestion.map(function(gestion){
-                  return `
-                  <tr>
+                ${data.gestion.length != 0 ?
+              data.gestion.map(function (gestion, index) {
+                return `
+                  <tr id="id_tr_${index}">
                     <td>${gestion.gestion}</td>
                     <td>${gestion.monto}</td>
                     <td>${gestion.fecha}</td>
                     <td>${gestion.estado}</td>
+                    <td>
+                      <a onclick="togleInput(${gestion.id}, ${index})" class="btn btn-warning btn-sm text-white"
+                          title="Editar">
+                          <i class="fas fa-edit"></i>
+                      </a>
+                    </td>
                   </tr>
                   `
-                }) : 
-                  `
+              }) :
+              `
                   <tr>
                     <td>No</td>
                     <td>Hay</td>
-                    <td colspan="2">Acuerdos</td>
+                    <td colspan="5">Acuerdos</td>
                   </tr>
                   `
-                }
-                
+            }
               </tbody>
             </table>     
           `
-          document.getElementById('infoRecordatorios').innerHTML = `
+        })
+    }
+  }
+
+  function togleInput(id, index) {
+    var tr = document.getElementById(`id_tr_${index}`)
+    var children = tr.children
+    var td1 = children[0].textContent
+    var td2 = children[1].textContent
+    var td3 = children[2].textContent
+    var td4 = children[3].textContent
+
+    children[0].innerHTML = `<input type="text" id="id_input_${index}_gestion" class="form-control form-control-sm"" value="${td1}">`
+    children[1].innerHTML = `<input type="text" id="id_input_${index}_monto" class="form-control form-control-sm"" value="${td2}">`
+    children[2].innerHTML = `<input type="date" id="id_input_${index}_fecha" class="form-control form-control-sm"" value="${td3}">`
+    children[3].innerHTML = `
+        <select id="id_input_${index}_estatus" class="form-control form-control-sm" required>
+          <option ${td4 == '' ? 'selected' : ''} value=""></option>
+          <option ${td4 == 'RENUENTE' ? 'selected' : ''} value="RENUENTE">RENUENTE</option>
+          <option ${td4 == 'EN ACUERDO' ? 'selected' : ''} value="EN ACUERDO">EN ACUERDO</option>
+          <option ${td4 == 'PENDIENTE' ? 'selected' : ''} value="PENDIENTE">PENDIENTE</option>
+        </select>
+    `
+    children[4].innerHTML = `
+                <a onclick="update(${id}, ${index})" class="btn btn-success btn-sm text-white" title="Editar">
+                    <i class="fas fa-save"></i>
+                </a>
+                <a onclick="cancel(${id}, ${index}, '${td1}', '${td2}', '${td3}', '${td4}')" class="btn btn-danger btn-sm text-white" title="Eliminar">
+                  <i class="fas fa-stop"></i>
+                </a>`
+  }
+
+  function cancel(id, index, td1, td2, td3, td4) {
+    var children = document.getElementById(`id_tr_${index}`).children
+    children[0].innerText = td1
+    children[1].innerText = td2
+    children[2].innerText = td3
+    children[3].innerText = td4
+    children[4].innerHTML = `<a onclick="togleInput(${id}, ${index})" class="btn btn-warning btn-sm text-white"
+                          title="Editar">
+                          <i class="fas fa-edit"></i>
+                      </a>`
+  }
+
+  function update(id, index) {
+    var gestion = document.getElementById(`id_input_${index}_gestion`).value
+    var monto = document.getElementById(`id_input_${index}_monto`).value
+    var fecha = document.getElementById(`id_input_${index}_fecha`).value
+    var estatus = document.getElementById(`id_input_${index}_estatus`).value
+    if (!gestion || !monto || !fecha || !estatus) {
+      return alert("los datos requeridos")
+    }
+    var base_url = '{{ path_for("gestion_update") }}'
+    console.log(base_url)
+    $.ajax({
+      url: base_url,
+      type: 'PUT',
+      dataType: "json",
+      data: { 
+        id: id,
+        gestion: gestion,
+        monto: monto,
+        fecha: fecha,
+        estatus: estatus
+      },
+      success: function (data) {
+        if (!data.status){
+          alert("Hubo un error al guardar")
+        }
+        return cancel(id, index, 
+          data.data.gestion, data.data.monto, data.data.fecha, data.data.estatus)
+      }
+    });
+  }
+</script>
+
+but
+<!-- 
+document.getElementById('infoRecordatorios').innerHTML = `
             <table class="table table-bordered table-sm text-center">
               <thead>
                 <tr>
@@ -308,29 +265,24 @@
                 </tr>
               </thead>
               <tbody>
-                ${data.recordatorios.length != 0 ? 
-                  data.recordatorios.map(function(recordatorio){
-                  return `
+                ${data.recordatorios.length != 0 ?
+              data.recordatorios.map(function (recordatorio) {
+                return `
                   <tr>
                     <td>${recordatorio.recordatorio}</td>
                     <td>${recordatorio.fecha}</td>
                   </tr>
                   `
-                }) : 
-                  `
+              }) :
+              `
                   <tr>
                     <td>No</td>
                     <td>Hay Recordatorio</td>
                   </tr>
                   `
-                }
+            }
                 
               </tbody>
             </table>     
-          `
-          console.log(data)
-        })
-    }
-  }
-</script>
+          ` -->
 {% endblock %}
