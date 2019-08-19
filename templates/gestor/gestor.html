@@ -135,8 +135,16 @@
       $.getJSON(url)
         .then(function (data) {
           document.getElementById('input_acuerdo').value = ''
+          document.getElementById('input_deudor').value = ''
+          document.getElementById('input_fecha').value = ''
+          document.getElementById('input_total').value = ''
+          document.getElementById('input_acreedor').value = ''
           if (data.gestion.length != 0) {
             document.getElementById('input_acuerdo').value = data.gestion[0].acuerdo
+            document.getElementById('input_deudor').value = `${data.gestionDetail.nombre} ${data.gestionDetail.apellido}`
+            document.getElementById('input_fecha').value = data.gestionDetail.fecha
+            document.getElementById('input_total').value = data.gestionDetail.total
+            document.getElementById('input_acreedor').value = data.gestionDetail.razon_social
           }
           document.getElementById('infoPagos').innerHTML = `
             <table class="table table-bordered table-sm text-center">
@@ -246,6 +254,8 @@
       success: function (data) {
         if (!data.status){
           alert("Hubo un error al guardar")
+        } else {
+          alert("Informacion Actualizada")
         }
         return cancel(id, index, 
           data.data.gestion, data.data.monto, data.data.fecha, data.data.estatus)
@@ -254,7 +264,6 @@
   }
 </script>
 
-but
 <!-- 
 document.getElementById('infoRecordatorios').innerHTML = `
             <table class="table table-bordered table-sm text-center">
