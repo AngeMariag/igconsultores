@@ -75,6 +75,20 @@ class GestionModel extends Model
         ON ficha.id = gestion.id_ficha";
         return $this->execute_query($query);
     }
+
+    public function getDataModalDetail($id_ficha){
+        $query = "SELECT round(ficha.total, 2) as total, acreedor.razon_social, cartera.fecha, deudor.nombre, deudor.apellido FROM gestion 
+            LEFT JOIN ficha 
+            ON ficha.id=gestion.id_ficha
+            LEFT JOIN deudor
+            ON deudor.id=ficha.id_deudor
+            LEFT JOIN cartera
+            ON cartera.id=ficha.id_cartera
+            LEFT JOIN acreedor
+            ON acreedor.id=cartera.id_acreedor
+            WHERE id_ficha = {$id_ficha}";
+        return $this->execute_query($query);
+    }
 }
 
 class RecordatoriosModel extends Model

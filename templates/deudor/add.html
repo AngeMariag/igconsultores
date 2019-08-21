@@ -9,6 +9,11 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                      <!-- CADA DEUDOR LLEVA UN CÓDIGO -->
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Código asignado al Deudor', 'codigo_deudor', session.ficha.codigo_deudor) }}
+                    </div>
+                    
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
                             <label for="id_typedocument_deudor">Tipo de Documento (*)</label>
@@ -25,6 +30,7 @@
                             </select>
                         </div>
                     </div>
+                  
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         {{ wrapped_input('Documento (*)', 'document_deudor', session.ficha.document_deudor) }}
                     </div>
