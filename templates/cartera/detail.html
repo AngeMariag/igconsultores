@@ -108,17 +108,11 @@
                                 <i class="fas fa-plus"></i>
                             </button>
                         </h4>
-                        <!-- <div class="col-12 mt-3">
-                            <h3>
-                                Deudor {{ loop.index }}
-                            </h3>
-                        </div>
-                         -->
-                          {% for data in deudores %}
+                        {% for data in deudores %}
                         <table class="table table-hover text-center ">
                             <thead class="table-info">
                                 <tr>
-                                    <th>Tipo Documento</th>
+                                    <th>Codigo</th>
                                     <th>Documento</th>
                                     <th>Nombre y Apellido</th>
                                     <th>Telefono</th>
@@ -129,14 +123,14 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        {{ data.deudor.tipodocumento }}
+                                        {{ data.deudor.tipodocumento|upper }}-{{ data.deudor.documento }}
                                         {% if data.deudor.tipodocumento == 'nit' %}
                                         <span class="badge badge-primary">Juridica</span>
                                         {% else %}
                                         <span class="badge badge-primary">Natural</span>
                                         {% endif %}
                                     </td>
-                                    <td>{{ data.deudor.documento }}</td>
+                                    <td>{{ data.deudor.codigo }}</td>
                                     <td>{{ data.deudor.nombre }} {{ data.deudor.apellido }}</td>
                                     <td>{{ data.deudor.telefono }}</td>
                                     <td> {% if data.deudor.gcodigo %}
@@ -146,7 +140,7 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
+                                        <a href="#" class="btn btn-info btn-sm text-white" title="Ver" data-toggle="modal" data-target="#vista"> 
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         <a href="#" class="btn btn-warning btn-sm text-white" title="Editar">
@@ -168,6 +162,7 @@
     </div>
 </div>
 {% include 'cartera/ficha.html' %}
+{% include 'cartera/modalDetail.html' %}
 {% endblock %}
 
 {% block js %}

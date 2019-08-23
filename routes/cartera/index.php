@@ -243,6 +243,7 @@ $app->group('/cartera', function () use ($app) {
         // deudor
         $typedocument_deudor = (isset($post['typedocument_deudor'])) ? $post['typedocument_deudor'] : '';
         $document_deudor = (isset($post['document_deudor'])) ? $post['document_deudor'] : '';
+        $codigo_deudor = (isset($post['codigo_deudor'])) ? $post['codigo_deudor'] : '';
         $name_deudor = (isset($post['name_deudor'])) ? $post['name_deudor'] : '';
         $last_name_deudor = (isset($post['last_name_deudor'])) ? $post['last_name_deudor'] : '';
         $tlf_deudor = (isset($post['tlf_deudor'])) ? $post['tlf_deudor'] : '';
@@ -316,6 +317,7 @@ $app->group('/cartera', function () use ($app) {
         } else {
             $deudorModel->tipodocumento = $typedocument_deudor;
             $deudorModel->documento = $document_deudor;
+            $deudorModel->codigo = $codigo_deudor;
             $deudorModel->nombre = $name_deudor;
             $deudorModel->apellido = $last_name_deudor;
             $deudorModel->telefono = $tlf_deudor;
