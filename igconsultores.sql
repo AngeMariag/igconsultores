@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-08-2019 a las 04:54:52
+-- Tiempo de generación: 23-08-2019 a las 20:08:33
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.7
 
@@ -40,7 +40,7 @@ CREATE TABLE `acreedor` (
 --
 
 INSERT INTO `acreedor` (`id`, `tipo_documento`, `documento`, `razon_social`) VALUES
-(23, 'cc', '25520841', 'Junuir Sanchez');
+(1, 'cc', '25520842', 'Ramon Socail');
 
 -- --------------------------------------------------------
 
@@ -60,8 +60,7 @@ CREATE TABLE `cartera` (
 --
 
 INSERT INTO `cartera` (`id`, `token`, `id_acreedor`, `fecha`) VALUES
-(16, '3164d6ae-40a5-4361-bc73-d18a3f91039d', 22, '2019-08-15'),
-(17, 'e0d01803-4684-4a20-94d1-18f4191c10e7', 23, '2019-08-16');
+(1, '7e12e7e0-176f-4904-bd3c-756d1a7d2b0f', 1, '2019-08-23');
 
 -- --------------------------------------------------------
 
@@ -82,12 +81,8 @@ CREATE TABLE `cartera_deudor_codeudor` (
 --
 
 INSERT INTO `cartera_deudor_codeudor` (`id`, `id_cartera`, `id_deudor`, `id_codeudor`, `id_gestor`) VALUES
-(18, 16, 12, NULL, 4),
-(19, 16, NULL, 9, NULL),
-(20, 16, 13, NULL, 4),
-(21, 16, NULL, 10, NULL),
-(22, 17, 14, NULL, 4),
-(23, 17, NULL, 11, NULL);
+(1, 1, 1, NULL, 1),
+(2, 1, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -110,9 +105,7 @@ CREATE TABLE `codeudor` (
 --
 
 INSERT INTO `codeudor` (`id`, `nombre`, `apellido`, `tipodocumento`, `documento`, `telefono`, `direccion`) VALUES
-(11, 'qwqwd', 'qwd12312', 'cc', '213123', '123123', '123123'),
-(10, 'qwqwe', 'qweqwe', 'cc', '12312312', '231231231', 'qwqwdqw'),
-(9, 'wer', 'wef', 'cc', '234234', '42234w', 'ewefwef');
+(1, 'uoiyuiy', 'uoiyoiuy', 'cc', '6986', '8708709', 'piouiou');
 
 -- --------------------------------------------------------
 
@@ -127,17 +120,16 @@ CREATE TABLE `deudor` (
   `tipodocumento` varchar(3) NOT NULL,
   `documento` varchar(15) NOT NULL,
   `telefono` varchar(15) NOT NULL,
-  `direccion` text NOT NULL
+  `direccion` text NOT NULL,
+  `codigo` varchar(30) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `deudor`
 --
 
-INSERT INTO `deudor` (`id`, `nombre`, `apellido`, `tipodocumento`, `documento`, `telefono`, `direccion`) VALUES
-(14, 'Junior', 'Sanchez', 'cc', '25520840', '123123', 'Mesa d eCavcas'),
-(13, 'Junior', 'Sanchez', 'cc', '25520841', '213123123123', 'Mesa d eCavcas'),
-(12, 'Ramon', 'Deudor', 'cc', '25520842', '04245024077', 'Me de Ha');
+INSERT INTO `deudor` (`id`, `nombre`, `apellido`, `tipodocumento`, `documento`, `telefono`, `direccion`, `codigo`) VALUES
+(1, 'uoiyiuy', 'iuoyoiuy', 'cc', '786976', '8769868', 'yoiuy', '76986');
 
 -- --------------------------------------------------------
 
@@ -151,6 +143,13 @@ CREATE TABLE `documentos_cartera` (
   `ruta` text NOT NULL,
   `id_cartera` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `documentos_cartera`
+--
+
+INSERT INTO `documentos_cartera` (`id`, `nombre`, `ruta`, `id_cartera`) VALUES
+(1, 'wefwef', '/igconsultores/media/ef9a8359993025ca.png', 1);
 
 -- --------------------------------------------------------
 
@@ -178,9 +177,7 @@ CREATE TABLE `ficha` (
 --
 
 INSERT INTO `ficha` (`id`, `titulo`, `capital`, `interes`, `honorarios`, `gastos`, `descuento`, `sancion`, `total`, `id_deudor`, `id_cartera`, `estado`) VALUES
-(7, 'qweqwe', '123', '0', '23', '12', '0', '20', '190.64999999999998', 14, 17, 0),
-(6, 'qwqwe', '1233', '12', '23', '12', '12', '20', '2207.07', 13, 16, 0),
-(5, 'ewwef', '12', '0', '23', '12', '0', '0', '16.2', 12, 16, 0);
+(1, 'oijhlkjh', '897087', '0', '23', '12', '0', '0', '1211067.45', 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -197,13 +194,6 @@ CREATE TABLE `gestion` (
   `estado` varchar(300) NOT NULL,
   `id_ficha` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `gestion`
---
-
-INSERT INTO `gestion` (`id`, `acuerdo`, `gestion`, `fecha`, `monto`, `estado`, `id_ficha`) VALUES
-(1, 'qwe', '12', '2019-08-22', 123, 'RENUENTE', 7);
 
 -- --------------------------------------------------------
 
@@ -224,7 +214,7 @@ CREATE TABLE `gestor` (
 --
 
 INSERT INTO `gestor` (`id`, `codigo`, `identificacion`, `nombre`, `apellido`) VALUES
-(4, '25520842', '564ew56f', 'Ramon', 'Gestor');
+(1, '25520842', '8707788', 'Ramon', 'Grstor');
 
 -- --------------------------------------------------------
 
@@ -237,18 +227,6 @@ CREATE TABLE `observaciones_ficha` (
   `id_ficha` int(11) NOT NULL,
   `observacion` varchar(350) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `observaciones_ficha`
---
-
-INSERT INTO `observaciones_ficha` (`id`, `id_ficha`, `observacion`) VALUES
-(10, 6, 'qwdqwd'),
-(9, 6, 'qwdqwd'),
-(8, 6, 'qwdqwd'),
-(7, 5, 'qwdqwd'),
-(6, 5, 'qwdqwd'),
-(11, 7, 'qweqwe');
 
 -- --------------------------------------------------------
 
@@ -278,13 +256,6 @@ CREATE TABLE `recordatorios` (
   `id_ficha` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `recordatorios`
---
-
-INSERT INTO `recordatorios` (`id`, `recordatorio`, `fecha`, `id_ficha`) VALUES
-(1, 'qweqewqwe', '2019-08-16', 7);
-
 -- --------------------------------------------------------
 
 --
@@ -304,7 +275,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `username`, `password`, `nivel`) VALUES
 (1, 'jysa', '73a22c28d279ff107cf8ce992ebc3cada6623b6170b38271e6024ca4bd2029995c126b0e9e2004a5f1d11cf36ef01812413ea18e33105f608d752797107fa81a', 1),
-(4, '25520842', '73a22c28d279ff107cf8ce992ebc3cada6623b6170b38271e6024ca4bd2029995c126b0e9e2004a5f1d11cf36ef01812413ea18e33105f608d752797107fa81a', 3);
+(5, '25520842', '73a22c28d279ff107cf8ce992ebc3cada6623b6170b38271e6024ca4bd2029995c126b0e9e2004a5f1d11cf36ef01812413ea18e33105f608d752797107fa81a', 3);
 
 --
 -- Índices para tablas volcadas
@@ -355,7 +326,7 @@ ALTER TABLE `documentos_cartera`
 -- Indices de la tabla `ficha`
 --
 ALTER TABLE `ficha`
-  ADD UNIQUE KEY `id_ficha` (`id`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indices de la tabla `gestion`
@@ -396,73 +367,73 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `acreedor`
 --
 ALTER TABLE `acreedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `cartera`
 --
 ALTER TABLE `cartera`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `cartera_deudor_codeudor`
 --
 ALTER TABLE `cartera_deudor_codeudor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `codeudor`
 --
 ALTER TABLE `codeudor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `deudor`
 --
 ALTER TABLE `deudor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `documentos_cartera`
 --
 ALTER TABLE `documentos_cartera`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `ficha`
 --
 ALTER TABLE `ficha`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `gestion`
 --
 ALTER TABLE `gestion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `gestor`
 --
 ALTER TABLE `gestor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `observaciones_ficha`
 --
 ALTER TABLE `observaciones_ficha`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `recordatorios`
 --
 ALTER TABLE `recordatorios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

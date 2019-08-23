@@ -35,6 +35,9 @@
                         {{ wrapped_input('Documento (*)', 'document_deudor', session.ficha.document_deudor) }}
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
+                        {{ wrapped_input('Codigo (*)', 'codigo_deudor', session.ficha.codigo_deudor) }}
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
                         {{ wrapped_input('Nombre (*)', 'name_deudor', session.ficha.name_deudor) }}
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -46,7 +49,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         {{ wrapped_input('Direccion (*)', 'address_deudor', session.ficha.address_deudor) }}
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
                             <label for="id_gestor_deudor">Gestor (*)</label>
                             <select id="id_gestor_deudor" class="form-control" name="gestor_deudor" required autofocus

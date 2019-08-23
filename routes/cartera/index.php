@@ -244,6 +244,7 @@ $app->group('/cartera', function () use ($app) {
         $codigo_deudor = (isset($post['codigo_deudor'])) ? $post['codigo_deudor'] : '';
         $typedocument_deudor = (isset($post['typedocument_deudor'])) ? $post['typedocument_deudor'] : '';
         $document_deudor = (isset($post['document_deudor'])) ? $post['document_deudor'] : '';
+        $codigo_deudor = (isset($post['codigo_deudor'])) ? $post['codigo_deudor'] : '';
         $name_deudor = (isset($post['name_deudor'])) ? $post['name_deudor'] : '';
         $last_name_deudor = (isset($post['last_name_deudor'])) ? $post['last_name_deudor'] : '';
         $tlf_deudor = (isset($post['tlf_deudor'])) ? $post['tlf_deudor'] : '';
@@ -318,6 +319,7 @@ $app->group('/cartera', function () use ($app) {
             $deudorModel->codigo_deudor = $codigo_deudor;
             $deudorModel->tipodocumento = $typedocument_deudor;
             $deudorModel->documento = $document_deudor;
+            $deudorModel->codigo = $codigo_deudor;
             $deudorModel->nombre = $name_deudor;
             $deudorModel->apellido = $last_name_deudor;
             $deudorModel->telefono = $tlf_deudor;
@@ -344,7 +346,7 @@ $app->group('/cartera', function () use ($app) {
         }
         $carteDeudorModel = new CarteraDeudorCoDeudor;
         $carteDeudorModel->id_cartera = $cartera['id'];
-        $carteDeudorModel->id_deudor = $save_id_deudor['id'];
+        $carteDeudorModel->id_deudor = $save_id_deudor;
         $carteDeudorModel->id_codeudor = $save_id_codeudor_1;
         $carteDeudorModel->save();
 
@@ -368,7 +370,7 @@ $app->group('/cartera', function () use ($app) {
             }
             $carteDeudorModel = new CarteraDeudorCoDeudor;
             $carteDeudorModel->id_cartera = $cartera['id'];
-            $carteDeudorModel->id_deudor = $save_id_deudor['id'];
+            $carteDeudorModel->id_deudor = $save_id_deudor;
             $carteDeudorModel->id_codeudor = $save_id_codeudor_2;
             $carteDeudorModel->save();
         }

@@ -22,7 +22,7 @@ class GestorModel extends Model
             ON acreedor.id=cartera.id_acreedor
             LEFT JOIN ficha
             ON ficha.id_cartera=cartera.id and ficha.id_deudor=deudor.id
-            WHERE codigo = {$codigo}";
+            WHERE gestor.codigo = {$codigo}";
         return $this->execute_query($query);
     }
 

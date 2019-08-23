@@ -108,6 +108,7 @@
                                 <i class="fas fa-plus"></i>
                             </button>
                         </h4>
+<<<<<<< HEAD
                         <!-- <div class="col-12 mt-3">
                             <h3>
                                 Deudor {{ loop.index }}
@@ -121,6 +122,13 @@
                                 <tr>
                                     <th>Código</th>
                                     <th>Tipo Documento</th>
+=======
+                        {% for data in deudores %}
+                        <table class="table table-hover text-center ">
+                            <thead class="table-info">
+                                <tr>
+                                    <th>Codigo</th>
+>>>>>>> 6f41cff3fa60a3cc77cf2c7d4d6505d54070aa78
                                     <th>Documento</th>
                                     <th>Nombre y Apellido</th>
                                     <th>Telefono</th>
@@ -132,14 +140,14 @@
                                 <tr>
                                     <td>{{ data.deudor.codigo_deudor }}</td>
                                     <td>
-                                        {{ data.deudor.tipodocumento }}
+                                        {{ data.deudor.tipodocumento|upper }}-{{ data.deudor.documento }}
                                         {% if data.deudor.tipodocumento == 'nit' %}
                                         <span class="badge badge-primary">Juridica</span>
                                         {% else %}
                                         <span class="badge badge-primary">Natural</span>
                                         {% endif %}
                                     </td>
-                                    <td>{{ data.deudor.documento }}</td>
+                                    <td>{{ data.deudor.codigo }}</td>
                                     <td>{{ data.deudor.nombre }} {{ data.deudor.apellido }}</td>
                                     <td>{{ data.deudor.telefono }}</td>
                                     <td> {% if data.deudor.gcodigo %}
@@ -149,6 +157,7 @@
                                         {% endif %}
                                     </td>
                                     <td>
+<<<<<<< HEAD
                                
                                <a href="javascript:leermasproyectos({{ data.deudor.id }});" class="btn btn-xs btn-info" title="Leer Mas"><i class="glyphicon glyphicon-search"></i></a>
                                 <!-- <a href="#" onclick="modalverdeudor({{ data.deudor.id }})" class="btn btn-info btn-sm text-white"
@@ -158,6 +167,11 @@
 <!--                                         <a href="#" class="btn btn-info btn-sm text-white" title="Ver">
                                             <i class="fas fa-eye" data-toggle="modal" data-target=".bd-example-modal-lg"></i>
                                         </a> -->
+=======
+                                        <a href="#" class="btn btn-info btn-sm text-white" title="Ver" data-toggle="modal" data-target="#vista"> 
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+>>>>>>> 6f41cff3fa60a3cc77cf2c7d4d6505d54070aa78
                                         <a href="#" class="btn btn-warning btn-sm text-white" title="Editar">
                                             <i class="fas fa-edit"></i>
                                         </a>
@@ -177,6 +191,7 @@
     </div>
 </div>
 {% include 'cartera/ficha.html' %}
+<<<<<<< HEAD
 
 
 
@@ -192,6 +207,9 @@
     </div>
   </div>
 </div>
+=======
+{% include 'cartera/modalDetail.html' %}
+>>>>>>> 6f41cff3fa60a3cc77cf2c7d4d6505d54070aa78
 {% endblock %}
 
 {% block js %}
