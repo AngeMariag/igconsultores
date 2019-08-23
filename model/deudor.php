@@ -10,13 +10,9 @@ class DeudorModel extends Model
 
     public function findManyDeudor($id_cartera)
     {
-<<<<<<< HEAD
-        $query = "SELECT d.id, d.codigo_deudor, d.nombre, d.apellido, d.tipodocumento, 
-=======
-        $query = "SELECT d.id, d.nombre, d.apellido, d.codigo, d.tipodocumento, 
->>>>>>> 6f41cff3fa60a3cc77cf2c7d4d6505d54070aa78
+        $query = "SELECT d.id, d.codigo as dcodigo, d.nombre, d.apellido, d.tipodocumento, 
             d.documento, d.telefono, d.direccion, g.codigo as gcodigo,
-            g.nombre as gnombre, g.apellido as gapellido  FROM deudor as d
+            g.nombre as gnombre, g.apellido as gapellido FROM deudor as d
             LEFT JOIN cartera_deudor_codeudor as car
             ON d.id = car.id_deudor
             LEFT JOIN gestor as g 
