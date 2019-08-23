@@ -84,8 +84,9 @@
           document.getElementById('set_deudor').innerHTML =
             `<div>
               <table class="table table-bordered table-sm text-center">
-                <thead>
+                <thead class="table-info">
                   <tr>
+                    <th>CÓDIGO</th>
                     <th>DOCUMENTO</th>
                     <th>NOMBRE Y APELLIDO</th>
                     <th>TELEFONO</th>
@@ -93,6 +94,7 @@
                 </thead>
                 <tbody>
                   <tr>
+                    <td>${data.deudor.codigo_deudor.toUpperCase()}</td>
                     <td>${data.deudor.tipodocumento.toUpperCase()}-${data.deudor.documento}</td>
                     <td>${data.deudor.nombre.toUpperCase()} ${data.deudor.apellido.toUpperCase()}</td>
                     <td>${data.deudor.telefono}</td>
@@ -100,7 +102,27 @@
                 </tbody>
               </table>
             </div>`
-          document.getElementById('set_total').innerHTML =
+          document.getElementById('set_codeudor').innerHTML=
+          // agregare mi codeudor 
+           `<div>
+                  <table class="table table-bordered table-sm text-center">
+                    <thead class="table-info">
+                      <tr>
+                        <<th>DOCUMENTO</th>
+                        <th>NOMBRE Y APELLIDO</th>
+                        <th>TELEFONO</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>${data.deudor.tipodocumento.toUpperCase()}-${data.deudor.documento}</td>
+                        <td>${data.deudor.nombre.toUpperCase()} ${data.deudor.apellido.toUpperCase()}</td>
+                        <td>${data.deudor.telefono}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>`
+              document.getElementById('set_total').innerHTML =
             `<div>
               <table class="table table-bordered table-sm text-center">
                 <thead>

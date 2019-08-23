@@ -11,7 +11,7 @@ class GestorModel extends Model
     public function getDataTableGestor($codigo)
     {   
         $table = static::$table;
-        $query = "SELECT ficha.id, gestor.codigo, deudor.tipodocumento, deudor.documento, deudor.nombre, deudor.apellido, acreedor.razon_social FROM {$table}
+        $query = "SELECT ficha.id, gestor.codigo, deudor.codigo_deudor, deudor.tipodocumento, deudor.documento, deudor.nombre, deudor.apellido, acreedor.razon_social FROM {$table}
             LEFT JOIN cartera_deudor_codeudor as car
             ON car.id_gestor=gestor.id
             LEFT JOIN deudor 

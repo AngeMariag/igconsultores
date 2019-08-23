@@ -25,7 +25,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Código</th>
+                            <th>Código Deudor</th>
                             <th>Documento Deudor</th>
                             <th>Deudor</th>
                             <th>Acreedor</th>
@@ -36,7 +36,7 @@
                         {% for data in datas %}
                         <tr>
                             <td>{{ loop.index }}</td>
-                            <td>{{ data.codigo}}</td>
+                            <td>{{ data.codigo_deudor}}</td>
                             <td>{{ data.tipodocumento|upper }}-{{ data.documento }}</td>
                             <td>{{ data.nombre }}-{{ data.apellido }}</td>
                             <td>{{ data.razon_social }}</td>
@@ -83,10 +83,18 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group col-sm-12">
-                                <h3 for="">Deudor</h3>
+                                <h4 for="" class="text-center my3">DATOS DEL DEUDOR</h4>
                                 <div id="set_deudor"></div>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="form-group col-sm-12">
+                                <h4 for="" class="text-center my3">DATOS DEL CODEUDOR</h4>
+                                <div id="set_codeudor"></div>
+                            </div>
+                        </div>
+                        
+
                         <div class="col-12">
                             <div class="form-group col-sm-12">
                                 <h3 for="">Deuda Total: <b><span id="id_total"></span></b></h3>

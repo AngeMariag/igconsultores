@@ -21,7 +21,7 @@ $app->post('/', function ($request, $response) {
         $this->flash->addMessage('error', 'Usuario o Contraseña Invalida');
         return $response->withRedirect($this->router->pathFor('login_get'));
     }
-    if ($user['password'] != encrypt($password)) {
+    if ($user['password'] != $password) {
         $this->flash->addMessage('error', 'Usuario o Contraseña Invalida');
         return $response->withRedirect($this->router->pathFor('login_get'));
     }

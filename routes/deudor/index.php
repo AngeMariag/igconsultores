@@ -17,6 +17,25 @@ use Slim\Http\Response;
 
 $app->group('/cartera/{token}', function () use ($app) {
 
+    $app->get('/deu', function (Request $req, Response $res) {
+        $ficha_id = $req->getQueryParams();
+        if (!isset($deudor_id['id'])) {
+            return $res->withRedirect($this->router->pathFor('dashboard'));
+        }
+
+        $deuModel = new DeudorModel;
+        $deudor = $deuModel->find('id', '=', $deudor['id_deudor']);
+        if (!$deudor) {
+            return $res->withRedirect($this->router->pathFor('dashboard'));
+        }
+        $ctx = [
+        
+            'deudor' => $deudor
+        ];
+        return json_encode($ctx);
+    });
+
+
     $app->get('/deudor/add', function (Request $req, Response $res, $args) {
         $carteraModel = new CarteraModel;
         $gestorModel = new GestorModel;
@@ -39,6 +58,7 @@ $app->group('/cartera/{token}', function () use ($app) {
         if (!$cartera) return $res->withRedirect($this->router->pathFor('acreedor_detail_get', ['token' => $args['token']]));
 
         $post = $req->getParsedBody();
+        $codigo = (isset($post['codigo'])) ? $post['codigo'] : '';
         $typedocument = (isset($post['typedocument'])) ? $post['typedocument'] : '';
         $document = (isset($post['document'])) ? $post['document'] : '';
         $name = (isset($post['name'])) ? $post['name'] : '';
@@ -48,7 +68,7 @@ $app->group('/cartera/{token}', function () use ($app) {
         $gestor = (isset($post['gestor'])) ? $post['gestor'] : '';
 
         if (
-            !$typedocument || !$document || !$name ||
+            !$codigo || !$typedocument || !$document || !$name ||
             !$last_name || !$tlf || !$address || !$gestor
         ) {
             return $this->view->render($res, 'deudor/add.html', [
@@ -75,6 +95,7 @@ $app->group('/cartera/{token}', function () use ($app) {
             }
             $save_id = $find_deudor['id'];
         } else {
+            $deudorModel->codigo_deudor = $codigo;
             $deudorModel->tipodocumento = $typedocument;
             $deudorModel->documento = $document;
             $deudorModel->nombre = $name;

@@ -3,7 +3,7 @@
 use models\{AuthModel, GestorModel};
 use Slim\Http\{Request, Response};
 
-// vista para ejecutar el guardado del acreedor
+// vista para ejecutar el guardado del gestor
 $app->post('/signup', function (Request $request, Response $response) {
     $post = $request->getParsedBody();
 
@@ -44,7 +44,7 @@ $app->post('/signup', function (Request $request, Response $response) {
 
 
     $authModel->username = $codigo;
-    $authModel->password = encrypt($pass1);
+    $authModel->password = $pass1;
     $authModel->nivel = 3;
     $authModel->save();
     unset($_SESSION['signup']);

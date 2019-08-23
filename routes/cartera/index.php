@@ -241,6 +241,7 @@ $app->group('/cartera', function () use ($app) {
         $post = $request->getParsedBody();
 
         // deudor
+        $codigo_deudor = (isset($post['codigo_deudor'])) ? $post['codigo_deudor'] : '';
         $typedocument_deudor = (isset($post['typedocument_deudor'])) ? $post['typedocument_deudor'] : '';
         $document_deudor = (isset($post['document_deudor'])) ? $post['document_deudor'] : '';
         $name_deudor = (isset($post['name_deudor'])) ? $post['name_deudor'] : '';
@@ -314,6 +315,7 @@ $app->group('/cartera', function () use ($app) {
             }
             $save_id_deudor = $find_deudor['id'];
         } else {
+            $deudorModel->codigo_deudor = $codigo_deudor;
             $deudorModel->tipodocumento = $typedocument_deudor;
             $deudorModel->documento = $document_deudor;
             $deudorModel->nombre = $name_deudor;
