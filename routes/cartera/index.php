@@ -368,7 +368,7 @@ $app->group('/cartera', function () use ($app) {
             }
             $carteDeudorModel = new CarteraDeudorCoDeudor;
             $carteDeudorModel->id_cartera = $cartera['id'];
-            $carteDeudorModel->id_deudor = $save_id_deudor['id'];
+            $carteDeudorModel->id_deudor = $save_id_deudor;
             $carteDeudorModel->id_codeudor = $save_id_codeudor_2;
             $carteDeudorModel->save();
         }
