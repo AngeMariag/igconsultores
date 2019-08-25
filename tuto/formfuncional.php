@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+ <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+  <style type="text/css">
+    .slider{
+      background: url("images/consultoria.jpg");
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+
+   
+  </head>
+  <body>
+
+<!-- formulario -->
+
+<section class="container mt-5">
+  <h3 class="text-uppercase text-center">formulario de contacto</h3>
+  <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. .</p>
+
+<!-- vamos a agregar tamaño -->
+  <div class="row">
+    <div class="col-6">
+      <form action="">
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Nombre:</label>
+          <input type="text" name="" placeholder="xxxx" class="form-control col-10">
+        </div>
+        <div class="form-group row">
+          <label class="col-2 col-form-label">Email</label>
+          <input type="Email" name="" placeholder="correo" class="form-control col-10">
+        </div>
+        <div class="btn btn-danger">Enviar</div>
+      </form>
+  </div>
+</div>
+</section>
+
+<section class="container mt-5">
+  <h3 class="text-uppercase text-center"> formulario en linea</h3>
+  <p class="lead text-center">Formulario en Linea</p>
+
+  <form action="" class="form-inline justify-content-center flex-column flex-md-row">
+    <div class="form-group my-2">
+      <label class="mx-2">NOMBRE</label>
+      <input type="text-center" name="" placeholder="nombre" class="form-control">
+    </div>
+     <div class="form-group my-2">
+      <label class="mx-2">APELLIDO</label>
+      <input type="text-center" name="" placeholder="nombre" class="form-control">
+    </div>
+     <div class="form-group mx-2 my-2">
+      <button class="btn btn-danger " type="submit">Enviar</button>
+    </div>
+    
+  </form>
+</section>
+
+<section class="container mt-5 pt-5">
+    <h3 class="text-uppercase text-center">Formulario de contacto</h3>
+    <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus hic sint non rem quibusdam. Dicta facilis dignissimos deserunt, mollitia dolores.</p>
+
+    <div class="container">
+      <div><? echo $error.$mensajeExito; ?></div>
+      <form method="post">
+        <div class="form-group row">
+            <label for="nombre" class="col-sm-2 form-control-label">Nombre</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="nombre" placeholder="Escribe tu nombre" type="text" name="nombre">
+            </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-sm-2 form-control-label">Email</label>
+          <div class="col-sm-10">
+            <input class="form-control" id="email" placeholder="Escribe tu e-mail" type="email" name="email">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="asunto" class="col-sm-2 form-control-label">Asunto</label>
+          <div class="col-sm-10">
+            <input class="form-control" id="asunto" placeholder="Asunto del correo" type="text" name="asunto">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="mensaje" class="col-sm-2 form-control-label">Mensaje</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" id="mensaje" rows="3" placeholder="¿Qué quieres preguntar?" name="mensaje"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-warning offset-2">Enviar</button>
+        </div>
+      </form>
+    </div>
+
+  </section>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+<?php
+    header("Content-type: text/html;charset=\"utf-8\"");
+    $error = ""; $mensajeExito = "";
+
+    if ($_POST) {
+        if ($_POST['email'] && filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) === false) {
+            $error .= "E-mail no válido.<br>";   
+        }
+        if ($error != "") {
+            $error = '<div class="alert alert-danger" role="alert"><p><b>Se generó un error:</b></p>' . $error . '</div>';
+        } else {
+            $nombre = $_POST['nombre'];
+            $mail = $_POST['email'];
+            $asunto = $_POST['asunto'];
+            $mensajeC = $_POST['mensaje'];
+            
+            $header = 'From: ' . $mail . " \r\n";
+            $header .= "X-Mailer: PHP/" . phpversion() . " \r\n";
+            $header .= "Mime-Version: 1.0 \r\n";
+            $header .= "Content-Type: text/plain";
+
+            $mensaje = "Este mensaje fue enviado por " . $nombre . ",\r\n";
+            $mensaje .= "Su e-mail es: " . $mail . " \r\n";
+            $mensaje .= "Asunto: " . $asunto . " \r\n";
+            $mensaje .= "Mensaje: " . $mensajeC . " \r\n";
+            $mensaje .= "Enviado el " . date('d/m/Y', time());
+
+            $para = 'tu-nombre@tu-dominio.com';
+            $asunto = 'Mensaje de mi sitio web';
+
+            if (mail($para, $asunto, utf8_decode($mensaje), $header)) {
+                $mensajeExito = '<div class="alert alert-success" role="alert">Mensaje enviado con éxito :)</div>';    
+            } else {
+                $error = '<div class="alert alert-danger" role="alert"><p><strong>Mensaje sin enviar :(</div>';  
+            } 
+        }  
+    }
+?>

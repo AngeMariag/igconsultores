@@ -1,0 +1,421 @@
+*{
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+/*Variables repetidas*/
+:root {
+    --brand-color:#3498db;/*Variable que llama al color general*/
+    --brand-sombra:#246A99;
+}
+html{
+	background-color: white;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 300;
+	font-size: 16px;
+	text-rendering: optimizeLegibility;
+
+}
+
+h1,h2,h3{
+	text-transform: uppercase;/*Mayuscula*/
+	letter-spacing: 1px;/*espacio entre letras*/
+	word-spacing: 3px;
+	margin-bottom: 20px;
+	color: white;
+}
+
+h1{
+	color: white;
+	font-size: 2rem;/*Unidad estandar de un font-size inicial,1erm=16px, 2erm=32,1.5rem=24px diseño armonioso*/
+	
+}
+h2{
+	font-size: 1.5rem;
+	word-spacing: 2px;
+	text-align: center;
+	padding-top: 80px;
+}
+
+h3{
+	font-size: 1.1rem;
+	word-spacing: 1px;
+	font-weight: bold;
+}
+p{
+	font-size: 0.9rem;
+	line-height: 135%;
+	text-align: left;
+}
+/* Pseudo clase que me permite crear elementos luego del que estoy llamando*/
+h2::after{
+	display: block;
+	height: 2px;
+	background-color: var(--brand-color);
+	width: 100px;
+	margin: auto;
+	margin-top: 30px;
+	content: "";/*para que se vea la raya que estamos creando*/
+}
+/*header{
+	background-image: linear-gradient(rgba(10,0,0,0.40),black), url("image/consultoria.jpg");
+	height: 100vh;
+	background-size: cover;/*Cubre todo el contenedor*/
+	/*background-position: center;/*Centrar*/*/
+
+/*}*/
+.titulo-box{
+	position: absolute;
+	width: 80%;/*respecto al padre*/
+	top: 50%;/*mitad*/
+	left: 0px;/*Centrar*/
+	right: 0px;/*Centrar*/
+	margin: auto;/*Centra y alinea a la izquierda*/
+}
+
+
+
+
+.btn{
+	display: inline-block;
+	padding: 5px 15px;
+	text-decoration: none;
+	border:1px  var(--brand-color)solid;
+	border-radius: 200px;
+	color: white;
+	transition: background-color 0.4s, border 0.4s, color 0.4s;
+}
+.btn-completo{
+	background-color: var(--brand-color);
+}
+.btn-transparente{
+	color: var(--brand-color);
+}
+.btn:hover{
+	background-color: var(--brand-sombra);
+	border: 1px solid var(--brand-sombra);
+	color: white;
+}
+
+nav{
+	width: 80%;
+	margin: auto;
+	padding-top: 20px;
+}
+
+.logo{
+	float: left;
+	width: 10%;
+	min-width: 100px;
+}
+
+.nav-principal{
+	padding-top: 40px;
+	float: right; 
+}
+.nav-principal li{
+	display: inline-block;
+}
+.nav-principal a{
+	text-decoration: none;
+	color: white;
+	/*margin-left: 40px;*/
+	text-transform: uppercase;
+	border-bottom: 1px solid transparent;
+	transition: border-bottom 0.4s;
+	padding-bottom: 10px;
+}
+.nav-principal a:hover{
+	border-bottom: 1px solid var(--brand-color);
+}
+
+/*************CARACTERISTICAS********************/
+
+.caracteristicas{
+	padding-top: 80px;
+	overflow: auto;
+}
+/* */
+.c-paragrafo{
+	width: 80%;/*centrar el elemento*/
+	margin: auto;/*centrar el elemento*/
+	line-height: 30px;
+	text-align: center;
+}
+.c-info{
+	padding-top: 60px;
+	width: 80%;
+	margin: auto; 
+}
+.col{
+	padding-left: 13px;
+}
+.c-info i{
+	width: 80%;
+	margin: auto;
+	font-size: 2.5rem;
+	color: var(--brand-color);
+	text-align: center;
+	margin-bottom: 30px;
+}
+/* seccion de casas destacadas*/
+
+.vivienda-destacadas{
+	overflow: auto;
+
+}
+.fotos-casas{
+	padding-top: 60px;
+}
+.f-contenedor{
+	width: 100%;
+	list-style-type: none;
+	/*background-color: black;*/
+}
+
+.f-contenedor li{
+	float: left;
+	width: 25%;
+	overflow: hidden;
+}
+
+.f-contenedor a{
+	display: block;
+	width: 100%;
+	position: relative;
+	height: 0;
+	padding: 56.25% 0 0 0;
+	overflow: hidden;
+	background-color: black;
+
+}
+
+.f-contenedor img{
+	position: absolute;
+	display: block;
+	width: 100%;
+	top: 0;
+	bottom: 0px;
+	margin: auto;
+	transform: scale(1.15);
+	transition: transform 0.5s, opacity 0.5s;
+	opacity: 0.7;
+}
+
+.f-contenedor img:hover{
+	transform: scale(1);
+	opacity: 1;
+}
+
+.registro{
+	overflow: hidden;
+}
+.Registra img{
+	display: block;
+	float: right;
+	width: 20%;
+	margin-right: 30px;
+}
+
+.registra-contenedor p{
+	padding: 10px 0;
+}
+.registra-contenedor i{
+	color: var(--brand-color);
+	width: 50px;
+	font-size: 1.2rem;
+	text-align: center;
+}
+.registra-contenedor a{
+	margin-top: 40px;
+	margin-left: 40px;
+}
+
+/*----------CIUDADES--------------*/
+
+
+.ciudad{
+	overflow: all;
+}
+.ciudad ul {
+	overflow: auto;
+	width: 100%;
+	margin-bottom: 20px;
+	
+}
+
+.ciudad .cuartos{
+	width: 20%;
+	float: left;
+	margin-left:4%; 
+}
+
+.ciudad li img{
+	width: 100%;
+
+}
+
+.informacion-adicional i{
+	color: var(--brand-color);
+	width: 50px;
+	font-size: 1.4rem;
+	text-align: center;
+}
+.informacion-adicional p{
+	padding: 10px 0px;
+	font-size: 0.9rem;
+}
+
+
+/*PLANES*/
+.plan{
+	background-color: #f7f7f7;
+	color: black;
+	padding-bottom: 60px;
+
+}
+
+.plan-contenedor{
+	width: 70%;
+	margin: auto;
+	padding-top: 60px;
+
+}
+
+.modulo-plan{
+	width: 25%;
+	background-color: white;
+	border: 1px solid rgb(241,241,241);
+	display: inline-block;
+	margin-left: 6.25%;
+	box-shadow: 1px 1px 10px var(--brand-color); 
+
+
+}
+
+.plan-titulo{
+	width: 100%;
+	height: 30%; /* o 100px estaticos*/
+	background-color: var(--brand-color);
+	color: white;
+	margin-bottom: 20px;
+}
+
+.plan-titulo h3{
+	font-size: 2.5rem;
+	text-align: center;
+}
+
+.modulo-plan p{
+	font-size: 0.8rem;
+	padding: 10px 5px;
+
+}
+
+.plan-cuerpo i{
+	width: 30px;
+	text-align: center;
+	color: gold;
+}
+
+.plan-cuerpo a{
+	display: block;
+	width: 60%;
+	margin: 15px auto;
+	text-align: center;
+}
+
+/*FOOTER*/
+
+footer{
+	overflow: hidden;
+	background-color: black;
+	color: white;
+	position: relative;
+	height: 30vh;
+	font-size: 0.7rem;
+}
+
+.politicas{
+	position: absolute;
+	width: 80%:;
+	left: 0;
+	right: 0;
+	top: 30px;
+	margin: auto;
+	text-align: center;
+
+}
+
+.politicas::after{
+	display: block;
+	content: "";
+	width: 200px;
+	margin: 20px auto;
+	height: 2px;background-color: white;
+}
+.politicas li{
+	display: inline-block;
+	padding-left: 20px;
+	text-decoration: none;
+	transition: 1s;
+}
+
+.politicas li:hover{
+	color: var(--brand-color);
+	text-decoration: underline;
+	cursor: pointer;
+
+}
+
+footer .socios{
+	position: absolute;
+	left: 20%;
+	top: 40%;
+	width: 60%;
+}
+
+.socios img{
+	width: 80px;
+	cursor:pointer;
+
+}
+
+.social-media{
+	position: absolute;
+	right: 20%;
+	top: 45%;
+	text-align: center;
+}
+
+.social-media i{
+	width: 20px;
+	color: white;
+	transition: color 1s;
+}
+.social-media i:hover{
+	color: var(--brand-color);
+	cursor: pointer;
+
+}
+footer h4{
+	margin-bottom: 20px;
+}
+
+
+
+/*MI DIV PERSONALIZADO*/
+.c-personalizado{
+	background-image: linear-gradient(rgba(0,0,0,0.40),black), url("imagenes/casa.jpeg");*/
+	width: 100%;
+	height: 100vh;
+	background-size: cover;/*Cubre todo el contenedor*/
+	background-position: center;/*Centrar*/
+	color: white;
+	text-align: center;
+	/*font-size: 150px;*/
+}
+
+
+
+

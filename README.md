@@ -1,2 +1,0 @@
-# igconsultores
-proyecto
