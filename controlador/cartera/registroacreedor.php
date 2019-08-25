@@ -9,7 +9,7 @@ $sql=$cn->query("INSERT INTO acreedor (tipo_documento,documento,razon_social) VA
 		
 echo '<script type="text/javascript">
 		           alert("DATOS INSERTADOS CORRECTAMENTE");
-		            window.location.href = "../../menuinterno.php?op=formulario";
+		            window.location.href = "registro.php";
 		           </script>';
 }
 else{

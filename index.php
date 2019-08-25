@@ -96,28 +96,28 @@ $op = $_GET['op'];
             <div class="form-group row">
               <label for="nombre" class="col-sm-4 form-control-label">Código de Gestor</label>
               <div class="col-sm-8">
-                <input value="{{ session.signup.codigo }}" class="form-control" id="codigo" placeholder="Inserta tu código de usuario" type="text"
+                <input value="" class="form-control" id="codigo" placeholder="Inserta tu código de usuario" type="text"
                   name="codigo" required="" title="Campo requerido">
               </div>
             </div>
             <div class="form-group row">
               <label for="identificacion" class="col-sm-4 form-control-label">Identificación</label>
               <div class="col-sm-8">
-                <input value="{{ session.signup.identificacion }}"  required class="form-control" id="identificacion" placeholder="Identificación" type="text"
+                <input value=""  required class="form-control" id="identificacion" placeholder="Identificación" type="text"
                   name="identificacion">
               </div>
             </div>
             <div class="form-group row">
               <label for="nombre" class="col-sm-4 form-control-label">Nombre</label>
               <div class="col-sm-8">
-                <input value="{{ session.signup.nombre_gestor }}" required class="form-control" id="nombre_deudor" placeholder="Inserta tu código de usuario" type="text"
+                <input value="" required class="form-control" id="nombre_deudor" placeholder="Inserta tu código de usuario" type="text"
                   name="nombre_gestor">
               </div>
             </div>
             <div class="form-group row">
               <label for="asunto" class="col-sm-4 form-control-label">Apellido</label>
               <div class="col-sm-8">
-                <input value="{{ session.signup.apellido_gestor }}" required class="form-control" id="apellido" placeholder="Apellido" type="text" name="apellido_gestor">
+                <input value="" required class="form-control" id="apellido" placeholder="Apellido" type="text" name="apellido_gestor">
               </div>
             </div>
             <h4 class="alert alert-primary text-center">Datos de Usuario</h4>
@@ -156,7 +156,7 @@ $op = $_GET['op'];
       </div>
     </div>
   </div>
-  
+
 <script type="text/javascript">
   function session(){
   var datos = $('#inicio_session').serialize();

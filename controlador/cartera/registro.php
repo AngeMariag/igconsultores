@@ -6,7 +6,7 @@
   
  <!-- Agregar datos de registro para acreedor  -->
  
-<form  action="formularios/procesar2.php" method="POST" class="m-auto  my-2 col-lg-12 col-md-10 text-center text-uppercase border" name="form">
+<!-- <form  action="formularios/procesar2.php" method="POST" class="m-auto  my-2 col-lg-12 col-md-10 text-center text-uppercase border" name="form"> -->
  <div class="form-inline form-row my-3 col-12 col-md-12" >
                 
     <b><label class="col-form-label col-lg-12 m-auto">POR FAVOR SELECCIONA UN ACREEDOR O REGISTRA UNO NUEVO</label></b>
@@ -58,7 +58,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="controlador/cartera/registroacreedor.php" method="POST" id="formulario">
+      <form action="registroacreedor.php" method="POST" id="formulario">
           
 
       <div class="form-group ">

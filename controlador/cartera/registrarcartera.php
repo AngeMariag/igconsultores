@@ -2,6 +2,7 @@
 
 $id= $_POST['id'];
 
+// echo ($id);
 include '../../conexion.php';
 
 if (isset($_POST['btn-guardar-cartera'])) {
