@@ -7,11 +7,11 @@ $sql = $cn->query("SELECT * FROM usuario WHERE username='$usuario'");
 $row = mysqli_fetch_assoc($sql);
  if ($row > 0){
         if($row['password']==$clave){
-            $_SESSION["usuario"]= $usuario;
-            // $_SESSION["nivel"]=$row['nivel'];
+            $_SESSION["username"]= $usuario;
+            $_SESSION["nivel"]=$row['nivel'];
             // session_start();
 			$_SESSION["autenticado"]= "SI";
-			//header ("Location: ../../menus.php");
+			// header ("Location: ../menus.php");
             $resul = array(
                 0=>true
                 );

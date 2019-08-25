@@ -14,7 +14,7 @@ $op = $_GET['op'];
     <!-- Bootstrap CSS -->
  <!-- <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome.min.css"> -->
  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
- <link rel="stylesheet" type="text/css" href="css/style.css">
+ <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>  
  <link rel="" type="text/css" href="js/consultores.js"> 
  <script src="js/jquery-2.1.0_1.js"></script>
@@ -35,12 +35,12 @@ $op = $_GET['op'];
   
 
 <header>
-    <div class="titulo-box">
-      <h1>IG CONSULTORES <br>SOFTWARE DE REGISTRO</h1>
+    <div class="titulo-box text-white ">
+      <h2>IG CONSULTORES SOFTWARE DE REGISTRO</h2>
       <!--<a href="#" class="btn btn-completo">INGRESA</a>-->
     </div>
   <div class="col-md-6 offset-md-6 col-sm-12">
-  <form id="inicio_session" name="form" class="" >
+  <form id="inicio_session" name="form" class="mt-5" >
       <!--Header del contenido-->
   
     
@@ -87,12 +87,12 @@ $op = $_GET['op'];
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <form action="controlador/registrouser.php" method="POST">
         <div class="modal-body">
 
           <div class="container">
-
-            <input type="hidden" name="{{csrf.keys.name}}" value="{{csrf.name}}">
-            <input type="hidden" name="{{csrf.keys.value}}" value="{{csrf.value}}">
+            <!-- <input type="hidden" name="{{csrf.keys.name}}" value="{{csrf.name}}">
+            <input type="hidden" name="{{csrf.keys.value}}" value="{{csrf.value}}"> -->
             <div class="form-group row">
               <label for="nombre" class="col-sm-4 form-control-label">Código de Gestor</label>
               <div class="col-sm-8">
@@ -111,13 +111,13 @@ $op = $_GET['op'];
               <label for="nombre" class="col-sm-4 form-control-label">Nombre</label>
               <div class="col-sm-8">
                 <input value="" required class="form-control" id="nombre_deudor" placeholder="Inserta tu código de usuario" type="text"
-                  name="nombre_gestor">
+                  name="nombre">
               </div>
             </div>
             <div class="form-group row">
-              <label for="asunto" class="col-sm-4 form-control-label">Apellido</label>
+              <label for="" class="col-sm-4 form-control-label">Apellido</label>
               <div class="col-sm-8">
-                <input value="" required class="form-control" id="apellido" placeholder="Apellido" type="text" name="apellido_gestor">
+                <input value="" required class="form-control" id="" placeholder="Apellido" type="text" name="apellido">
               </div>
             </div>
             <h4 class="alert alert-primary text-center">Datos de Usuario</h4>
@@ -137,22 +137,17 @@ $op = $_GET['op'];
                   name="pass2" onblur="validaregistrop()">
               </div>
             </div>
-            {% if flash.getMessage('error1') %}
             <div class="alert alert-danger text-center">
-              {% for error in flash.getMessage('error1') %}
-              {{ error }}
-              {% endfor %}
-            </div>
-            {{ session|unset('acreedor') }}
-            {% endif %}
-
+             </div>
+        
             <h5 class=" text-center"><b style="color: red;">(*)</b>Recuerda que tu código de gestor sera tu nuevo usuario</h5>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">ATRAS</button>
-          <button type="submit" class="btn btn-primary" id="btnregistrarp">REGISTRAR</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" >ATRAS</button>
+          <button type="submit" class="btn btn-primary"  name="save-gestor">REGISTRAR</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
@@ -168,7 +163,7 @@ $op = $_GET['op'];
     success:function(resul){
       var arre = eval(resul);
       if(arre[0]==true){
-        window.location= "controlador/cartera/menuinterno.php";
+        window.location= "menus.php";
       }else if(arre[0]==false){
         $('.error-sesion').show();
         $('.error-sesion').html("<b>"+arre[1]+"</b>");
