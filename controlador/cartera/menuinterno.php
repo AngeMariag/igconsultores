@@ -12,11 +12,11 @@ $op = $_GET['op'];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
- <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+ <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>  
 
- <script src="../../js/jquery-3.4.1.min.js"></script>
-
+ <script src="js/jquery-3.4.1.min.js"></script>
+ -->
   </head>
   <body>
     <!-- INICIO CON UN MENU -->
@@ -39,7 +39,7 @@ $op = $_GET['op'];
               REGISTROS
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="registro.php">CARTERA</a>
+              <a class="dropdown-item" href="controlador/cartera/registro.php">CARTERA</a>
               <a class="dropdown-item" href="?op=pago">GESTORES</a>
               <a class="dropdown-item" href="#">EJECUTIVO</a>
               <a class="dropdown-item" href="#">ACREEDOR</a>
@@ -72,6 +72,6 @@ $op = $_GET['op'];
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="../../js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     </body>
 </html>

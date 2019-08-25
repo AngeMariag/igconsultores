@@ -1,5 +1,5 @@
 <section>
-  <?php include ('menuinterno.php'); ?>
+  <?php include ('controlador/cartera/menuinterno.php'); ?>
 </section>
 <section class="container mt-5">
   <h3 class="text-uppercase text-center alert alert-primary">REGISTRO PRINCIPAL DE CARTERA</h3>

@@ -11,7 +11,12 @@ $op = $_GET['op'];
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- 
+    <!-- Bootstrap CSS -->
+ <!-- <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"> -->
+ <!-- <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>   -->
+
+ <!-- <script src="../../js/jquery-3.4.1.min.js"></script> -->
+
   </head>
   <body>
     <!-- INICIO CON UN MENU -->
@@ -49,7 +54,7 @@ $op = $_GET['op'];
           <!-- <a class="nav-item nav-link" href="?op=formulario" >REGISTRO</a> -->
           <a class="nav-item nav-link" href="#">CONFIGURACIÓN</a>
           <a class="nav-item nav-link" href="#">AYUDA</a>
-          <a class="nav-item nav-link" href="index.php" >SALIR</a>
+          <a class="nav-item nav-link" href="../../index.php" >SALIR</a>
           
         </div>
         <div class="d-flex flex-row justify-content-center">
@@ -61,10 +66,15 @@ $op = $_GET['op'];
 
    
     <!-- IMAGEN PARA EL BODY -->
-    <!-- <div class="container-fluid">
+    <div class="container-fluid">
     <?php 
-        //include ("../contenido.php");
+        include ("../contenido.php");
      ?>
-    </div> -->
+    </div>
+     
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+    <!-- <script src="../../js/bootstrap.min.js"></script> -->
     </body>
 </html>

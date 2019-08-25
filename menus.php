@@ -1,8 +1,8 @@
 <?php 
 include("conexion.php");
 session_start();
-$usuario = $_SESSION['usuario'];
-if (isset($_SESSION['usuario'])) {
+$usuario = $_SESSION['username'];
+if (isset($_SESSION['username'])) {
 $nivel = $_SESSION['nivel'];
 $menu="";
 if ($nivel == 0)
@@ -34,13 +34,13 @@ if ($nivel == 3)
 
 					<!--menu nomina-->
 	<?php if ($_SESSION['nivel'] == 0) { 
-		include("menuinterno.php");
+		include("controlador/cartera/menuinterno.php");
 	}
 	?>
 
 					<!--menu capacitacion-->
 	<?php if ($_SESSION['nivel'] == 1) { 
-		include("menuinterno.php");
+		include("controlador/cartera/menuinterno.php");
 	}
 	?>
 		
