@@ -3,6 +3,7 @@ include '../../conexion.php';
 
 if (isset($_POST['btn-guardar-cartera'])) {
 	$uploadDirectory = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'media' . DIRECTORY_SEPARATOR;
+	$url_file = "/" . explode('/', $_SERVER['REQUEST_URI'])[1] . '/media/'; 
 	$id = $_POST['id'];
 	$fecha = $_POST['fecha'];
 	$ndocumento = $_POST['ndocumento'];
@@ -35,12 +36,13 @@ if (isset($_POST['btn-guardar-cartera'])) {
 				$ext = pathinfo($document['file']['name'], PATHINFO_EXTENSION);
 				$name = md5($document['file']['name'] . time());
 				$path = "{$uploadDirectory}{$name}.{$ext}";
+				$url = "{$url_file}{$name}.{$ext}";
 				if (!move_uploaded_file($document['file']['tmp_name'], $path)) {
 					throw new Exception('Could not move file');
 				}
 				array_push($delete_file, $path);
 				$sql = "INSERT INTO documentos_cartera(nombre, ruta, id_cartera) 
-							VALUES ('{$document["name"]}', '{$path}', '{$id_cartera}')";
+							VALUES ('{$document["name"]}', '{$url}', '{$id_cartera}')";
 				$cn->query($sql) or die(mysqli_error($cn));
 			}
 		} catch (Exception $th) {

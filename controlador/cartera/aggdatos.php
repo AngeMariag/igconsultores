@@ -1,13 +1,25 @@
 <?php
-$id = isset($_GET['id']) ? $_GET['id'] : '';
 require("conexion.php");
-$sql = $cn->query("SELECT * FROM acreedor WHERE id = $id");
+$id = isset($_GET['id']) ? $_GET['id'] : '';
+$cartera_token = isset($_GET['cartera']) ? $_GET['cartera'] : '';
+$acreedor = $cn->query("SELECT * FROM acreedor WHERE id = $id");
+
+if ($cartera_token != '') {
+  $cartera = $cn->query("SELECT * FROM cartera WHERE id_acreedor={$id} and token='{$cartera_token}'");
+
+  if (mysqli_num_rows($cartera) == 0) {
+    return header("Location: menus.php?op=registro_cartera");
+  }
+
+  $cartera = mysqli_fetch_assoc($cartera);
+  $doc_cartera = $cn->query("SELECT * FROM documentos_cartera WHERE id_cartera={$cartera['id']}");
+}
 ?>
 
 
 <div class="container my-3">
   <section class="mb-1">
-    <?php if (mysqli_num_rows($sql) != 0) { ?>
+    <?php if (mysqli_num_rows($acreedor) != 0) { ?>
     <div class="table  responsive" id="">
       <table class="table table-bordered table-hover table-condensed">
         <thead>
@@ -18,7 +30,7 @@ $sql = $cn->query("SELECT * FROM acreedor WHERE id = $id");
           </tr>
         </thead>
         <tbody>
-          <?php while ($f = mysqli_fetch_assoc($sql)) { ?>
+          <?php while ($f = mysqli_fetch_assoc($acreedor)) { ?>
           <tr>
             <td>
               <?= utf8_encode(strtoupper($f["tipo_documento"])) ?>
@@ -39,19 +51,41 @@ $sql = $cn->query("SELECT * FROM acreedor WHERE id = $id");
     </div>
     <?php } ?>
   </section>
-  <?php if (mysqli_num_rows($sql) != 0) { ?>
+  <?php if (mysqli_num_rows($acreedor) != 0) { ?>
 
-    <p class=" text-center alert alert-primary alert-large" role="alert">
-      ADJUNTE FECHA Y DOCUMENTOS DE RESPALDO DE LA CARTERA
-      <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bd-insert-document">
-        AÑADIR
-      </button>
-    </p>
-    <!-- VENTANA PARA AGG DOCUMENTOS  -->
-    <?php require('controlador/cartera/modal/addDocument.php') ?>
-    
-    <!-- AGG OTRA VENTANA -->
-      <form>
+  <?php if ($cartera_token == '') { ?>
+  <p class=" text-center alert alert-primary alert-large" role="alert">
+    ADJUNTE FECHA Y DOCUMENTOS DE RESPALDO DE LA CARTERA
+    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bd-insert-document">
+      AÑADIR
+    </button>
+  </p>
+  <?php } ?>
+  <!-- VENTANA PARA AGG DOCUMENTOS  -->
+  <?php require('controlador/cartera/modal/addDocument.php') ?>
+
+  <!-- AGG OTRA VENTANA -->
+  <?php if ($cartera_token != '') {  ?>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+          <th class="text-white" style="background:#000080;">NOMBRE DOCUMENTO</th>
+          <th class="text-white" style="background:#000080;">DOCUMENTO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php while ($doc = mysqli_fetch_assoc($doc_cartera)) { ?>
+        <tr>
+          <td><?= $doc['nombre'] ?></td>
+          <td><a href="<?= $doc['ruta'] ?>" target="_blank">Descargar</a></td>
+        </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+  </div>
+
+  <form>
     <p class="lead text-center alert alert-primary alert-sm" role="alert">DATOS DEL DEUDOR</p>
     <input type="hidden" name="" value="<?= $id ?>">
     <div class="form-row ">
@@ -238,12 +272,12 @@ $sql = $cn->query("SELECT * FROM acreedor WHERE id = $id");
       <select id="id_gestor" name="id" class="form-control col-md-9" required aria-required="true">
         <option value="-------------">-----------------------</option>
         <?php
-          include('../../conexion');
-          $busqueda = $cn->query("SELECT id, codigo, nombre, apellido from gestor") or die("Problemas en el select:" . mysqli_error());
-          while ($row = mysqli_fetch_array($busqueda)) {
-            echo '<option value="' . $row['id'] . '">' . $row['nombre'] . '' . $row['apellido'] . ' - ' . $row['codigo'] . ' </option>';
-          }
-          ?>
+            include('../../conexion');
+            $busqueda = $cn->query("SELECT id, codigo, nombre, apellido from gestor") or die("Problemas en el select:" . mysqli_error());
+            while ($row = mysqli_fetch_array($busqueda)) {
+              echo '<option value="' . $row['id'] . '">' . $row['nombre'] . '' . $row['apellido'] . ' - ' . $row['codigo'] . ' </option>';
+            }
+            ?>
       </select>
     </div>
     <p class="lead text-center alert alert-primary" role="alert">AGREGAR OBSERVACIONES</p>
@@ -270,6 +304,7 @@ $sql = $cn->query("SELECT * FROM acreedor WHERE id = $id");
 
 
   </form>
+  <?php } ?>
 </div>
 
 <script type="text/javascript">
