@@ -18,14 +18,12 @@ if ($cartera_token != '') {
 $query_ficha = "SELECT deudor.codigo, CONCAT(UPPER(deudor.tipodocumento), '-', deudor.documento) as documento,
   CONCAT(deudor.nombre, ' ', deudor.apellido) as deudor,
   deudor.telefono, CONCAT(gestor.nombre, ' ', gestor.apellido) as gestor
-  FROM cartera 
-  LEFT JOIN cartera_deudor_codeudor as car
-  ON car.id_cartera=cartera.id and car.id_deudor=cartera.id_acreedor and car.id_codeudor is NULL
+  FROM cartera_deudor_codeudor as car
   LEFT JOIN deudor
   ON deudor.id=car.id_deudor
   LEFT JOIN gestor
   ON gestor.id=car.id_gestor
-  WHERE token='{$cartera_token}' and id_acreedor={$id}";
+  WHERE car.id_cartera='{$cartera["id"]}' and car.id_codeudor is NULL";
 
 $fichas = $cn->query($query_ficha);
 
