@@ -49,6 +49,10 @@ if (isset($_POST['btn-guardar-cartera'])) {
 			}
 			$sql = "DELETE FROM cartera WHERE id={$id_cartera}";
 			$cn->query($sql);
+			echo "
+			<script>
+				alert('no se pudo guardar')
+			</script>";
 		}
 	}
 	header("Location: aggdatos.php?id={$id}&cartera={$token}");

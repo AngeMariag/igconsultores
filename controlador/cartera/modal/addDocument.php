@@ -17,7 +17,7 @@
                     </p>
                     <div id="field" class=""></div>
 
-                    <div class="btn-group btn-group-lg my-5" role="group" aria-label="Basic example">
+                    <div class="btn-group btn-group-lg my-5" style="display: flex; justify-content: center;">
                         <button type="submit" name="btn-guardar-cartera" class="btn btn-success"><i class="far fa-save"></i>
                             GUARDAR</button>
                         <a href="javascript:window.location.reload()" class="btn btn-danger"><i class="fas fa-eraser"></i>CERRAR</a>
