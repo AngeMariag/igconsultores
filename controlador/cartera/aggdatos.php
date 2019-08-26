@@ -14,6 +14,21 @@ if ($cartera_token != '') {
   $cartera = mysqli_fetch_assoc($cartera);
   $doc_cartera = $cn->query("SELECT * FROM documentos_cartera WHERE id_cartera={$cartera['id']}");
 }
+
+$query_ficha = "SELECT deudor.codigo, CONCAT(UPPER(deudor.tipodocumento), '-', deudor.documento) as documento,
+  CONCAT(deudor.nombre, ' ', deudor.apellido) as deudor,
+  deudor.telefono, CONCAT(gestor.nombre, ' ', gestor.apellido) as gestor
+  FROM cartera 
+  LEFT JOIN cartera_deudor_codeudor as car
+  ON car.id_cartera=cartera.id and car.id_deudor=cartera.id_acreedor and car.id_codeudor is NULL
+  LEFT JOIN deudor
+  ON deudor.id=car.id_deudor
+  LEFT JOIN gestor
+  ON gestor.id=car.id_gestor
+  WHERE token='{$cartera_token}' and id_acreedor={$id}";
+
+$fichas = $cn->query($query_ficha);
+
 ?>
 <div class="container my-3">
   <section class="mb-1">
@@ -90,8 +105,37 @@ if ($cartera_token != '') {
       AÑADIR
     </button>
   </p>
-  
   <?php require('controlador/cartera/modal/addficha.php') ?>
+
+  <?php if (mysqli_num_rows($fichas) != 0) { ?>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+          <th class="text-white" style="background:#000080;">#</th>
+          <th class="text-white" style="background:#000080;">CODIGO</th>
+          <th class="text-white" style="background:#000080;">DOCUMENTO</th>
+          <th class="text-white" style="background:#000080;">NOMBRE</th>
+          <th class="text-white" style="background:#000080;">TELEFONO</th>
+          <th class="text-white" style="background:#000080;">GESTOR ENCARGADO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php $i=1; while ($ficha = mysqli_fetch_assoc($fichas)) { ?>
+          <tr>
+            <td><?= $i++ ?></td>
+            <td><?= $ficha['codigo'] ?></td>
+            <td><?= $ficha['documento'] ?></td>
+            <td><?= $ficha['deudor'] ?></td>
+            <td><?= $ficha['telefono'] ?></td>
+            <td><?= $ficha['gestor'] ?></td>
+          </tr>
+        <?php }  ?>
+      </tbody>
+    </table>
+  </div>
+  <?php } ?>
+
   <?php } ?>
 </div>
 <?php } else { ?>
