@@ -30,7 +30,7 @@ $user = $_SESSION['user'];
           <a class="dropdown-item" href="#">EJECUTIVO</a>
           <a class="dropdown-item" href="#">ACREEDOR</a>
           <?php } if ($user['nivel'] == 2 || $user['nivel'] == 0) { ?>
-          <a class="dropdown-item" href="?op=registro_cartera">GESTIONES</a>
+          <a class="dropdown-item" href="?op=reg_gestion">GESTIONES</a>
           <a class="dropdown-item" href="?op=registro_cartera">PAGOS</a>
           <?php } if ($user['nivel'] == 3 || $user['nivel'] == 0) { ?>
           <a class="dropdown-item" href="?op=registro_cartera">VERIFICACION DE PAGOS</a>

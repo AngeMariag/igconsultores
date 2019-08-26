@@ -17,9 +17,10 @@ $op = $_GET['op'];
 
    <!-- ESTILO DE IMAGEN BODY -->
    <style type="text/css">
+    
     .slider{
       background: url("images/consultoria.jpg");
-      height: 100vh;
+      height: 91vh;
       background-size: cover;
       background-position: center;
     }
@@ -28,9 +29,10 @@ $op = $_GET['op'];
   <body>
     <!-- INICIO CON UN MENU -->
     
-    <section class="container-fluid slider d-flex justify-content-center align-items-center">
+    <section> 
+    <div class="container-fluid slider d-flex justify-content-center align-items-center">
       <h1 class="display-1 text-white ">IG CONSULTORES</h1>
-      
+     </div> 
     </section>
     
   </body>
