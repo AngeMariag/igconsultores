@@ -13,19 +13,20 @@ if ($cartera_token != '') {
 
   $cartera = mysqli_fetch_assoc($cartera);
   $doc_cartera = $cn->query("SELECT * FROM documentos_cartera WHERE id_cartera={$cartera['id']}");
+  
+  $query_ficha = "SELECT deudor.codigo, CONCAT(UPPER(deudor.tipodocumento), '-', deudor.documento) as documento,
+    CONCAT(deudor.nombre, ' ', deudor.apellido) as deudor,
+    deudor.telefono, CONCAT(gestor.nombre, ' ', gestor.apellido) as gestor
+    FROM cartera_deudor_codeudor as car
+    LEFT JOIN deudor
+    ON deudor.id=car.id_deudor
+    LEFT JOIN gestor
+    ON gestor.id=car.id_gestor
+    WHERE car.id_cartera='{$cartera["id"]}' and car.id_codeudor is NULL";
+  
+  $fichas = $cn->query($query_ficha);
 }
 
-$query_ficha = "SELECT deudor.codigo, CONCAT(UPPER(deudor.tipodocumento), '-', deudor.documento) as documento,
-  CONCAT(deudor.nombre, ' ', deudor.apellido) as deudor,
-  deudor.telefono, CONCAT(gestor.nombre, ' ', gestor.apellido) as gestor
-  FROM cartera_deudor_codeudor as car
-  LEFT JOIN deudor
-  ON deudor.id=car.id_deudor
-  LEFT JOIN gestor
-  ON gestor.id=car.id_gestor
-  WHERE car.id_cartera='{$cartera["id"]}' and car.id_codeudor is NULL";
-
-$fichas = $cn->query($query_ficha);
 
 ?>
 <div class="container my-3">
