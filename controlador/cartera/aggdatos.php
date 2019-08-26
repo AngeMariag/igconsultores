@@ -85,56 +85,75 @@ if ($cartera_token != '') {
     </table>
   </div>
 
+
+  <form action="" method="post">
+    <div class="card">
+      <!-- DATOS DEUDOR -->
+      <div class="card-header bg-primary text-white text-center">
+        DATOS DEL DEUDOR
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group">
+              <label for="">Código</label>
+              <input type="text" class="form-control text-uppercase" id="codigo_deudor" placeholder="Código" name="codigo_deudor" required="">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="form-group">
+              <label for="inputState">Tipo de Documento</label>
+              <select id="" class="form-control" name="tipodocumento_deudor">
+                <option selected>Selecciona...</option>
+                <option value="cc">CC</option>
+                <option value="ce">CE</option>
+                <option value="nit">NIT</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="form-group">
+              <label for="inputCity">Nro. Documento</label>
+              <input type="text" class="form-control" id="" name="documento_deudor">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="form-group">
+              <label for="inputEmail4">NOMBRE</label>
+              <input type="text" class="form-control text-uppercase" id="inputEmail4" placeholder="Nombre" name="nombre_deudor">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="form-group">
+              <label for="inputPassword4">APELLIDO</label>
+              <input type="text" class="form-control" id="" placeholder="Apellido" name="apellido_deudor">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="form-group">
+              <label for="inputEmail4">TELEFONO</label>
+              <input type="text" class="form-control" id="inputEmail4" placeholder="TELEFNO" name="telefono_deudor">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="form-group">
+              <label for="inputPassword4">DIRECCIÓN</label>
+              <input type="text" class="form-control" id="" placeholder="DIRECCION" name="direccion_deudor">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END DATOS DEUDOR -->
+
+      <!-- DATOS CODEUDOR -->
+      <div class="card-header bg-primary text-white text-center">
+      DATOS DEL CODEUDOR
+      </div>
+      <!-- END DATOS CODEUDOR -->
+    </div>
+  </form>
   <form>
-    <p class="lead text-center alert alert-primary alert-sm" role="alert">DATOS DEL DEUDOR</p>
-    <input type="hidden" name="" value="<?= $id ?>">
-    <div class="form-row ">
-      <div class="form-group col-sm-12 col-md-12 my-2">
-        <label for="codigo_deudor">Código</label>
-        <input type="text" class="form-control text-uppercase" id="codigo_deudor" placeholder="Código" name="codigo_deudor" required="">
-      </div>
-    </div>
-    <div class="form-row">
 
-      <div class="form-group col-md-6 my-2">
-        <label for="inputState">Tipo de Documento</label>
-        <select id="" class="form-control" name="tipodocumento_deudor">
-          <option selected>Selecciona...</option>
-          <option value="cc">CC</option>
-          <option value="ce">CE</option>
-          <option value="nit">NIT</option>
-
-        </select>
-      </div>
-      <div class="form-group col-md-6 my-2">
-        <label for="inputCity">Nro. Documento</label>
-        <input type="text" class="form-control" id="" name="documento_deudor">
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-6 my-2">
-        <label for="inputEmail4">NOMBRE</label>
-        <input type="text" class="form-control text-uppercase" id="inputEmail4" placeholder="Nombre" name="nombre_deudor">
-      </div>
-      <div class="form-group col-md-6 my-2">
-        <label for="inputPassword4">APELLIDO</label>
-        <input type="text" class="form-control" id="" placeholder="Apellido" name="apellido_deudor">
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-4 my-2">
-        <label for="inputEmail4">TELEFONO</label>
-        <input type="text" class="form-control" id="inputEmail4" placeholder="Nombre" name="telefono_deudor">
-      </div>
-      <div class="form-group col-md-8 my-2">
-        <label for="inputPassword4">DIRECCIÓN</label>
-        <input type="text" class="form-control" id="" placeholder="Apellido" name="direccion_deudor">
-      </div>
-    </div>
-
-    <p class="lead text-center alert alert-primary " role="alert">DATOS DEL CODEUDOR</p>
     <div class="form-row">
       <div class="form-group col-md-6 my-2">
         <label for="inputState">Tipo de Documento</label>
