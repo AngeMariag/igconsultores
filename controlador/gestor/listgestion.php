@@ -43,7 +43,6 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
                         <thead>
                             <tr>
                                 <th>Código Deudor</th>
-                                <th>Código GESTOR</th>
                                 <th>Documento Deudor</th>
                                 <th>Deudor</th>
                                 <th>Acreedor</th>
@@ -53,7 +52,20 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
                         <tbody>
                             <?php while ($f = mysqli_fetch_assoc($sql)) { ?>
                                 <tr>
-                                <td><?= utf8_encode(strtoupper($f["codigo"])) ?></td>
+                                <td><?= utf8_encode(strtoupper($f["dcodigo"])) ?></td>
+                                  <td><?= utf8_encode(strtoupper($f["tipodocumento"])) .("-"). utf8_encode(strtoupper($f["documento"])) ?></td>
+                                   <td><?= utf8_encode(strtoupper($f["nombre"])) .(" "). utf8_encode(strtoupper($f["apellido"])) ?></td>
+                                    <td><?= utf8_encode(strtoupper($f["razon_social"])) ?></td>
+                                    <td>
+                                      <a href="#" onclick="modalShow1(<?= utf8_decode(strtoupper($f['id'])) ?>)" class="btn btn-info btn-sm text-white"
+                                    title="Ver" data-toggle="modal" data-target="#vista">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="#" onclick="modalShow(<?= utf8_decode(strtoupper($f['id'])) ?>)" class="btn btn-warning btn-sm text-white"
+                                    title="Editar" data-toggle="modal" data-target="#exampleModal3">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                    </td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -72,3 +84,90 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+   function modalShow(id) {
+     var url = 'controlador/gestor/consulta.php';
+      // console.log(id);
+    // if (id) {
+
+
+      
+    //   // base_url = '{{ base_url() }}'
+    //   // url = `${base_url}/gestion/ficha?id=${id}`
+    //   // $.getJSON(url)
+    //     .then(function (data) {
+    //       capital = parseFloat(data.ficha.capital)
+
+    //       document.getElementById('id_name_input_hidden_id').value = id
+    //       document.getElementById('id_total').innerText = parseFloat(data.ficha.total).toFixed(2)
+    //       document.getElementById('set_deudor').innerHTML =
+    //         `<div>
+    //           <table class="table table-bordered table-sm text-center">
+    //             <thead class="table-info">
+    //               <tr>
+    //                 <th>CÓDIGO</th>
+    //                 <th>DOCUMENTO</th>
+    //                 <th>NOMBRE Y APELLIDO</th>
+    //                 <th>TELEFONO</th>
+    //               </tr>
+    //             </thead>
+    //             <tbody>
+    //               <tr>
+    //                 <td>${data.deudor.codigo_deudor.toUpperCase()}</td>
+    //                 <td>${data.deudor.tipodocumento.toUpperCase()}-${data.deudor.documento}</td>
+    //                 <td>${data.deudor.nombre.toUpperCase()} ${data.deudor.apellido.toUpperCase()}</td>
+    //                 <td>${data.deudor.telefono}</td>
+    //               </tr>
+    //             </tbody>
+    //           </table>
+    //         </div>`
+    //       document.getElementById('set_codeudor').innerHTML=
+    //       // agregare mi codeudor 
+    //        `<div>
+    //               <table class="table table-bordered table-sm text-center">
+    //                 <thead class="table-info">
+    //                   <tr>
+    //                     <<th>DOCUMENTO</th>
+    //                     <th>NOMBRE Y APELLIDO</th>
+    //                     <th>TELEFONO</th>
+    //                   </tr>
+    //                 </thead>
+    //                 <tbody>
+    //                   <tr>
+    //                     <td>${data.deudor.tipodocumento.toUpperCase()}-${data.deudor.documento}</td>
+    //                     <td>${data.deudor.nombre.toUpperCase()} ${data.deudor.apellido.toUpperCase()}</td>
+    //                     <td>${data.deudor.telefono}</td>
+    //                   </tr>
+    //                 </tbody>
+    //               </table>
+    //             </div>`
+    //           document.getElementById('set_total').innerHTML =
+    //         `<div>
+    //           <table class="table table-bordered table-sm text-center">
+    //             <thead>
+    //               <tr>
+    //                 <th>CAPITAL</th>
+    //                 <th>INTERES</th>
+    //                 <th>HONORARIOS</th>
+    //                 <th>GASTOS</th>
+    //                 <th>DESCUENTOS</th>
+    //                 <th>SANCION</th>
+    //               </tr>
+    //             </thead>
+    //             <tbody>
+    //               <tr>
+    //                 <td>${data.ficha.capital}</td>
+    //                 <td>${(capital * parseFloat(data.ficha.interes) / 100).toFixed(2)}</td>
+    //                 <td>${(capital * parseFloat(data.ficha.honorarios) / 100).toFixed(2)}</td>
+    //                 <td>${(capital * parseFloat(data.ficha.gastos) / 100).toFixed(2)}</td>
+    //                 <td>${(capital * parseFloat(data.ficha.descuento) / 100).toFixed(2)}</td>
+    //                 <td>${(capital * parseFloat(data.ficha.sancion) / 100).toFixed(2)}</td>
+    //               </tr>
+    //             </tbody>
+    //           </table>
+    //         </div>`
+    //     })
+    // }
+  }
+</script>
