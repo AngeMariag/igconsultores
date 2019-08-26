@@ -29,6 +29,4 @@ $row = mysqli_fetch_assoc($sql);
                 1=>"Usuario No Existe"
                 );
             echo json_encode($resul);
-    }    
-
-?>
+    }

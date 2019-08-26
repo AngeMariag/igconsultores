@@ -31,34 +31,24 @@ if ($nivel == 3)
 
 </head>
 <body>
-
-					<!--menu nomina-->
-	<?php if ($_SESSION['nivel'] == 0) { 
+<?php 
+	if ($_SESSION['nivel'] == '0') { 
 		include("controlador/cartera/menuinterno.php");
 	}
-	?>
-
-					<!--menu capacitacion-->
-	<?php if ($_SESSION['nivel'] == 1) { 
+	
+	if ($_SESSION['nivel'] == '1') { 
 		include("controlador/cartera/menuinterno.php");
 	}
-	?>
 		
-					<!--menu permisologias-->
-	<?php if ($_SESSION['nivel'] == 2) { 
+	if ($_SESSION['nivel'] == '2') { 
 		include("permisologias.php");
 	}
-	?>
 		
-					<!--menu empleados-->
-	<?php if ($_SESSION['nivel'] == 3) { 
+	if ($_SESSION['nivel'] == '3') { 
 		include("controlador/gestor/menugestor.php");
 	}
 	?>
-
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
     <script src="js/bootstrap.min.js"></script>
 
 </body>
