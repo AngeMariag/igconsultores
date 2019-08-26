@@ -17,8 +17,16 @@ $op = $_GET['op'];
 
  <script src="js/jquery-3.4.1.min.js"></script>
  -->
+
+ <style type="text/css">
+   
+   nav{
+    position: fixed; 
+    button: 0;
+   }
+ </style>
   </head>
-  <body>
+  <body class="" style="">
     <!-- INICIO CON UN MENU -->
     <nav class="navbar navbar-expand-lg navbar navbar-light bg-light sticky-top">
        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">

@@ -34,13 +34,13 @@ if ($nivel == 3)
 
 					<!--menu nomina-->
 	<?php if ($_SESSION['nivel'] == 0) { 
-		include("controlador/cartera/menuinterno.php");
+		include("controlador/cartera/registro.php");
 	}
 	?>
 
 					<!--menu capacitacion-->
 	<?php if ($_SESSION['nivel'] == 1) { 
-		include("controlador/cartera/menuinterno.php");
+		include("controlador/cartera/registro.php");
 	}
 	?>
 		

@@ -1,6 +1,6 @@
-<section>
-  <?php include ('controlador/cartera/menuinterno.php'); ?>
-</section>
+
+<?php include ('controlador/cartera/menuinterno.php'); ?>
+
 <section class="container mt-5">
   <h3 class="text-uppercase text-center alert alert-primary">REGISTRO PRINCIPAL DE CARTERA</h3>
   
@@ -58,7 +58,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action="registroacreedor.php" method="POST" id="formulario">
+      <form action="controlador/cartera/registroacreedor.php" method="POST" id="formulario">
           
 
       <div class="form-group ">
@@ -102,7 +102,7 @@ $(document).ready(paginar_resultados(1));
  function paginar_resultados(pagina)
 {   
   $.ajax({
-    url:"consulta.php?tp=1",
+    url:"controlador/cartera/consulta.php?tp=1",
     type:"POST",
     data:"pagina="+pagina,
     success:function(rs){
