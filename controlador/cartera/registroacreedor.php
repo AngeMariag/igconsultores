@@ -9,10 +9,8 @@ if (isset($_POST['btn-save-acre'])) {
 	$sql = "INSERT INTO acreedor (tipo_documento,documento,razon_social)
 			VALUE ('{$type_document}', '{$document}', '{$name}')";
 	$cn->query($sql) or die(mysqli_error($cn));
-	echo '<script type="text/javascript">
-					alert("DATOS INSERTADOS CORRECTAMENTE");
-						window.location.href = "registro.php";
-					</script>';
+	return header("Location: ../../menus.php?op=registro_cartera");
+	
 } else {
 	echo "HUBO UN PROBLEMA AL INSERTAR LOS DATOS, POR FAVOR VUELVE A REGISTRAR EL ACREEDOR";
 }

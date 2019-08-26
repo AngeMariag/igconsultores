@@ -5,6 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/popper.min.js"></script>
@@ -148,7 +149,7 @@
         success: function(resul) {
           var arre = eval(resul);
           if (arre[0] == true) {
-            window.location = "menus.php";
+            window.location = "menus.php?op=inicio";
           } else if (arre[0] == false) {
             $('.error-sesion').show();
             $('.error-sesion').html("<b>" + arre[1] + "</b>");

@@ -55,5 +55,5 @@ if (isset($_POST['btn-guardar-cartera'])) {
 			</script>";
 		}
 	}
-	header("Location: aggdatos.php?id={$id}&cartera={$token}");
+	header("Location: ../../menus.php?op=aggdatos&id={$id}&cartera={$token}");
 }

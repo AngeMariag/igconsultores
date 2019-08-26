@@ -81,7 +81,7 @@ switch ($tp)
 
                                   <a href="javascript:leermas('.$f['id'].');" class="btn btn-sm btn-info" title="Leer Mas"><i class="fas fa-search"></i></a>
                                    <a href="javascript:agregarotrosi('.$f['id'].');" class="btn btn-warning btn-sm" title="EDITAR"><i class="fas fa-edit"></i></a>
-                                   <a href="controlador/cartera/aggdatos.php?id='.$f['id'].'"  class="btn btn-success btn-sm" title="NUEVA CARTERA"><i class="fas fa-plus"></i></a>
+                                   <a href="?op=aggdatos&id='.$f['id'].'"  class="btn btn-success btn-sm" title="NUEVA CARTERA"><i class="fas fa-plus"></i></a>
                                     
                                     </td>
                                     

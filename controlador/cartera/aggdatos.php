@@ -1,12 +1,6 @@
-<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
-<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet" />
-
-<script src="../../js/jquery-3.4.1.min.js"></script>
-
 <?php
 $id = isset($_GET['id']) ? $_GET['id'] : '';
-require("menuinterno.php");
-require_once("../../conexion.php");
+require("conexion.php");
 $sql = $cn->query("SELECT * FROM acreedor WHERE id = $id");
 ?>
 
@@ -54,7 +48,7 @@ $sql = $cn->query("SELECT * FROM acreedor WHERE id = $id");
       </button>
     </p>
     <!-- VENTANA PARA AGG DOCUMENTOS  -->
-    <?php require('./modal/addDocument.php') ?>
+    <?php require('controlador/cartera/modal/addDocument.php') ?>
     
     <!-- AGG OTRA VENTANA -->
       <form>
@@ -430,9 +424,6 @@ $sql = $cn->query("SELECT * FROM acreedor WHERE id = $id");
 
   }
 </script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="../../js/bootstrap.min.js"></script>
 
 <?php } else { ?>
 <div class="text-center">

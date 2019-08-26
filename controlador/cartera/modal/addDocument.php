@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="container my-3">
-                <form action="registrarcartera.php" enctype="multipart/form-data" method="post" class="m-auto  my-2 col-lg-12 col-md-10 text-center text-uppercase border">
+                <form action="controlador/cartera/registrarcartera.php" enctype="multipart/form-data" method="post" class="m-auto  my-2 col-lg-12 col-md-10 text-center text-uppercase border">
                     <input type="hidden" name="id" value="<?=$id?>">
                     <p class="my-5">POR FAVOR INSERTER LA FECHA DE CREACIÓN DE LA CARTERA</p>
                     <div class="form-inline">
