@@ -8,14 +8,7 @@ $apellido = $_POST['apellido'];
 $password = $_POST['pass2'];
 $nivel = 3;
 
-// $pass = $_POST['pass2'];
-// echo $nombre;
-// echo $identificacion;
-// echo $codigo;
-// echo $apellido;
 
-// echo $user;
-// echo $pass;
 if (isset($_POST['save-gestor'])) {
 	
 $sql=$cn->query("INSERT INTO gestor (codigo, identificacion, nombre, apellido) VALUES ('$codigo', '$identificacion','$nombre','$apellido')")OR DIE(mysqli_error($cn));
