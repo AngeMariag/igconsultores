@@ -6,7 +6,7 @@ $identificacion = $_POST['identificacion'];
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $password = $_POST['pass2'];
-$nivel = 3;
+$nivel = 2;
 
 
 if (isset($_POST['save-gestor'])) {
