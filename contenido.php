@@ -7,6 +7,7 @@ $route = [
 	'aggdatos' => "controlador/cartera/aggdatos.php",
 	'pago' => 'formularios/pago.php',
 	'reg_gestion' => "controlador/gestor/registro_gestion.php",
+	'vercarteras' => "controlador/cartera/vistacarteras.php",
 ]; 
 
 isset($route[$op]) ? include($route[$op]) : header("Location: menus.php?op=inicio");

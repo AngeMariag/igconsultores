@@ -1,38 +1,71 @@
 <?php 
 
-
 include '../../conexion.php';
 
-$id = $_GET['id'];
+$cn->query("SET NAMES 'utf8'");
 
+if (isset($_GET['tp'])) {
+	$tp = $_GET['tp'];
+}
 
-$query = "SELECT  gestion.id, gestion.acuerdo, gestion.gestion, gestion.fecha, gestion.monto, gestion.estado, ficha.total FROM gestion 
-        LEFT JOIN ficha
-        ON ficha.id = gestion.id_ficha";
-        return $this->execute_query($query);
+switch ($tp)
 
+ //SEGUN EL NUMERO DE TIPO QUE RECIBA PARA PROCESAR 
+  {
+	case '1':
+	$verdeudor="";
+	 $idficha = $_POST['id'];
 
-
- // $ficha_id = $req->getQueryParams();
-        if (!isset($ficha_id['id'])) {
-            return $res->withRedirect($this->router->pathFor('dashboard'));
-        }
-
-        $fichaModel = new FacturaModel;
-        $ficha = $fichaModel->find('id', '=', $ficha_id['id']);
-        if (!$ficha) {
-            return $res->withRedirect($this->router->pathFor('dashboard'));
-        }
-        $deudorModel = new DeudorModel;
-        $deudor = $deudorModel->find('id', '=', $ficha['id_deudor']);
-        if (!$deudor) {
-            return $res->withRedirect($this->router->pathFor('dashboard'));
-        }
-        $ctx = [
-            'ficha' => $ficha,
-            'deudor' => $deudor
-        ];
-        return json_encode($ctx);
-    // });
+	 $sql = $cn->query(" SELECT * FROM cartera_deudor_codeudor inner join ficha on cartera_deudor_codeudor.id_cartera=ficha.id_cartera INNER join deudor on cartera_deudor_codeudor.id_deudor=deudor.id where ficha.id = '$idficha'");
 	
+
+	 $valores = mysqli_fetch_array($sql);
+
+	 if (mysqli_num_rows($sql) !=0) {
+	 	$verdeudor=$verdeudor. '<table class="table table-bordered table-sm text-center">
+                <thead class="table-info">
+                  <tr>
+                    <th>CÓDIGO</th>
+                    <th>DOCUMENTO</th>
+                    <th>NOMBRE Y APELLIDO</th>
+                    <th>TELEFONO</th>
+                  </tr>
+                  </thead>';
+            // while ($f = mysqli_fetch_assoc($sql)) {
+           $verdeudor=$verdeudor.'<tbody>
+                  <tr>
+                    <td>'.utf8_encode(strtoupper($valores["codigo"])).'</td>
+                    <td>'.utf8_encode(strtoupper($valores["documento"])).'</td>
+                     <td align="center">
+                      '.utf8_encode(strtoupper($valores["nombre"])).' '.utf8_encode(strtoupper($valores["apellido"])).' 
+                  </td>
+                    <td>'.$valores['telefono'].'></td>
+                  </tr>
+                </tbody>';
+            // }
+              $verdeudor=$verdeudor.'</table>
+           ';
+	 
+	 }else{
+        $verdeudor=$verdeudor.'<div class="alert alert-danger text-center">
+                            <strong>Lo Sentimos No Se Encontraron Registros De Objetivos Específicos  para este contrato...</strong>
+                        </div>';
+    }
+    // consulta para ver mi codeudor
+    // $sql2 = $cn->query(" SELECT * FROM cartera_deudor_codeudor inner join ficha on cartera_deudor_codeudor.id_cartera=ficha.id_cartera INNER join codeudor on cartera_deudor_codeudor.id_codeudor=codeudor.id_deudor.id where ficha.id = '$idficha'");
+	 $datos = array(
+	 	0 => $verdeudor,
+	 );
+	 echo json_encode($datos);
+     break;
+
+
+
+/**************************************************EDITAR******************************/
+
+	
+	default:
+		
+	break;
+}
  ?>

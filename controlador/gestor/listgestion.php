@@ -1,7 +1,10 @@
 <?php
+
 include('conexion.php');
+
 $user = $_SESSION['user'];
 
+// include('controlador/gestor/index.php');
 $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deudor.tipodocumento, deudor.documento, deudor.nombre, deudor.apellido, acreedor.razon_social 
     FROM gestor LEFT JOIN cartera_deudor_codeudor as car
     ON car.id_gestor=gestor.id
@@ -61,10 +64,8 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
                                     title="Ver" data-toggle="modal" data-target="#vista">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="#" onclick="modalShow(<?= utf8_decode(strtoupper($f['id'])) ?>)" class="btn btn-warning btn-sm text-white"
-                                    title="Editar" data-toggle="modal" data-target="#exampleModal3">
-                                    <i class="fas fa-edit"></i>
-                                </a>
+                                <a href="javascript:agregar(<?= utf8_encode(strtoupper($f["id"])) ?>);"  class="btn btn-warning btn-sm text-white" title="Editar"><i class="fas fa-edit"></i></a> 
+                                
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -85,89 +86,59 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
     </div>
 </div>
 
+
+
+<!-- VENTANA DE VISTA DE GESTIONES DE PAGO -->
+<!-- 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">
+  Huge modal
+</button> -->
+
+<div id="aggacuerdo" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+     aria-labelledby="myHugeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+     <H2>PRUEBA</H2>
+     <div class=" container">
+     <form action="" id="acuerdogestion">
+       <input type="text" required="required" readonly="readonly" id="iddeudor" name="id" readonly="readonly"/>
+
+       <div class="table-responsive">
+         <div id="tabladeudores" class="" style="width: 75%;">  </div>
+       </div>
+     </form>
+     </div>
+    </div>
+  </div>
+</div>
+
+
 <script type="text/javascript">
-   function modalShow(id) {
-     var url = 'controlador/gestor/consulta.php';
-      // console.log(id);
-    // if (id) {
 
 
-      
-    //   // base_url = '{{ base_url() }}'
-    //   // url = `${base_url}/gestion/ficha?id=${id}`
-    //   // $.getJSON(url)
-    //     .then(function (data) {
-    //       capital = parseFloat(data.ficha.capital)
+  // NUEVA FUNCIÓN PARA MI INSERTAR GESTIONES DE PAGO
 
-    //       document.getElementById('id_name_input_hidden_id').value = id
-    //       document.getElementById('id_total').innerText = parseFloat(data.ficha.total).toFixed(2)
-    //       document.getElementById('set_deudor').innerHTML =
-    //         `<div>
-    //           <table class="table table-bordered table-sm text-center">
-    //             <thead class="table-info">
-    //               <tr>
-    //                 <th>CÓDIGO</th>
-    //                 <th>DOCUMENTO</th>
-    //                 <th>NOMBRE Y APELLIDO</th>
-    //                 <th>TELEFONO</th>
-    //               </tr>
-    //             </thead>
-    //             <tbody>
-    //               <tr>
-    //                 <td>${data.deudor.codigo_deudor.toUpperCase()}</td>
-    //                 <td>${data.deudor.tipodocumento.toUpperCase()}-${data.deudor.documento}</td>
-    //                 <td>${data.deudor.nombre.toUpperCase()} ${data.deudor.apellido.toUpperCase()}</td>
-    //                 <td>${data.deudor.telefono}</td>
-    //               </tr>
-    //             </tbody>
-    //           </table>
-    //         </div>`
-    //       document.getElementById('set_codeudor').innerHTML=
-    //       // agregare mi codeudor 
-    //        `<div>
-    //               <table class="table table-bordered table-sm text-center">
-    //                 <thead class="table-info">
-    //                   <tr>
-    //                     <<th>DOCUMENTO</th>
-    //                     <th>NOMBRE Y APELLIDO</th>
-    //                     <th>TELEFONO</th>
-    //                   </tr>
-    //                 </thead>
-    //                 <tbody>
-    //                   <tr>
-    //                     <td>${data.deudor.tipodocumento.toUpperCase()}-${data.deudor.documento}</td>
-    //                     <td>${data.deudor.nombre.toUpperCase()} ${data.deudor.apellido.toUpperCase()}</td>
-    //                     <td>${data.deudor.telefono}</td>
-    //                   </tr>
-    //                 </tbody>
-    //               </table>
-    //             </div>`
-    //           document.getElementById('set_total').innerHTML =
-    //         `<div>
-    //           <table class="table table-bordered table-sm text-center">
-    //             <thead>
-    //               <tr>
-    //                 <th>CAPITAL</th>
-    //                 <th>INTERES</th>
-    //                 <th>HONORARIOS</th>
-    //                 <th>GASTOS</th>
-    //                 <th>DESCUENTOS</th>
-    //                 <th>SANCION</th>
-    //               </tr>
-    //             </thead>
-    //             <tbody>
-    //               <tr>
-    //                 <td>${data.ficha.capital}</td>
-    //                 <td>${(capital * parseFloat(data.ficha.interes) / 100).toFixed(2)}</td>
-    //                 <td>${(capital * parseFloat(data.ficha.honorarios) / 100).toFixed(2)}</td>
-    //                 <td>${(capital * parseFloat(data.ficha.gastos) / 100).toFixed(2)}</td>
-    //                 <td>${(capital * parseFloat(data.ficha.descuento) / 100).toFixed(2)}</td>
-    //                 <td>${(capital * parseFloat(data.ficha.sancion) / 100).toFixed(2)}</td>
-    //               </tr>
-    //             </tbody>
-    //           </table>
-    //         </div>`
-    //     })
-    // }
-  }
+function agregar(id)
+  {
+    $('#acuerdogestion')[0].reset();
+    var url = 'controlador/gestor/consulta.php?tp=1';
+      $.ajax({
+      type:'POST',
+      url:url,
+      data:'tp=1&id='+id,
+      success: function(valores){
+          var datos = eval(valores);
+         $('#iddeudor').val(id);
+           $('#tabladeudores').html(datos[0]);
+         $('#aggacuerdo').modal({
+            show:true,
+            backdrop:'static'
+          });
+        return false;
+      }
+    });
+    return false;
+  } 
+
+ 
 </script>

@@ -1,7 +1,8 @@
 <?php 
 
 include '../../conexion.php';
-
+// $mysqli->set_charset('utf8');
+header("Content-Type: text/html;charset=utf-8"); 
 $cn->query("SET NAMES 'utf8'");
 
 if (isset($_GET['tp'])) {
@@ -79,7 +80,7 @@ switch ($tp)
                                     
                                    <td align="center">
 
-                                  <a href="javascript:leermas('.$f['id'].');" class="btn btn-sm btn-info" title="Leer Mas"><i class="fas fa-search"></i></a>
+                                  <a href="?op=vercarteras&id='.$f['id'].'" class="btn btn-sm btn-info" title="Leer Mas"><i class="fas fa-search"></i></a>
                                    <a href="javascript:agregarotrosi('.$f['id'].');" class="btn btn-warning btn-sm" title="EDITAR"><i class="fas fa-edit"></i></a>
                                    <a href="?op=aggdatos&id='.$f['id'].'"  class="btn btn-success btn-sm" title="NUEVA CARTERA"><i class="fas fa-plus"></i></a>
                                     

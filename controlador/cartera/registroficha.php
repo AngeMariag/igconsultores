@@ -60,12 +60,15 @@ if (isset($_POST['btn-enviar'])) {
     $query_deudor = "INSERT INTO 
                     deudor(codigo, tipodocumento, documento, nombre, apellido, telefono, direccion) 
                     VALUES ('{$codigo_deudor}','{$tipodocumento_deudor}','{$documento_deudor}','{$nombre_deudor}','{$apellido_deudor}','{$telefono_deudor}','{$direccion_deudor}')";
+
+    // vamos a ver si funciona
+    $id_d = mysqli_insert_id($cn);
     $query_codeudor1 = "INSERT INTO 
-                    codeudor(tipodocumento, documento, nombre, apellido, telefono, direccion) 
-                    VALUES ('{$tipodocumento_codeudor_1}','{$documento_codeudor_1}','{$nombre_codeudor_1}','{$apellido_codeudor_1}','{$telefono_codeudor_1}','{$direccion_codeudor_1}')";
+                    codeudor(tipodocumento, documento, nombre, apellido, telefono, direccion,id_deudor) 
+                    VALUES ('{$tipodocumento_codeudor_1}','{$documento_codeudor_1}','{$nombre_codeudor_1}','{$apellido_codeudor_1}','{$telefono_codeudor_1}','{$direccion_codeudor_1}',$id_d)";
     $query_codeudor2 = "INSERT INTO 
-                    codeudor(tipodocumento, documento, nombre, apellido, telefono, direccion) 
-                    VALUES ('{$tipodocumento_codeudor_2}','{$documento_codeudor_2}','{$nombre_codeudor_2}','{$apellido_codeudor_2}','{$telefono_codeudor_2}','{$direccion_codeudor_2}')";
+                    codeudor(tipodocumento, documento, nombre, apellido, telefono, direccion,id_deudor) 
+                    VALUES ('{$tipodocumento_codeudor_2}','{$documento_codeudor_2}','{$nombre_codeudor_2}','{$apellido_codeudor_2}','{$telefono_codeudor_2}','{$direccion_codeudor_2}',$id_d)";
 
     $deudor = mysqli_fetch_assoc($cn->query($query_find_deudor));
     if ($deudor) {

@@ -90,7 +90,7 @@ if ($cartera_token != '') {
         <?php while ($doc = mysqli_fetch_assoc($doc_cartera)) { ?>
         <tr>
           <td><?= $doc['nombre'] ?></td>
-          <td><a href="<?= $doc['ruta'] ?>" target="_blank">Descargar</a></td>
+          <td><a href="<?= $doc['ruta'] ?>" target="_blank"><i class="far fa-file-pdf"></i>Descargar</a></td>
         </tr>
         <?php } ?>
       </tbody>
