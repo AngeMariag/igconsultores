@@ -44,7 +44,7 @@ switch ($tp)
                     }else{
                         $limit = $nroLotes*($paginaActual-1);
                     }
-                     $sql = $cn->query("SELECT * FROM acreedor  ORDER BY id ASC LIMIT $limit, $nroLotes");
+                     $sql = $cn->query("SELECT * FROM acreedor  ORDER BY id DESC LIMIT $limit, $nroLotes");
                       $i=1;
                       if(mysqli_num_rows($sql) != 0){
 

@@ -1,4 +1,6 @@
 <?php
+ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED);
+
 include '../../conexion.php';
 
 if (isset($_POST['btn-enviar'])) {
@@ -85,6 +87,16 @@ if (isset($_POST['btn-enviar'])) {
                     ficha(titulo, capital, interes, honorarios, gastos, descuento, sancion, total, id_deudor, id_cartera, estado) 
                     VALUES ('{$titulo}','{$capital}','{$interes}','{$honorarios}','{$gastos}','{$descuento}','{$sancion}','{$total}','{$deudor_id}','{$cartera["id"]}', '1')";
 
+
+   $id_ficha = mysqli_insert_id($cn);
+
+    for($i = 0; $i < count($_POST['ndocumento']); $i++)
+                {
+                    $dgenerales = explode(".",$_FILES['documentos_general']['name']);
+                    $documentoa=$cn->query("INSERT INTO documentos_cartera (nombre,ruta,id_ficha) VALUES ('" . $_POST['ndocumento'][$i] . "','documentos/".$_FILES['documentos_general']['name'][$i]."','$id_ficha')")or die(mysqli_error($cn));  
+                    move_uploaded_file($_FILES['documentos_general']['tmp_name'][$i],"../../documentos/".$_FILES['documentos_general']['name'][$i]);
+                }         
+
     $cn->query($query_car_deudor) or die(mysqli_error($cn));
     if (
         $tipodocumento_codeudor_1 &&
@@ -127,10 +139,10 @@ if (isset($_POST['btn-enviar'])) {
     $cn->query($query_ficha) or die(mysqli_error($cn));
 
     if (count($observaciones) == 0) {
-        $ficha_id = $cn->insert_id;
+        //$ficha_id = $cn->insert_id;
         foreach ($observaciones as $observacion) {
             $query_ficha = "INSERT INTO observaciones_ficha(id_ficha, observacion) 
-                                VALUES ('{$ficha_id}', '{$observacion}')";
+                                VALUES ('id_ficha', '{$observacion}')";
             $cn->query($query_ficha) or die(mysqli_error($cn));
         }
     }

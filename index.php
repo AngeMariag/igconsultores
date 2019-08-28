@@ -28,7 +28,7 @@
       <div class="row">
         <div class="col-12 mt-5">
           <h2 class="text-white">
-            IG CONSULTORES SOFTWARE DE REGISTRO
+            IG CONSULTORES LEGALES S.A.S
           </h2>
         </div>
 

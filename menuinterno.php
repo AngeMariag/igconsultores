@@ -13,7 +13,7 @@ $user = $_SESSION['user'];
 
   <a class="navbar-brand" href="#">
     <img src="images/icono.png" width="60" height="40" class="d-inline-block align-top" alt="">
-    IG CONSULTORES
+    IG CONSULTORES LEGALES S.A.S
   </a>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <div class="navbar-nav mr-auto ml-auto text-center">

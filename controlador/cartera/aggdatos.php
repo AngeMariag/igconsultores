@@ -67,7 +67,7 @@ if ($cartera_token != '') {
 
   <?php if ($cartera_token == '') { ?>
   <p class=" text-center alert alert-primary alert-large" role="alert">
-    ADJUNTE FECHA Y DOCUMENTOS DE RESPALDO DE LA CARTERA
+    ADJUNTE FECHA DE REGISTRO LA CARTERA
     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bd-insert-document">
       AÑADIR
     </button>
@@ -78,7 +78,7 @@ if ($cartera_token != '') {
 
   <!-- AGG OTRA VENTANA -->
   <?php if ($cartera_token != '') {  ?>
-  <div class="table-responsive">
+  <!-- <div class="table-responsive">
     <table class="table table-bordered table-hover table-condensed">
       <thead>
         <tr>
@@ -96,7 +96,7 @@ if ($cartera_token != '') {
       </tbody>
     </table>
   </div>
-
+ -->
 
   <p class=" text-center alert alert-primary alert-large" role="alert">
     REGISTRE FICHAS
@@ -135,7 +135,7 @@ if ($cartera_token != '') {
   </div>
   <?php } ?>
 
-  <?php } ?>
+  <!-- <?php } ?> -->
 </div>
 <?php } else { ?>
 <div class="text-center">

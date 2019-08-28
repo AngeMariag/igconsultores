@@ -4,18 +4,19 @@
             <div class="container my-3">
                 <form action="controlador/cartera/registrarcartera.php" enctype="multipart/form-data" method="post" class="m-auto  my-2 col-lg-12 col-md-10 text-center text-uppercase border">
                     <input type="hidden" name="id" value="<?=$id?>">
-                    <p class="my-5">POR FAVOR INSERTER LA FECHA DE CREACIÓN DE LA CARTERA</p>
-                    <div class="form-inline">
+                    <p class="my-5">POR FAVOR INSERTER LA FECHA DE REGISTRO DE LA CARTERA</p>
+                    <div class="form-inline my-5">
                         <label class="col-md-5"><b style="color: red;">(*)</b>INTRODUZCA LA FECHA DE INGRESO DE LA CARTERA</label>
                         <input type="date" name="fecha" class="form-control col-md-7">
                     </div>
-                    <p class=" text-center alert alert-primary alert-large my-2" role="alert">
+                    <!-- FIELD DONDE CREO DOCUMENTOS -->
+                    <!-- <p class=" text-center alert alert-primary alert-large my-2" role="alert">
                         ADJUNTE DOCUMENTOS DE RESPALDO DE LA CARTERA
                         <button type="button" class="btn btn-success pull-right btn-sm" onclick="mostrar_mas()">
                             <i class="fas fa-plus"></i>
                         </button>
-                    </p>
-                    <div id="field" class=""></div>
+                    </p> -->
+                    <!-- <div id="field" class=""></div> -->
 
                     <div class="btn-group btn-group-lg my-5" style="display: flex; justify-content: center;">
                         <button type="submit" name="btn-guardar-cartera" class="btn btn-success"><i class="far fa-save"></i>
@@ -28,7 +29,7 @@
     </div>
 </div>
 
-<script>
+<!-- <script>
     function mostrar_mas(obj) {
         var fila = `
             <div class="row my-2" style="justify-content: center; align-items: center; ">
@@ -52,4 +53,4 @@
         var parent = $(this).parents().get(1);
         $(parent).remove();
     });
-</script>
+</script> -->

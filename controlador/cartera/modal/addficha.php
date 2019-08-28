@@ -282,6 +282,29 @@
                             </div>
                         </div>
                         <!-- END DATOS GESTOR -->
+                        <!-- DOCUMENTOS POR DEUDOR -->
+                        <!-- FIELD DONDE CREO DOCUMENTOS -->
+                    <div class="card-header bg-primary text-white text-center">
+                            AGREGAR DOCUMENTOS DE RESPALDO DE LA CARTERA
+                        </div>
+
+                   <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button type="button" class="btn btn-success pull-right btn-sm" onclick="mostrar_mas()">
+                            <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="col-12 text-justify mt-3">
+                                    <div class="form-group">
+                                        <label class="col-md-6 control-label" for="nombres">DOCUMENTOS:</label>
+                                        <div id="field" class=""></div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+
 
                         <!-- DATOS OBSERVACIONES -->
                         <div class="card-header bg-primary text-white text-center">
@@ -466,4 +489,32 @@
         });
         $('#tablanp').append(fila);
     }
+
+
+    // FUNCION PARA AGG DOCUMENTOS
+
+    function mostrar_mas(obj) {
+        var fila = `
+            <div class="row my-2" style="justify-content: center; align-items: center; ">
+                <div class="col-sm-12 col-md-5">
+                    <input type="text" required class="form-control form-control-sm " name="ndocumento[]" placeholder="NOMBRE DEL DOCUMENTO">
+                </div>
+                <div class="col-sm-12 col-md-5">
+                    <input type="file" required class="form-control form-control-sm" name="documentos_general[]">
+                </div>
+                <div class="">
+                    <button class="eliminar btn btn-danger btn-sm">
+                    <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `
+        $('#field').append(fila);
+    }
+    // Evento que selecciona la fila y la elimina
+    $(document).on("click", ".eliminar", function() {
+        var parent = $(this).parents().get(1);
+        $(parent).remove();
+    });
+</script> -->
 </script>
