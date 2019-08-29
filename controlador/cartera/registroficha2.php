@@ -98,7 +98,7 @@ if (isset($_POST['btn-enviar'])) {
 
         for($i = 0; $i < count($_POST['ndocumento']); $i++)
     {
-    $documentoa=$cn->query("INSERT INTO documentos_cartera (nombre, ruta, id_ficha) VALUES ('" . $_POST['ndocumento'][$i] . "','documentos".$_FILES['documentos_general']['name'][$i]."', '$id_ficha')")or die(mysqli_error($cn));  
+    $documentoa=$cn->query("INSERT INTO documentos_cartera (nombre, ruta, id_ficha) VALUES ('" . $_POST['ndocumento'][$i] . "','documentos/".$_FILES['documentos_general']['name'][$i]."', '$id_ficha')")or die(mysqli_error($cn));  
     move_uploaded_file($_FILES['documentos_general']['tmp_name'][$i],"../../documentos/".$_FILES['documentos_general']['name'][$i]);
     }
 

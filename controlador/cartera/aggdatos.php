@@ -31,10 +31,11 @@ if ($cartera_token != '') {
 ?>
 <div class="container my-3">
   <div class="text-float my-2">
-  <a href="javascript:window.history.back()" class="btn btn-warning">
+  <!-- <a href="javascript:window.history.back()" class="btn btn-warning">
     <i class="fas fa-reply"></i>
     Regresar
-  </a>
+  </a> -->
+  <p class="text-center"> (<b class="" style="color: red;">*</b>) Al finalizar de cargar deudores, dirígete a la ventana visualizar</p>
 </div>
   <section class="mb-1">
     <?php if (mysqli_num_rows($acreedor) != 0) { ?>
