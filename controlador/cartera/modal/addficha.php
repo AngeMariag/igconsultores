@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="container my-3">
-                <form action="controlador/cartera/registroficha.php" method="post">
+                <form action="controlador/cartera/registroficha2.php" enctype="multipart/form-data" method="post">
                     <div class="card">
                         <!-- DATOS DEUDOR -->
                         <div class="card-header bg-primary text-white text-center">
@@ -181,7 +181,7 @@
                                     <div class="form-group">
                                         <label for="inputPassword4">CAPITAL</label>
                                         <div class="input-group">
-                                            <input required type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="capital" id="capital" value="">
+                                            <input required type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="capital" id="capital" value="" onkeyup="format(this)">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">$ PCO</span>
                                             </div>

@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<script src="js/jquery-3.4.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
+	<script src="js/validacion.js"></script>
 </head>
 
 <body>

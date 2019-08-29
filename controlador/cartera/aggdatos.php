@@ -30,6 +30,12 @@ if ($cartera_token != '') {
 
 ?>
 <div class="container my-3">
+  <div class="text-float my-2">
+  <a href="javascript:window.history.back()" class="btn btn-warning">
+    <i class="fas fa-reply"></i>
+    Regresar
+  </a>
+</div>
   <section class="mb-1">
     <?php if (mysqli_num_rows($acreedor) != 0) { ?>
     <div class="table  responsive" id="">
@@ -145,3 +151,5 @@ if ($cartera_token != '') {
   </a>
 </div>
 <?php }; ?>
+
+

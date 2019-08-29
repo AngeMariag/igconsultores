@@ -1,5 +1,7 @@
 <?php
 include '../../conexion.php';
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 if (isset($_POST['btn-enviar'])) {
     $id = $_POST['id'];
@@ -62,7 +64,7 @@ if (isset($_POST['btn-enviar'])) {
                     VALUES ('{$codigo_deudor}','{$tipodocumento_deudor}','{$documento_deudor}','{$nombre_deudor}','{$apellido_deudor}','{$telefono_deudor}','{$direccion_deudor}')";
 
     // vamos a ver si funciona
-    $id_d = mysqli_insert_id($cn);
+    // $id_d = mysqli_insert_id($cn);
     $query_codeudor1 = "INSERT INTO 
                     codeudor(tipodocumento, documento, nombre, apellido, telefono, direccion) 
                     VALUES ('{$tipodocumento_codeudor_1}','{$documento_codeudor_1}','{$nombre_codeudor_1}','{$apellido_codeudor_1}','{$telefono_codeudor_1}','{$direccion_codeudor_1}')";
@@ -81,9 +83,24 @@ if (isset($_POST['btn-enviar'])) {
     $query_car_deudor = "INSERT INTO cartera_deudor_codeudor(id_cartera, id_deudor, id_gestor) 
                     VALUES ('{$cartera["id"]}', '{$deudor_id}', '{$gestor}')";
 
-    $query_ficha = "INSERT INTO 
+    $query_ficha = $cn->query("INSERT INTO 
                     ficha(titulo, capital, interes, honorarios, gastos, descuento, sancion, total, id_deudor, id_cartera, estado) 
-                    VALUES ('{$titulo}','{$capital}','{$interes}','{$honorarios}','{$gastos}','{$descuento}','{$sancion}','{$total}','{$deudor_id}','{$cartera["id"]}', '1')";
+                    VALUES ('{$titulo}','{$capital}','{$interes}','{$honorarios}','{$gastos}','{$descuento}','{$sancion}','{$total}','{$deudor_id}','{$cartera["id"]}', '1')");
+
+
+    $id_ficha = mysqli_insert_id($cn);  
+    // INSERTO FICHA
+    foreach($_POST['observacion'] as $observaciones) 
+                    $sql2=$cn->query("INSERT INTO  observaciones_ficha (id_ficha, observacion) VALUES ('$id_ficha', '$observaciones')");
+    
+   // INSERTO DOCUMENTOS 
+    $dgenerales = explode(".",$_FILES['documentos_general']['name']);
+
+        for($i = 0; $i < count($_POST['ndocumento']); $i++)
+    {
+    $documentoa=$cn->query("INSERT INTO documentos_cartera (nombre, ruta, id_ficha) VALUES ('" . $_POST['ndocumento'][$i] . "','documentos".$_FILES['documentos_general']['name'][$i]."', '$id_ficha')")or die(mysqli_error($cn));  
+    move_uploaded_file($_FILES['documentos_general']['tmp_name'][$i],"../../documentos/".$_FILES['documentos_general']['name'][$i]);
+    }
 
     $cn->query($query_car_deudor) or die(mysqli_error($cn));
     if (
@@ -124,14 +141,6 @@ if (isset($_POST['btn-enviar'])) {
                     VALUES ('{$cartera["id"]}', '{$deudor_id}', '{$codeudor2_id}')";
         $cn->query($query_car_codeudor2) or die(mysqli_error($cn));
     }
-    $cn->query($query_ficha) or die(mysqli_error($cn));
-    if (count($observaciones) == 0) {
-        $ficha_id = $cn->insert_id;
-        foreach ($observaciones as $observacion) {
-            $query_ficha = "INSERT INTO observaciones_ficha(id_ficha, observacion) 
-                                VALUES ('{$ficha_id}', '{$observacion}')";
-            $cn->query($query_ficha) or die(mysqli_error($cn));
-        }
-    }
+   
     return header("Location: ../../menus.php?op=aggdatos&id={$id}&cartera={$token}");
 }

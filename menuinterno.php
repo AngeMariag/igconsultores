@@ -23,12 +23,13 @@ $user = $_SESSION['user'];
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           REGISTROS
         </a>
+
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <?php if ($user['nivel'] == 1 || $user['nivel'] == 0) { ?>
           <a class="dropdown-item" href="?op=registro_cartera">CARTERA</a>
-          <a class="dropdown-item" href="?op=pago">GESTORES</a>
-          <a class="dropdown-item" href="#">EJECUTIVO</a>
-          <a class="dropdown-item" href="#">ACREEDOR</a>
+          <!-- <a class="dropdown-item" href="?op=pago">GESTORES</a> -->
+          <!-- <a class="dropdown-item" href="#">EJECUTIVO</a> -->
+          <!-- <a class="dropdown-item" href="#">ACREEDOR</a> -->
           <?php } if ($user['nivel'] == 2 || $user['nivel'] == 0) { ?>
           <a class="dropdown-item" href="?op=reg_gestion">GESTIONES</a>
           <a class="dropdown-item" href="?op=registro_cartera">PAGOS</a>
@@ -39,6 +40,9 @@ $user = $_SESSION['user'];
             <a class="dropdown-item" href="#">Something else here</a> -->
         </div>
       </li>
+      <?php if ($user['nivel'] == 1 || $user['nivel'] == 0) { ?>
+          <a class="nav-item nav-link active" href="?op=vercarteras">VISUALIZAR</a>
+          <?php } ?>
 
       <!-- <a class="nav-item nav-link" href="?op=formulario" >REGISTRO</a> -->
       <a class="nav-item nav-link" href="#">CONFIGURACIÓN</a>
