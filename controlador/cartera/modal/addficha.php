@@ -171,21 +171,27 @@
                         </div>
                         <div class="card-body">
                             <div class="row text-center">
-                                <div class="col-md-6 col-sm-12">
+                                <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="inputEmail4">TITULO</label>
                                         <input required type="text" value="" class="form-control" id="" placeholder="TITULO" name="titulo">
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12">
+                                <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
                                         <label for="inputPassword4">CAPITAL</label>
                                         <div class="input-group">
-                                            <input required type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="capital" id="capital" value="">
+                                            <input required type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="capital" id="capital" value="" onkeyup="format(this)">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">$ PCO</span>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="inputPassword4">MESES</label>
+                                        <input required type="number" class="form-control" name="meses" id="meses" value="" onkeyup="format(this)">
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
@@ -274,15 +280,15 @@
                         <!-- END DATOS GESTOR -->
                         <!-- DOCUMENTOS POR DEUDOR -->
                         <!-- FIELD DONDE CREO DOCUMENTOS -->
-                    <div class="card-header bg-primary text-white text-center">
+                        <div class="card-header bg-primary text-white text-center">
                             AGREGAR DOCUMENTOS DE RESPALDO DE LA CARTERA
                         </div>
 
-                   <div class="card-body">
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <button type="button" class="btn btn-success pull-right btn-sm" onclick="mostrar_mas()">
-                            <i class="fas fa-plus"></i>
+                                        <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                                 <div class="col-12 text-justify mt-3">
@@ -292,7 +298,7 @@
                                     </div>
                                 </div>
                             </div>
-                    </div>
+                        </div>
 
 
 
@@ -353,11 +359,19 @@
         </thead>
         <tbody>
           <tr>
+
             <td>${obj.capital}</td>
             <td>${obj.get_interes}</td>
             <td>${obj.get_honorarios}</td>
             <td>${obj.get_gastos}</td>
             <td>${obj.get_sancion}</td>
+
+            <td>${obj.capital.toFixed(2)}</td>
+            <td>${obj.get_interes.toFixed(2)}</td>
+            <td>${obj.get_honorarios.toFixed(2)}</td>
+            <td>${obj.get_gastos.toFixed(2)}</td>
+            <td>${obj.get_descuento.toFixed(2)}</td>
+            <td>${obj.get_sancion.toFixed(2)}</td>
           </tr>
         </tbody>
       </table>
@@ -381,6 +395,7 @@
             btn_total.addEventListener('click', function(e) {
                 // obteniendo input a traves del id
                 var $capital = document.getElementById('capital')
+                var $meses = document.getElementById('meses')
                 var $interes = document.getElementById('interes')
                 var $honorarios = document.getElementById('honorarios')
                 var $gastos = document.getElementById('gastos')
@@ -388,6 +403,7 @@
                 var $sancion = document.querySelector('input[name="sancion"]:checked')
 
                 var capital = 0
+                var meses = 0
                 var por_interes = 0
                 var por_honorarios = 0
                 var por_gastos = 0
@@ -403,6 +419,7 @@
                 var obj = {}
 
                 capital = $capital.value
+                meses = $meses.value
                 por_interes = $interes.value
                 por_honorarios = $honorarios.value
                 por_gastos = $gastos.value
@@ -416,6 +433,7 @@
 
                 //  parseando los datos a flotante
                 capital = parseFloat(capital)
+                meses = parseFloat(meses)
                 por_interes = parseFloat(por_interes)
                 por_honorarios = parseFloat(por_honorarios)
                 por_gastos = parseFloat(por_gastos)
@@ -423,6 +441,9 @@
                 por_sancion = parseFloat(por_sancion)
 
                 get_interes = (capital * por_interes) / 100
+                get_meses = (get_interes * meses) / 100
+                capital = capital + get_meses
+
                 get_honorarios = (capital * por_honorarios) / 100
                 get_gastos = (capital * por_gastos) / 100
                 // get_descuento = (capital * por_descuento) / 100
@@ -499,4 +520,5 @@
         var parent = $(this).parents().get(1);
         $(parent).remove();
     });
+
 </script> 
