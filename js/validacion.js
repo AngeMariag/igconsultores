@@ -74,3 +74,21 @@ if ('fecha_inicio >= fecha_fin') {
     if (f1 < f2)
     alert("f1 es menor que f2")
 }
+
+function formatoMonto2(valor, decimales, separador_decimal, separador_miles){
+    numero=valor;
+    numero=numero.toString().replace(/,/g,'');
+    numero=parseFloat(numero);
+    if(isNaN(numero)) return "";
+
+    if(decimales!==undefined) numero=numero.toFixed(decimales);
+
+    numero=numero.toString().replace(".", separador_decimal!==undefined ? separador_decimal : ",");
+
+    if(separador_miles){
+        var miles=new RegExp("(-?[0-9]+)([0-9]{3})");
+        while(miles.test(numero))
+            numero=numero.replace(miles, "$1" + separador_miles + "$2");
+    }
+    return numero;
+}

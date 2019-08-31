@@ -1,6 +1,8 @@
 <?php
 include '../../conexion.php';
 
+$cn->query("SET NAMES 'utf8'");
+
 if (isset($_POST['btn-save-acre'])) {
 	$type_document = $_POST['tipo_documento'];
 	$document = $_POST['documento'];

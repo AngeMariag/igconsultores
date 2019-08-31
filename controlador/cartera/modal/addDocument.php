@@ -7,7 +7,7 @@
                     <p class="my-5">POR FAVOR INSERTER LA FECHA DE REGISTRO DE LA CARTERA</p>
                     <div class="form-inline my-5">
                         <label class="col-md-5"><b style="color: red;">(*)</b>INTRODUZCA LA FECHA DE INGRESO DE LA CARTERA</label>
-                        <input type="date" name="fecha" class="form-control col-md-7">
+                        <input type="date" name="fecha" class="form-control col-md-7" required="">
                     </div>
                     <!-- FIELD DONDE CREO DOCUMENTOS -->
                     <!-- <p class=" text-center alert alert-primary alert-large my-2" role="alert">

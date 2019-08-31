@@ -8,6 +8,8 @@ $route = [
 	'pago' => 'formularios/pago.php',
 	'reg_gestion' => "controlador/gestor/registro_gestion.php",
 	'vercarteras' => "controlador/cartera/vistacarteras.php",
+	'pruebas' => "controlador/cartera/vistas/pruebas.php",
+	'gestiones' => "controlador/gestor/vistas/gestion.php",
 ]; 
 
 isset($route[$op]) ? include($route[$op]) : header("Location: menus.php?op=inicio");

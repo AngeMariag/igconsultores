@@ -181,7 +181,7 @@
                                     <div class="form-group">
                                         <label for="inputPassword4">CAPITAL</label>
                                         <div class="input-group">
-                                            <input required type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="capital" id="capital" value="" onkeyup="format(this)">
+                                            <input required type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="capital" id="capital" value="">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">$ PCO</span>
                                             </div>
@@ -221,17 +221,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="" class="">DESCUENTOS</label>
-                                        <div class="input-group">
-                                            <input required type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="descuento" id="descuento" value="0">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-sm-12 text-justify">
                                     <div class="form-group">
                                         <label for="">POR FAVOR SELECCIONA ESTA OPCIÓN SOLO SI APLICA SANCIÓN
@@ -358,7 +348,6 @@
             <th>INTERES</th>
             <th>HONORARIOS</th>
             <th>GASTOS</th>
-            <th>DESCUENTOS</th>
             <th>SANCION</th>
           </tr>
         </thead>
@@ -368,7 +357,6 @@
             <td>${obj.get_interes}</td>
             <td>${obj.get_honorarios}</td>
             <td>${obj.get_gastos}</td>
-            <td>${obj.get_descuento}</td>
             <td>${obj.get_sancion}</td>
           </tr>
         </tbody>
@@ -376,15 +364,10 @@
       <div class="row">
         <div class="col-md-4 offset-md-8 col-sm-12 my-2" style="display: flex;">
           <label class ="col-md-6">Sub-Total: </label>
-          <input required type="text" name="total1" readonly class="form-control" value="${obj.total.toFixed(2)}">
+          <input required type="text" name="total" readonly class="form-control" value="${obj.total.toFixed(2)}">
         </div>
       </div>
-       <div class="row">
-        <div class="col-md-4 offset-md-8 col-sm-12 my-2" style="display: flex;">
-          <label class ="col-md-6">Total: </label>
-          <input required type="text" name="total" readonly class="form-control" value="${obj.sub_total.toFixed(2)}">
-        </div>
-      </div>
+      
     </div>`
         document.getElementById('set_total').innerHTML = html
     }
@@ -401,20 +384,20 @@
                 var $interes = document.getElementById('interes')
                 var $honorarios = document.getElementById('honorarios')
                 var $gastos = document.getElementById('gastos')
-                var $descuento = document.getElementById('descuento')
+                // var $descuento = document.getElementById('descuento')
                 var $sancion = document.querySelector('input[name="sancion"]:checked')
 
                 var capital = 0
                 var por_interes = 0
                 var por_honorarios = 0
                 var por_gastos = 0
-                var por_descuento = 0
+                // var por_descuento = 0
                 var por_sancion = 0
 
                 var get_interes = 0
                 var get_honorarios = 0
                 var get_gastos = 0
-                var get_descuento = 0
+                // var get_descuento = 0
                 var get_sancion = 0
                 var total = 0
                 var obj = {}
@@ -423,7 +406,7 @@
                 por_interes = $interes.value
                 por_honorarios = $honorarios.value
                 por_gastos = $gastos.value
-                por_descuento = $descuento.value
+                // por_descuento = $descuento.value
                 por_sancion = $sancion.value
 
                 if (!capital) {
@@ -436,7 +419,7 @@
                 por_interes = parseFloat(por_interes)
                 por_honorarios = parseFloat(por_honorarios)
                 por_gastos = parseFloat(por_gastos)
-                por_descuento = parseFloat(por_descuento)
+                // por_descuento = parseFloat(por_descuento)
                 por_sancion = parseFloat(por_sancion)
 
                 get_interes = (capital * por_interes) / 100
@@ -447,16 +430,16 @@
 
                 total = capital + get_interes + get_honorarios + get_gastos + get_sancion
 
-                get_descuento = (total * por_descuento) / 100
+                // get_descuento = (total * por_descuento) / 100
 
-                sub_total = total - get_descuento
+                // sub_total = total - get_descuento
                 obj = {
                     get_interes: get_interes,
                     get_honorarios: get_honorarios,
                     get_gastos: get_gastos,
-                    get_descuento: get_descuento,
+                    // get_descuento: get_descuento,
                     total: total,
-                    sub_total: sub_total,
+                    // sub_total: sub_total,
                     capital: capital,
                     get_sancion: get_sancion
                 }
@@ -516,5 +499,4 @@
         var parent = $(this).parents().get(1);
         $(parent).remove();
     });
-</script> -->
-</script>
+</script> 

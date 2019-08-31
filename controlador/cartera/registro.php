@@ -1,3 +1,4 @@
+<a href="?op=pruebas" class="btn btn-prueba">PRUEBA</a>
 <section class="container mt-5">
   <h3 class="text-uppercase text-center alert alert-primary">REGISTRO PRINCIPAL DE CARTERA</h3>
 
@@ -28,7 +29,7 @@
 
               </ul>
             </nav>
-            <!-- <ul id="pgacreedor" class="pagination "></ul> -->
+            
           </div>
         </div>
 

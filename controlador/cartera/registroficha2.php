@@ -3,6 +3,8 @@ include '../../conexion.php';
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+$cn->query("SET NAMES 'utf8'");
+
 if (isset($_POST['btn-enviar'])) {
     $id = $_POST['id'];
     $token = $_POST['token'];

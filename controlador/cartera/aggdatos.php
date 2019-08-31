@@ -84,7 +84,7 @@ if ($cartera_token != '') {
   <?php require('controlador/cartera/modal/addDocument.php') ?>
 
   <!-- AGG OTRA VENTANA -->
-  <?php if ($cartera_token != '') {  ?>
+  <!-- <?php if ($cartera_token != '') {  ?> -->
   <!-- <div class="table-responsive">
     <table class="table table-bordered table-hover table-condensed">
       <thead>
