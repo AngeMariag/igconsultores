@@ -359,7 +359,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>${obj.capital.toFixed(2)}</td>
+            <td>${formatS(obj.capital.toFixed(2))}</td>
             <td>${obj.get_interes.toFixed(2)}</td>
             <td>${obj.get_honorarios.toFixed(2)}</td>
             <td>${obj.get_gastos.toFixed(2)}</td>
@@ -513,6 +513,17 @@
         $(parent).remove();
     });
 
+
+
+    function formatS(value) {
+        var num = value.replace(/\./g, '');
+        if (!isNaN(num)) {
+            num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+            num = num.split('').reverse().join('').replace(/^[\.]/, '');
+            value = num;
+        }
+        return value
+    }
     function format(input) {
         var num = input.value.replace(/\./g, '');
         if (!isNaN(num)) {
