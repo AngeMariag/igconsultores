@@ -171,13 +171,13 @@
                         </div>
                         <div class="card-body">
                             <div class="row text-center">
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="inputEmail4">TITULO</label>
                                         <input required type="text" value="" class="form-control" id="" placeholder="TITULO" name="titulo">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="inputPassword4">CAPITAL</label>
                                         <div class="input-group">
@@ -188,7 +188,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-3 col-sm-12">
                                     <div class="form-group">
                                         <label for="inputPassword4">MESES</label>
                                         <input required type="number" class="form-control" name="meses" id="meses" value="" onkeyup="format(this)">
@@ -227,7 +227,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-sm-12 text-justify">
                                     <div class="form-group">
                                         <label for="">POR FAVOR SELECCIONA ESTA OPCIÓN SOLO SI APLICA SANCIÓN
@@ -359,18 +359,10 @@
         </thead>
         <tbody>
           <tr>
-
-            <td>${obj.capital}</td>
-            <td>${obj.get_interes}</td>
-            <td>${obj.get_honorarios}</td>
-            <td>${obj.get_gastos}</td>
-            <td>${obj.get_sancion}</td>
-
             <td>${obj.capital.toFixed(2)}</td>
             <td>${obj.get_interes.toFixed(2)}</td>
             <td>${obj.get_honorarios.toFixed(2)}</td>
             <td>${obj.get_gastos.toFixed(2)}</td>
-            <td>${obj.get_descuento.toFixed(2)}</td>
             <td>${obj.get_sancion.toFixed(2)}</td>
           </tr>
         </tbody>
@@ -419,7 +411,7 @@
                 var obj = {}
 
                 capital = $capital.value
-                meses = $meses.value
+                meses = $meses.value || 0
                 por_interes = $interes.value
                 por_honorarios = $honorarios.value
                 por_gastos = $gastos.value
@@ -432,7 +424,7 @@
                 }
 
                 //  parseando los datos a flotante
-                capital = parseFloat(capital)
+                capital = parseFloat(capital.split(".").join(""))
                 meses = parseFloat(meses)
                 por_interes = parseFloat(por_interes)
                 por_honorarios = parseFloat(por_honorarios)
@@ -520,17 +512,16 @@
         var parent = $(this).parents().get(1);
         $(parent).remove();
     });
-    function format(input)
-{
-var num = input.value.replace(/\./g,'');
-if(!isNaN(num)){
-num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
-num = num.split('').reverse().join('').replace(/^[\.]/,'');
-input.value = num;
-}
-  
-else{ alert('TIPEA SOLO NÚMEROS');
-input.value = input.value.replace(/[^\d\.]*/g,'');
-}
-}
-</script> 
+
+    function format(input) {
+        var num = input.value.replace(/\./g, '');
+        if (!isNaN(num)) {
+            num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+            num = num.split('').reverse().join('').replace(/^[\.]/, '');
+            input.value = num;
+        } else {
+            alert('TIPEA SOLO NÚMEROS');
+            input.value = input.value.replace(/[^\d\.]*/g, '');
+        }
+    }
+</script>
