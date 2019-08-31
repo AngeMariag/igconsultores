@@ -171,7 +171,9 @@
                         </div>
                         <div class="card-body">
                             <div class="row text-center">
-                                <div class="col-md-6 col-sm-12">
+
+                                <div class="col-md-12 col-sm-12">
+
                                     <div class="form-group">
                                         <label for="inputEmail4">TITULO</label>
                                         <input required type="text" value="" class="form-control" id="" placeholder="TITULO" name="titulo">
@@ -181,17 +183,20 @@
                                     <div class="form-group">
                                         <label for="inputPassword4">CAPITAL</label>
                                         <div class="input-group">
-                                            <input required type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="capital" id="capital" value="" onkeyup="format(this)">
+                                            <input required type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="capital" id="capital" value="" >
                                             <div class="input-group-append">
                                                 <span class="input-group-text">$ PCO</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-12">
+
+                                <div class="col-md-6 col-sm-12">
+
+                        
                                     <div class="form-group">
                                         <label for="inputPassword4">MESES</label>
-                                        <input required type="number" class="form-control" name="meses" id="meses" value="" onkeyup="format(this)">
+                                        <input required type="number" class="form-control" name="meses" id="meses" value="0" >
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
@@ -370,8 +375,8 @@
       <div class="row">
         <div class="col-md-4 offset-md-8 col-sm-12 my-2" style="display: flex;">
           <label class ="col-md-6">Sub-Total: </label>
-          <input required type="text" name="total" readonly class="form-control" value="${obj.total.toFixed(2)}">
-        </div>
+        </div>          <input required type="text" name="total" readonly class="form-control" value="${obj.total.toFixed(2)}">
+
       </div>
       
     </div>`
