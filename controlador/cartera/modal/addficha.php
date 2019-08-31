@@ -183,7 +183,7 @@
                                     <div class="form-group">
                                         <label for="inputPassword4">CAPITAL</label>
                                         <div class="input-group">
-                                            <input required type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="capital" id="capital" value="" >
+                                            <input required type="text" onkeyup="format(this)" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="capital" id="capital" value="" >
                                             <div class="input-group-append">
                                                 <span class="input-group-text">$ PCO</span>
                                             </div>
@@ -364,7 +364,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>${formatS(obj.capital.toFixed(2))}</td>
+            <td>${obj.capital.toFixed(2)}</td>
             <td>${obj.get_interes.toFixed(2)}</td>
             <td>${obj.get_honorarios.toFixed(2)}</td>
             <td>${obj.get_gastos.toFixed(2)}</td>
