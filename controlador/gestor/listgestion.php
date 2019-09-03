@@ -93,9 +93,9 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
     <div class="modal-content">
       <h2 class="text-center bold  card-header bg-default" style="color:#000080;">DATOS DEL DEUDOR</h2>
       <div class="container">
-        <form action="" method="POST" id="modalvermas" class="text-center m-auto">
+        <form action="controlador/gestor/registrar.php" method="POST" id="modalvermas" class="text-center m-auto">
           
-          <input type="hidden" required="required" readonly="readonly" id="id_ficha1" readonly="readonly"/>
+          <input type="hidden" required="required" readonly="readonly" id="id_ficha1" readonly="readonly" name="id" />
            
           <div class="container-fluid my-3">
             <div class="table table-responsive m-auto table-sm " id="verdeudor">
@@ -193,7 +193,7 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
          <!-- SAVE ACUERDO -->
             <div class="card-body text-center">
                 <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-                    <button type="submit" name="btn-enviar" class="btn btn-success">
+                    <button type="submit" name="btn-save" class="btn btn-success">
                         <i class="far fa-save"></i>
                         GUARDAR
                     </button>
