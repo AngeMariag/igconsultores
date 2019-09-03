@@ -285,8 +285,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- END DATOS GESTOR -->
-                        <!-- DOCUMENTOS POR DEUDOR -->
+                       
                         <!-- FIELD DONDE CREO DOCUMENTOS -->
                         <div class="card-header bg-primary text-white text-center">
                             AGREGAR DOCUMENTOS DE RESPALDO DE LA CARTERA
@@ -366,8 +365,10 @@
         </thead>
         <tbody>
           <tr>
+
             <td>${obj.capital.toFixed(3)}</td>
-            
+            <td>${formatS(obj.capital)}</td>
+            <td>${obj.get_interes.toFixed(2)}</td>
             <td>${obj.get_honorarios.toFixed(2)}</td>
             <td>${obj.get_gastos.toFixed(2)}</td>
             <td>${obj.get_sancion.toFixed(2)}</td>
@@ -454,7 +455,7 @@
 
                 // sub_total = total - get_descuento
                 obj = {
-                    // get_interes: get_interes,
+                    get_interes: get_interes,
                     get_honorarios: get_honorarios,
                     get_gastos: get_gastos,
                     // get_descuento: get_descuento,
@@ -526,13 +527,10 @@
 
 
     function formatS(value) {
-        var num = value.replace(/\./g, '');
-        if (!isNaN(num)) {
-            num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
-            num = num.split('').reverse().join('').replace(/^[\.]/, '');
-            value = num;
-        }
-        return value
+        console.log(value)
+        num = value.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+        num = num.split('').reverse().join('').replace(/^[\.]/, '');
+        return num
     }
     function format(input) {
         var num = input.value.replace(/\./g, '');
