@@ -135,7 +135,7 @@ case '2':
                     }
 
                     
-                    $sql = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, CONCAT(UPPER(deudor.tipodocumento), '-', deudor.documento) as documento, CONCAT(deudor.nombre, ' ', deudor.apellido) as deudor, CONCAT(gestor.codigo) as gestor, acreedor.razon_social from ficha inner join cartera on ficha.id_cartera=cartera.id INNER JOIN cartera_deudor_codeudor on cartera.id=cartera_deudor_codeudor.id_cartera INNER join acreedor on cartera.id_acreedor=acreedor.id inner join deudor on ficha.id_deudor=deudor.id INNER join gestor on cartera_deudor_codeudor.id_gestor=gestor.id GROUP BY ficha.id_deudor");
+                    $sql = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, CONCAT(UPPER(deudor.tipodocumento), '-', deudor.documento) as documento, CONCAT(deudor.nombre, ' ', deudor.apellido) as deudor, CONCAT(gestor.codigo) as gestor, acreedor.razon_social from ficha inner join cartera on ficha.id_cartera=cartera.id INNER JOIN cartera_deudor_codeudor on cartera.id=cartera_deudor_codeudor.id_cartera INNER join acreedor on cartera.id_acreedor=acreedor.id inner join deudor on ficha.id_deudor=deudor.id INNER join gestor on cartera_deudor_codeudor.id_gestor=gestor.id GROUP BY ficha.id_deudor ORDER BY ficha.id_deudor DESC");
                     
                       $i=1;
                       if(mysqli_num_rows($sql) != 0){
@@ -226,8 +226,9 @@ break;
                             
                             <th class="text-white" style="background:#000080;">DOCUMENTO</th>
                             
-                            <th class="text-white" style="background:#000080;">ARCHIVO</th>
+                            <th class="text-white" style="background:#000080;">UBICACIÓN</th>
                             
+                            <th class="text-white" style="background:#000080;">ARCHIVO</th>
                           </tr>';
 
                           while ($f = mysqli_fetch_assoc($sql)) {
@@ -236,6 +237,9 @@ break;
                                               '.$f["nombre"].'
                                           </td> 
 
+                                          <td style=font-size:10px;>
+                                              '.$f["ubicacion_documento"].'
+                                          </td> 
                                           <td align="center" style=font-size:12px;>
                        
                                            <a href="' .$f['ruta'].'" target="_blank" class="btn btn-xs btn-danger"  title="IMPRIMIR"><i class="fas fa-file-pdf"></i></a>

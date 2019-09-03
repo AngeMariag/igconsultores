@@ -93,12 +93,12 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, deudor.tele
     $tablad=$tablad.'<table class="table table-bordered table-hover table-condensed"> 
                     <tr class=" info"> 
                       
-                        <th class="text-white" style="background:#000080;">CÓDIGO</th>
-                        <th class="text-white" style="background:#000080;">IDENTIFICACIÓN</th>
-                        <th class="text-white" style="background:#000080;">DEUDOR</th> 
-                         <th class="text-white" style="background:#000080;">ACREEDOR</th>
-                         <th class="text-white" style="background:#000080;">TELÉFONO</th>
-                         <th class="text-white" style="background:#000080;">DIRECCIÓN</th>
+                        <th class="text-white bg-info" style="">CÓDIGO</th>
+                        <th class="text-white bg-info" style="">IDENTIFICACIÓN</th>
+                        <th class="text-white bg-info" style="">DEUDOR</th> 
+                         <th class="text-white bg-info" style="">ACREEDOR</th>
+                         <th class="text-white bg-info" style="">TELÉFONO</th>
+                         <th class="text-white bg-info" style="">DIRECCIÓN</th>
                        
                     </tr>';
             while($v = mysqli_fetch_assoc($verdatos)){
@@ -145,10 +145,10 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, deudor.tele
     $tabla=$tabla.'<table class="table table-bordered table-hover table-condensed"> 
                     <tr class=" info"> 
                       
-                        <th class="text-white" style="background:#000080;">IDENTIFICACIÓN</th>
-                        <th class="text-white" style="background:#000080;">NOMBRE</th> 
-                         <th class="text-white" style="background:#000080;">APELLIDO</th>
-                         <th class="text-white" style="background:#000080;">TELÉFONO</th>
+                        <th class="text-white bg-info" style="">IDENTIFICACIÓN</th>
+                        <th class="text-white bg-info" style="">NOMBRE</th> 
+                         <th class="text-white bg-info" style="">APELLIDO</th>
+                         <th class="text-white bg-info" style="">TELÉFONO</th>
                        
                     </tr>';
             while($c = mysqli_fetch_assoc($vercodeudor)){
@@ -191,7 +191,7 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, deudor.tele
     $tabla3=$tabla3 .'<table class="table table-bordered table-hover table-condensed"> 
                     <tr class=" head-info"> 
                       
-                        <th class="text-white" style="background:#000080;">OBSERVACIÓN</th>
+                        <th class="text-white bg-info" style="">OBSERVACIÓN</th>
                         
                        
                     </tr>';
@@ -222,13 +222,13 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, deudor.tele
     $tabla2=$tabla2 .'<table class="table table-bordered table-hover table-condensed"> 
                     <tr class=" info"> 
                       
-                        <th class="text-white" style="background:#000080;">TÍTULO</th>
-                        <th class="text-white" style="background:#000080;">CAPITAL</th> 
-                         <th class="text-white" style="background:#000080;">INTERÉS</th>
-                         <th class="text-white" style="background:#000080;">HONORARIOS</th>
-                         <th class="text-white" style="background:#000080;">GASTOS</th>
-                         <th class="text-white" style="background:#000080;">SANCIÓN</th>
-                         <th class="text-white" style="background:#000080;">TOTAL</th>
+                        <th class="text-white bg-info" style="">TÍTULO</th>
+                        <th class="text-white bg-info" style="">CAPITAL</th> 
+                         <th class="text-white bg-info" style="">INTERÉS</th>
+                         <th class="text-white bg-info" style="">HONORARIOS</th>
+                         <th class="text-white bg-info" style="">GASTOS</th>
+                         <th class="text-white bg-info" style="">SANCIÓN</th>
+                         <th class="text-white bg-info" style="">TOTAL</th>
                        
                     </tr>';
             while($f = mysqli_fetch_assoc($verficha)){

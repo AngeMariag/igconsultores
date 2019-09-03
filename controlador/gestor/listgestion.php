@@ -16,7 +16,7 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
     ON acreedor.id=cartera.id_acreedor
     LEFT JOIN ficha
     ON ficha.id_cartera=cartera.id and ficha.id_deudor=deudor.id
-    WHERE gestor.codigo = '{$user['username']}'");
+    WHERE gestor.codigo = '{$user['username']}' ORDER BY ficha.id_deudor DESC");
 
 ?>
 
@@ -60,10 +60,10 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
                                    <td><?= utf8_encode(strtoupper($f["nombre"])) .(" "). utf8_encode(strtoupper($f["apellido"])) ?></td>
                                     <td><?= utf8_encode(strtoupper($f["razon_social"])) ?></td>
                                     <td>
-                                      <a href="#" onclick="modalShow1(<?= utf8_decode(strtoupper($f['id'])) ?>)" class="btn btn-info btn-sm text-white"
+                                      <!-- <a href="#" onclick="modalShow1(<?= utf8_decode(strtoupper($f['id'])) ?>)" class="btn btn-info btn-sm text-white"
                                     title="Ver" data-toggle="modal" data-target="#vista">
                                     <i class="fas fa-eye"></i>
-                                </a>
+                                </a> -->
                                 <a href="javascript:leermas(<?= $f["id"] ?>);"  class="btn btn-warning btn-sm text-white" title="Editar"><i class="fas fa-edit"></i></a> 
                                 
                                     </td>
@@ -89,78 +89,120 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
 
 
 <div class="modal fade bd-example-modal-xl" id="VERMAS" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-xl ">
     <div class="modal-content">
+      <h2 class="text-center bold  card-header bg-default" style="color:#000080;">DATOS DEL DEUDOR</h2>
       <div class="container">
         <form action="" method="POST" id="modalvermas" class="text-center m-auto">
           
           <input type="hidden" required="required" readonly="readonly" id="id_ficha1" readonly="readonly"/>
-           <div   style="height: 0%;" class="container-fluid my-3">
-            <h2 class="text-center bold my-4 table-sm">DATOS DEL DEUDOR</h2>
-             </div>
-
-         
-          <div class="container-fluid">
-            <div class="table table-responsive m-auto table-sm" id="verdeudor">
+           
+          <div class="container-fluid my-3">
+            <div class="table table-responsive m-auto table-sm " id="verdeudor">
               
             </div>
           </div>
           
-         <h3 class="text-center bold my-4">DATOS DEL CODEUDOR</h3>
-          <div class=" container-fluid">
+        <h4 class="">DATOS - <span class="badge badge-secondary">CODEUDOR</span></h4>
+          <div class=" container-fluid my-3">
             <div class="table table-responsive m-auto table-sm" id="vercodeudores2">
               
             </div>
           </div>
 
            
-         <h3 class="text-center bold my-4">FICHA - CUENTA</h3>
-          <div class="container-fluid">
+         <h4>FICHA - <span class="badge badge-secondary">CUENTA</span></h4>
+          <div class="container-fluid my-3">
             <div class="table table-responsive m-auto table-sm" id="verficha2">
               
             </div>
           </div>
 
-          <h2 class="text-center bold my-4">OBSERVACIONES DE CUENTA</h2>
-          <div class="">
+          <h4>OBSERVACIONES - <span class="badge badge-secondary">CUENTA</span></h4>
+          <div class=" container-fluid my-3">
             <div class="table table-responsive m-auto table-sm" id="verobservaciones">
            </div>
           </div>
 
+                <div class="card-header text-white bg-info my-3">
+            REGISTRAR GESTIÓN
+        </div>
 
-          <div class="card">
-            <h3 class="text-center"> REGISTRAR ACUERDO</h3>
-          </div>
-          <div class="row my-2">
-            <div class="form-group col-md-4">
+        <div class="container-fluid">
+              <div class="form-row">
+                <div class="form-group col-md-5">
+                  <label for="inputCity">GESTIÓN</label>
+                  <textarea class="form-control" name="gestion"></textarea>
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="inputZip">FECHA</label>
+                  <input type="date" class="form-control" id="" name="fecha">
+                </div>
+                <div class="form-group col-md-2">
+                  <label for="inputZip">MONTO</label>
+                  <input type="text" class="form-control" id="" name="monto">
+                </div>
+                <div class="form-group col-md-2">
+                  <label for="inputState">ESTADO</label>
+                  <select id="inputState" class="form-control" name="estado">
+                    <option selected>SELECCIONA</option>
+                    <option value="0">EN ACUERDO</option>
+                    <option value="1">RENUENTE</option>
+                    <option value="2">INSOLVENTE</option>
+                    <option value="3">INCUMPLIMIENTO</option>
+                    <option value="4">ILOCALIZADO</option>
+                    <option value="5">VOLVAR A LLAMAR</option>
+                    <option value="6">AUDITORIA</option>
+                    <option value="7">FRAUDE</option>
+
+                  </select>
+                </div>
+                
+              </div>
+             
+        </div>
+        <div class="card-header text-white bg-info my-3">
+            REGISTRAR ACUERDO
+        </div>
+          <div class=" container-fluid row">
+            <div class="form-group col-md-3">
               <label>TOTAL</label>
               <input type="" name="" id="totalficha" readonly="" class="form-control ">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label>PORCENTAJE</label>
-              <input type="" name="" id="porcentaje"  class="form-control ">
+              <input type="number" name="porcentaje" id="porcentaje"  class="form-control " value="0">
             </div>
-            <div class="form-group col-md-4">
-              <label>MONTO TOTAL</label>
-              <input type="" name="" id="montototal"  class="form-control ">
+            <div class="form-group col-md-6">
+              <label>ACUERDO</label>
+              <textarea class="form-control"></textarea>
             </div>
           </div>
-
+          <div class="col-md-4">
+            <button type="button" name="btn-total" class="btn btn-primary d-flex justify-content-sm-end my-2" id="btn_get_total2">CALCULAR TOTAL
+            </button>
+        </div>
+        <div class="col-12">
+            <div id="set_total2" class="mb-5 mt-3 text-center"></div>
+        </div>
           
           <br>
-          <div class="row col-sm-12 col-md-12 col-lg-12">
-            <div class="form-inline col-lg-12">
-              <label class="col-md-4">ACUERDO:</label>
-              <textarea class="form-control col-md-6"></textarea>
+        
+
+   
+         <!-- SAVE ACUERDO -->
+            <div class="card-body text-center">
+                <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                    <button type="submit" name="btn-enviar" class="btn btn-success">
+                        <i class="far fa-save"></i>
+                        GUARDAR
+                    </button>
+                    <a href="javascript:window.location.reload()" class="btn btn-danger">
+                        <i class="fas fa-window-close"></i>
+                        Cerrar
+                    </a>
+                </div>
             </div>
-          </div>
-          <div class="btn-group btn-group-sm my-5" style="">
-                        
-                        <a href="javascript:window.location.reload()" class="btn btn-danger"><i class="fas fa-trash-alt"></i>CERRAR</a>
-                    </div>
-
-
-          
         </form>
       </div>
       </div>
@@ -185,22 +227,6 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
         $("#verficha2").html(datos[2]);
         $("#verobservaciones").html(datos[3]);
         $('#totalficha').val(datos[4]);
-//       
-        // $("#verdeudor").html(datos[6]);
-         // $("#vergestiones2").html(datos[7]);
-         // $("#verpagos2").html(datos[8]);
-//          $('#fecha_inicio3').val(datos[4]);
-            // $('#objetivo_contrato3').val(datos[6]);
-//          //$('#objetivo_especificos3').val(datos[7]);
-//          $('#valor_facturado3').val(datos[7]);
-//          $('#valor_facturado3').val(datos[8]);
-
-//          $("#vertablas2").html(datos[10]);
-//          $("#vertablas3").html(datos[11]);
-//          $("#vertablas").html(datos[12]);
-//          $("#vertablas1").html(datos[13]);//objetivosespecificos
-//          $('#fecha_registro').val(datos[14]);
-//          $('#fecha_modificacion').val(datos[15]);
          $('#VERMAS').modal({
             show:true,
             backdrop:'static'
@@ -210,62 +236,82 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
     });
     return false;
   }
+
+  // FUNCIÓN PARA VER MI TOTAL A COBRAR GESTOR
+  function set_total2(obj) {
+        var html = `<div class="table-responsive col-md-8 m-auto">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class=" bg-info text-white">TOTAL INICIAL</th>
+            <th class="bg-info text-white">VALOR PORCENTAJE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>${obj.totalficha}</td>
+            
+            <td>${obj.get_porcentaje}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row class = "col-md-6">
+        <div class="col-md-4  col-sm-12 my-2" style="display: flex;">
+          <label class ="col-md-12"><b>TOTAL A PAGAR: </b></label>
+        </div><input required type="text" name="total" readonly class="form-control col-md-4" value="${obj.total.toFixed(2)}">
+
+      </div>
+      
+    </div>`
+        document.getElementById('set_total2').innerHTML = html
+    }
+
+    function get_total2() {
+        var state = {}
+        var btn_total = document.getElementById('btn_get_total2')
+
+
+        if (btn_total) {
+            btn_total.addEventListener('click', function(e) {
+                // obteniendo input a traves del id
+                var $totalficha = document.getElementById('totalficha')
+                var $porcentaje = document.getElementById('porcentaje')
+                
+                var totalficha = 0
+                var por_porcentaje = 0
+                
+                var get_porcentaje = 0
+                var total = 0
+                var obj = {}
+
+                totalficha = $totalficha.value
+                por_porcentaje = $porcentaje.value
+                
+                if (!totalficha) {
+                    alert("SE REQUIERE EL VALOR TOTAL INICIAL")
+                    return false
+                }
+
+                //  parseando los datos a flotante
+                totalficha = parseFloat(totalficha.split(".").join(""))
+                por_porcentaje = parseFloat(por_porcentaje)
+                
+                get_porcentaje = (totalficha * por_porcentaje) /100
+                
+                total = totalficha + get_porcentaje 
+
+                obj = {
+                    get_porcentaje: get_porcentaje,
+                    total: total,
+                    // sub_total: sub_total,
+                    totalficha: totalficha,
+                    
+                }
+                return set_total2(obj)
+            })
+        }
+    }
+
+    get_total2()
 </script>
 
-
-
-
-<!-- VENTANA DE VISTA DE GESTIONES DE PAGO -->
-<!-- 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">
-  Huge modal
-</button> -->
-
-<!-- <div id="aggacuerdo" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
-     aria-labelledby="myHugeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-     <H2>PRUEBA</H2>
-     <div class=" container">
-     <form action="" id="acuerdogestion">
-       <input type="text" required="required" readonly="readonly" id="iddeudor" name="id" readonly="readonly"/>
-
-       <div class="table-responsive">
-         <div id="tabladeudores" class="" style="width: 75%;">  </div>
-       </div>
-     </form>
-     </div>
-    </div>
-  </div>
-</div>
- -->
-<!-- 
-<script type="text/javascript">
-
-
-  // NUEVA FUNCIÓN PARA MI INSERTAR GESTIONES DE PAGO
-
-function agregar(id)
-  {
-    $('#acuerdogestion')[0].reset();
-    var url = 'controlador/gestor/consulta.php?tp=1';
-      $.ajax({
-      type:'POST',
-      url:url,
-      data:'tp=1&id='+id,
-      success: function(valores){
-          var datos = eval(valores);
-         $('#iddeudor').val(id);
-           $('#tabladeudores').html(datos[0]);
-         $('#aggacuerdo').modal({
-            show:true,
-            backdrop:'static'
-          });
-        return false;
-      }
-    });
-    return false;
-  } 
-
- 
-</script> -->

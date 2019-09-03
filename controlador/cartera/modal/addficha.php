@@ -14,13 +14,13 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="">Código</label>
+                                        <label for="">CÓDIGO</label>
                                         <input type="text" required class="form-control text-uppercase" id="codigo_deudor" placeholder="Código" name="codigo_deudor" required="">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="inputState">Tipo de Documento</label>
+                                        <label for="inputState">TIPO DE DOCUMENTO</label>
                                         <select id="" required class="form-control" name="tipodocumento_deudor">
                                             <option selected>Selecciona...</option>
                                             <option value="cc">CC</option>
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="inputCity">Nro. Documento</label>
+                                        <label for="inputCity">NRO. DOCUMENTO</label>
                                         <input type="text" required class="form-control" id="" name="documento_deudor">
                                     </div>
                                 </div>
@@ -44,12 +44,12 @@
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label for="inputPassword4">APELLIDO</label>
-                                        <input type="text" required class="form-control" id="" placeholder="Apellido" name="apellido_deudor">
+                                        <input type="text" required class="form-control text-uppercase" id="" placeholder="Apellido" name="apellido_deudor">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="inputEmail4">TELEFONO</label>
+                                        <label for="inputEmail4">TELÉFONO</label>
                                         <input type="text" required class="form-control" id="inputEmail4" placeholder="TELEFNO" name="telefono_deudor">
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="inputState">Tipo de Documento</label>
+                                        <label for="inputState">TIPO DE DOCUMENTOo</label>
                                         <select id="inputState" class="form-control" name="tipodocumento_codeudor_1">
                                             <option selected>...</option>
                                             <option value="cc">CÉDULA DE CIUDADANIA</option>
@@ -82,25 +82,25 @@
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="inputCity">Nro. Documento</label>
+                                        <label for="inputCity">NRO. DOCUMENTO</label>
                                         <input type="text" class="form-control" id="" name="documento_codeudor_1">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label for="inputEmail4">NOMBRE</label>
-                                        <input type="text" class="form-control" id="" placeholder="Nombre" name="nombre_codeudor_1">
+                                        <input type="text" class="form-control text-uppercase" id="" placeholder="Nombre" name="nombre_codeudor_1">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label for="inputPassword4">APELLIDO</label>
-                                        <input type="text" class="form-control" id="" placeholder="Apellido" name="apellido_codeudor_1">
+                                        <input type="text" class="form-control text-uppercase" id="" placeholder="Apellido" name="apellido_codeudor_1">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="inputEmail4">TELEFONO</label>
+                                        <label for="inputEmail4">TELÉFONO</label>
                                         <input type="text" class="form-control" id="inputEmail4" placeholder="Npombre" name="telefono_codeudor_1">
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="inputState">Tipo de Documento</label>
+                                        <label for="inputState">TIPO DE DOCUMENTO</label>
                                         <select id="inputState" class="form-control" name="tipodocumento_codeudor_2">
                                             <option selected>...</option>
                                             <option value="cc">CÉDULA DE CIUDADANIA</option>
@@ -133,25 +133,25 @@
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="inputCity">Nro. Documento</label>
+                                        <label for="inputCity">NRO. DOCUMENTO</label>
                                         <input type="text" class="form-control" id="" name="documento_codeudor_2">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label for="inputEmail4">NOMBRE</label>
-                                        <input type="text" class="form-control" id="" placeholder="Nombre" name="nombre_codeudor_2">
+                                        <input type="text" class="form-control text-uppercase" id="" placeholder="Nombre" name="nombre_codeudor_2">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label for="inputPassword4">APELLIDO</label>
-                                        <input type="text" class="form-control" id="" placeholder="Apellido" name="apellido_codeudor_2">
+                                        <input type="text" class="form-control text-uppercase" id="" placeholder="Apellido" name="apellido_codeudor_2">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="inputEmail4">TELEFONO</label>
+                                        <label for="inputEmail4">TELÉFONO</label>
                                         <input type="text" class="form-control" id="inputEmail4" placeholder="Npombre" name="telefono_codeudor_2">
                                     </div>
                                 </div>
@@ -191,17 +191,9 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 col-sm-12">
-
-                        
+                                 <div class="col-md-3 col-sm-12">
                                     <div class="form-group">
-                                        <label for="inputPassword4">MESES</label>
-                                        <input required type="number" class="form-control" name="meses" id="meses" value="0" >
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="inputEmail4">INTERES</label>
+                                        <label for="inputEmail4">INTERÉS</label>
                                         <div class="input-group">
                                             <input required type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="interes" id="interes" value="0">
                                             <div class="input-group-append">
@@ -210,6 +202,16 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-3 col-sm-12">
+
+                        
+                                    <div class="form-group">
+                                        <label for="inputPassword4">MESES</label>
+                                        <input required type="number" class="form-control" name="meses" id="meses" value="0" >
+                                    </div>
+                                </div>
+                               
                                 <div class="col-md-3 col-sm-12">
                                     <div class="form-group">
                                         <label for="inputPassword4">HONORARIOS</label>
@@ -272,6 +274,7 @@
                                         <select id="id_gestor" name="gestor" class="form-control" required aria-required="true">
                                             <option value="">-----------------------</option>
                                             <?php
+                                            $cn->query("SET NAMES 'utf8'");
                                             $busqueda = $cn->query("SELECT id, codigo, nombre, apellido from gestor") or die("Problemas en el select:" . mysqli_error());
                                             while ($row = mysqli_fetch_array($busqueda)) {
                                                 echo '<option value="' . $row['id'] . '">' . $row['nombre'] . '' . $row['apellido'] . ' - ' . $row['codigo'] . ' </option>';
@@ -356,7 +359,6 @@
         <thead>
           <tr>
             <th>CAPITAL</th>
-            <th>INTERES</th>
             <th>HONORARIOS</th>
             <th>GASTOS</th>
             <th>SANCION</th>
@@ -364,8 +366,8 @@
         </thead>
         <tbody>
           <tr>
-            <td>${obj.capital.toFixed(2)}</td>
-            <td>${obj.get_interes.toFixed(2)}</td>
+            <td>${obj.capital.toFixed(3)}</td>
+            
             <td>${obj.get_honorarios.toFixed(2)}</td>
             <td>${obj.get_gastos.toFixed(2)}</td>
             <td>${obj.get_sancion.toFixed(2)}</td>
@@ -375,7 +377,7 @@
       <div class="row">
         <div class="col-md-4 offset-md-8 col-sm-12 my-2" style="display: flex;">
           <label class ="col-md-6">Sub-Total: </label>
-        </div>          <input required type="text" name="total" readonly class="form-control" value="${obj.total.toFixed(2)}">
+        </div>          <input required type="text" name="total" readonly class="form-control" value="${obj.total}">
 
       </div>
       
@@ -438,7 +440,7 @@
                 por_sancion = parseFloat(por_sancion)
 
                 get_interes = (capital * por_interes) / 100
-                get_meses = (get_interes * meses) / 100
+                get_meses = (get_interes * meses) 
                 capital = capital + get_meses
 
                 get_honorarios = (capital * por_honorarios) / 100
@@ -446,13 +448,13 @@
                 // get_descuento = (capital * por_descuento) / 100
                 get_sancion = (capital * por_sancion) / 100
 
-                total = capital + get_interes + get_honorarios + get_gastos + get_sancion
+                total = capital + get_honorarios + get_gastos + get_sancion
 
                 // get_descuento = (total * por_descuento) / 100
 
                 // sub_total = total - get_descuento
                 obj = {
-                    get_interes: get_interes,
+                    // get_interes: get_interes,
                     get_honorarios: get_honorarios,
                     get_gastos: get_gastos,
                     // get_descuento: get_descuento,
@@ -497,11 +499,14 @@
     function mostrar_mas(obj) {
         var fila = `
             <div class="row my-2" style="justify-content: center; align-items: center; ">
-                <div class="col-sm-12 col-md-5">
-                    <input type="text" required class="form-control form-control-sm " name="ndocumento[]" placeholder="NOMBRE DEL DOCUMENTO">
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" required class="form-control  " name="ndocumento[]" placeholder="NOMBRE DEL DOCUMENTO">
                 </div>
-                <div class="col-sm-12 col-md-5">
-                    <input type="file" required class="form-control form-control-sm" name="documentos_general[]">
+                <div class="col-sm-12 col-md-3">
+                    <input type="file" required class="form-control " name="documentos_general[]">
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" required class="form-control " name="ubicacion_documento[]" placeholder="UBICACIÓN FÍSICA  DEL DOCUMENTO">
                 </div>
                 <div class="">
                     <button class="eliminar btn btn-danger btn-sm">

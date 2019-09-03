@@ -7,7 +7,7 @@ $op = $_GET['op'];
 ?>
 <!doctype html>
 <html lang="en">
-  <head>
+  <head class="">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,22 +18,32 @@ $op = $_GET['op'];
    <!-- ESTILO DE IMAGEN BODY -->
    <style type="text/css">
     
-    .slider{
-      background: url("images/consultoria.jpg");
-      height: 91vh;
+     html {
+        height:100%;
+        width:100%;
+    }
+
+  body{
+        background:#8ba987 url('images/background.jpg') no-repeat center center;
+        background-size:100% 100%;
+    }
+
+    /*.slider{
+      background: url("images/background.jpg");
+      height: 90vh;
       background-size: cover;
       background-position: center;
-    }
+    }*/
+
   </style>
    </head>
   <body>
     <!-- INICIO CON UN MENU -->
     
-    <section> 
     <div class="container-fluid slider d-flex justify-content-center align-items-center">
-      <h1 class="display-1 text-white ">IG CONSULTORES</h1>
+      <!-- <h1 class="display-1 text-white ">IG CONSULTORES</h1> -->
      </div> 
-    </section>
+
     
   </body>
 </html>

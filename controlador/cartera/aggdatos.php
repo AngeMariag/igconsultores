@@ -1,5 +1,6 @@
 <?php
 require("conexion.php");
+// $cn->query("SET NAMES 'utf8'");
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $cartera_token = isset($_GET['cartera']) ? $_GET['cartera'] : '';
 $acreedor = $cn->query("SELECT * FROM acreedor WHERE id = $id");

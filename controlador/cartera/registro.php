@@ -1,4 +1,4 @@
-<a href="?op=pruebas" class="btn btn-prueba">PRUEBA</a>
+<!-- <a href="?op=pruebas" class="btn btn-prueba">PRUEBA</a> -->
 <section class="container mt-5">
   <h3 class="text-uppercase text-center alert alert-primary">REGISTRO PRINCIPAL DE CARTERA</h3>
 
@@ -41,15 +41,13 @@
   <!-- SECTION PARA AGG UN NUEVO DEUDOR -->
 
   <section>
-    <!-- Button trigger modal -->
-
-
+    
     <!-- Modal  para nuevo acreedor-->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">NUEVO ACREEDOR</h5>
+          <div class="modal-header" style=" background:#003380;">
+            <h5 class="modal-title text-center text-white" id="exampleModalCenterTitle">POR FAVOR REGISTRA UN NUEVO ACREEDOR</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

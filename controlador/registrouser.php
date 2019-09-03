@@ -2,8 +2,6 @@
 require ('../conexion.php');
 $cn->query("SET NAMES 'utf8'");
 
-
-
 $codigo = $_POST['codigo'];
 $identificacion = $_POST['identificacion'];
 $nombre = $_POST['nombre'];

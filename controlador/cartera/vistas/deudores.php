@@ -60,16 +60,20 @@
 
 <!-- visualizar datos del deudor MODAL EXTRA LARGA-->
 <section>
- <!--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Extra large modal</button>
- -->
+
+<style type="text/css">
+  label{
+    
+  }
+</style>
 <div class="modal fade bd-example-modal-xl" id="VERMAS" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
-      <div class="container">
+      <div class="container-fluid">
         <form action="" method="POST" id="modalvermas" class="text-center m-auto">
           
           <input type="hidden" required="required" readonly="readonly" id="id_ficha1" readonly="readonly"/>
-          <h1 class="text-center my-5">REPORTE  DEUDOR</h1>
+          <h1 class="text-center my-2 card-header bg-default" style="color:#000080;">INFORMACIÓN GENERAL DE CUENTA DEUDOR</h1>
 
           <div class="form-group  row">
             <label for="inputPassword" class="col-sm-4 col-form-label">Código Deudor:</label>
