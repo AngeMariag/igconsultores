@@ -66,7 +66,7 @@ if ($cartera_token != '') {
       </table>
       <?php } else { ?>
       <div class="alert alert-danger text-center">
-        <strong>Lo Sentimos No Se Encontraron Registros, Por favor Presional el botón Agregar para realizar tu primer REGISTRO...</strong>
+        <strong>Lo Sentimos No Se Encontraron Registros, Por favor Presiona el botón Agregar para realizar tu primer REGISTRO...</strong>
       </div>
     </div>
     <?php } ?>

@@ -81,6 +81,8 @@ $tabla4 = ''; //tabla de pagos
   // $valores2 = mysqli_fetch_array($vercodeudor);
 
  $verobservaciones = $cn->query("SELECT * FROM observaciones_ficha where id = '$id'");
+
+ $veracuerdo = $cn->query("SELECT * FROM acuerdo where id_ficha = '$id'");
   // $valores2 = mysqli_fetch_array($vercodeudor);
 
 // ver deudor
@@ -272,8 +274,47 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, deudor.tele
                         </div>';
     }
  
+// SI EXISTE ACUERDO
 
+ if (mysqli_num_rows($veracuerdo) != 0) {
+    
+    $tabla4=$tabla4 .'<table class="table table-bordered table-hover table-condensed"> 
+                    <tr class=" info"> 
+                      
+                        <th class="text-white bg-info" style="">ACUERDO</th>
+                        <th class="text-white bg-info" style="">PORCENTAJE</th> 
+                         <th class="text-white bg-info" style="">MONTO TOTAL</th>
+                         
+                    </tr>';
+            while($f = mysqli_fetch_assoc($veracuerdo)){
+              $tabla4=$tabla4.'<tr class="default">
 
+                                 
+                                    <td>
+                                          '.$f["acuerdo"].'
+                                    </td>
+
+                                    <td>
+                                          '.$f["porcentaje"].' %
+                                    </td>
+                                         
+
+                                    <td>
+                                          '.$f["total_pagar"].' 
+                                    </td> 
+                                    
+                                   
+                                </tr>';
+
+            }
+            $tabla4=$tabla4.'</table>';
+
+  }else{
+        $tabla4=$tabla4.'<div class="alert alert-danger text-center">
+                            <strong>Lo Sentimos No Se Encontraron Registros...</strong>
+                        </div>';
+    }
+ 
 
 
   $datos = array(
@@ -285,8 +326,9 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, deudor.tele
       2 => $tabla2,
       3 => $tabla3,
       4 => $valores['total'],
+      5 => $tabla4,
       // 7 => $tabla3,
-      // 8 => $tabla4,
+      
   );
   echo json_encode($datos);
    

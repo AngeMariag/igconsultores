@@ -18,6 +18,7 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
     ON ficha.id_cartera=cartera.id and ficha.id_deudor=deudor.id
     WHERE gestor.codigo = '{$user['username']}' ORDER BY ficha.id_deudor DESC");
 
+
 ?>
 
 <div class="container mt-3">
@@ -86,14 +87,12 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
     </div>
 </div>
 
-
-
 <div class="modal fade bd-example-modal-xl" id="VERMAS" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl ">
     <div class="modal-content">
       <h2 class="text-center bold  card-header bg-default" style="color:#000080;">DATOS DEL DEUDOR</h2>
       <div class="container">
-        <form action="controlador/gestor/registrar.php" method="POST" id="modalvermas" class="text-center m-auto">
+        <form action="controlador/gestor/registrar_gestion.php" method="POST" id="modalvermas" class="text-center m-auto">
           
           <input type="hidden" required="required" readonly="readonly" id="id_ficha1" readonly="readonly" name="id" />
            
@@ -109,8 +108,7 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
               
             </div>
           </div>
-
-           
+        <
          <h4>FICHA - <span class="badge badge-secondary">CUENTA</span></h4>
           <div class="container-fluid my-3">
             <div class="table table-responsive m-auto table-sm" id="verficha2">
@@ -124,7 +122,14 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
            </div>
           </div>
 
-                <div class="card-header text-white bg-info my-3">
+
+        <h4>ACUERDO - <span class="badge badge-secondary">CUENTA</span></h4>
+          <div class=" container-fluid my-3">
+            <div class="table table-responsive m-auto table-sm" id="veracuerdo">
+           </div>
+          </div>
+
+         <div class="card-header text-white bg-info my-3">
             REGISTRAR GESTIÓN
         </div>
 
@@ -143,8 +148,8 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
                   <input type="text" class="form-control" id="" name="monto">
                 </div>
                 <div class="form-group col-md-2">
-                  <label for="inputState">ESTADO</label>
-                  <select id="inputState" class="form-control" name="estado">
+                  <label for="">ESTADO</label>
+                  <select id="" class="form-control" name="estado">
                     <option selected>SELECCIONA</option>
                     <option value="0">EN ACUERDO</option>
                     <option value="1">RENUENTE</option>
@@ -161,6 +166,8 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
               </div>
              
         </div>
+
+
         <div class="card-header text-white bg-info my-3">
             REGISTRAR ACUERDO
         </div>
@@ -187,8 +194,6 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
         </div>
           
           <br>
-        
-
    
          <!-- SAVE ACUERDO -->
             <div class="card-body text-center">
@@ -208,7 +213,6 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
       </div>
     </div>
   </div>
-</div>
 
 <script type="text/javascript">
   function leermas(id)
@@ -227,6 +231,7 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
         $("#verficha2").html(datos[2]);
         $("#verobservaciones").html(datos[3]);
         $('#totalficha').val(datos[4]);
+         $("#veracuerdo").html(datos[5]);
          $('#VERMAS').modal({
             show:true,
             backdrop:'static'
