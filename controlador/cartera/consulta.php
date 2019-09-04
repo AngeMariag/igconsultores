@@ -285,10 +285,10 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, CONCAT(UPPE
   $i =1;
   if (mysqli_num_rows($vercodeudor) != 0) {
     
-    $tabla=$tabla.'<table class="table table-bordered table-hover table-condensed"> 
-                    <tr class=" info"> 
-                      
-                        <th class="text-white" style="background:#000080;">IDENTIFICACIÓN</th>
+    $tabla=$tabla.'
+    <table class="table table-sm">
+                   <tr class=""> 
+                      <th class="text-white" style="background:#000080;">IDENTIFICACIÓN</th>
                         <th class="text-white" style="background:#000080;">NOMBRE</th> 
                          <th class="text-white" style="background:#000080;">APELLIDO</th>
                          <th class="text-white" style="background:#000080;">TELÉFONO</th>
@@ -331,12 +331,13 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, CONCAT(UPPE
 
   if (mysqli_num_rows($verficha) != 0) {
     
-    $tabla2=$tabla2 .'<table class="table table-bordered table-hover table-condensed"> 
+    $tabla2=$tabla2 .'<table class="table table-sm"> 
                     <tr class=" info"> 
                       
                         <th class="text-white" style="background:#000080;">TÍTULO</th>
                         <th class="text-white" style="background:#000080;">CAPITAL</th> 
                          <th class="text-white" style="background:#000080;">INTERÉS</th>
+                         <th class="text-white" style="background:#000080;">MESES</th>
                          <th class="text-white" style="background:#000080;">HONORARIOS</th>
                          <th class="text-white" style="background:#000080;">GASTOS</th>
                          <th class="text-white" style="background:#000080;">SANCIÓN</th>
@@ -358,7 +359,10 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, CONCAT(UPPE
 
                                     <td>
                                           '.$f["interes"].' %
-                                    </td> 
+                                    </td>
+                                    <td>
+                                          '.$f["meses"].' 
+                                    </td>  
                                     <td>
                                           '.$f["honorarios"].' %
                                     </td>
@@ -370,7 +374,7 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, CONCAT(UPPE
                                           '.$f["sancion"].' %
                                     </td>
                                     <td>
-                                          '.$f["total"].'
+                                          '.number_format($f["total"]).'
                                     </td>
                                    
                                 </tr>';
@@ -392,7 +396,7 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, CONCAT(UPPE
   $i =1;
   if (mysqli_num_rows($vergestion) != 0) {
     
-    $tabla3=$tabla3.'<table class="table table-bordered table-hover table-condensed"> 
+    $tabla3=$tabla3.'<table class="table table-sm"> 
                     <tr class=" info"> 
                       
                         <th class="text-white" style="background:#000080;">GESTIÓN</th>
@@ -442,7 +446,7 @@ $verdatos = $cn->query("SELECT ficha.id, ficha.total, deudor.codigo, CONCAT(UPPE
   $i =1;
   if (mysqli_num_rows($vergestion) != 0) {
     
-    $tabla4=$tabla4.'<table class="table table-bordered table-hover table-condensed"> 
+    $tabla4=$tabla4.'<table class="table table-sm"> 
                     <tr class=" info"> 
                       
                         <th class="text-white" style="background:#000080;">FECHA</th>

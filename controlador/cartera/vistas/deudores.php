@@ -121,7 +121,7 @@
             </div>
           </div>
 
-           <h3 class="text-center my-3"> FICHA </h3>
+           <h3 class="text-center my-3"> CUENTA </h3>
           <div class="container-fluid">
             <div class="table table-responsive m-auto" id="verficha">
               

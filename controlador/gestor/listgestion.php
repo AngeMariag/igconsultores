@@ -88,14 +88,43 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
 </div>
 
 <div class="modal fade bd-example-modal-xl" id="VERMAS" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl ">
+  <div class="modal-dialog modal-xl " style="color:#000080;">
     <div class="modal-content">
-      <h2 class="text-center bold  card-header bg-default" style="color:#000080;">DATOS DEL DEUDOR</h2>
-      <div class="container">
+        <div class="modal-header" style=" background:#003380;">
+          <h3 class="modal-title text-center text-white" id="myModalLabel">CUENTA DEUDOR </h3> <button tyle="buttom" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+                    <!-- PANEL PARA OBSERVAR DATOS DE ACUERDO Y GESTIONES -->
+          <div class="card card-header my-1 container-fluid">       
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link " id="nav-acuerdo-tab" data-toggle="tab" href="#nav-acuerdo" role="tab" aria-controls="nav-home" aria-selected="false">ACUERDO</a>
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab " aria-controls="nav-profile" aria-selected="false">GESTIÓN</a>
+              <a class="nav-item nav-link " id="nav-recordatorio-tab" data-toggle="tab" href="#nav-recordatorio" role="tab" aria-controls="nav-item" aria-selected="false">AGREGAR RECORDATORIO</a>
+              
+            </div>
+          </nav>
+
+        <div class="tab-content my-3" id="nav-tabContent">
+          <div class="tab-pane fade " id="nav-acuerdo" role="tabpanel" aria-labelledby="nav-home-tab">
+            <?php require ("controlador/gestor/vistas/addacuerdo.php") ?>
+          </div>
+          <div class="tab-pane fade  show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <?php require ("controlador/gestor/vistas/addgestion.php") ?>
+          </div>
+          <div class="tab-pane fade " id="nav-recordatorio" role="tabpanel" aria-labelledby="nav-home-tab">
+            <?php require ("controlador/gestor/vistas/addrecordatorio.php") ?>
+          </div>
+       
+        </div>
+    </div>
+
+    <div class="card-header text-white my-3" style=" background:#003380;">
+           DATOS GENERALES
+        </div>
+      <div class="container-fluid card-header">
         <form action="controlador/gestor/registrar_gestion.php" method="POST" id="modalvermas" class="text-center m-auto">
           
-          <input type="hidden" required="required" readonly="readonly" id="id_ficha1" readonly="readonly" name="id" />
-           
+          
           <div class="container-fluid my-3">
             <div class="table table-responsive m-auto table-sm " id="verdeudor">
               
@@ -108,7 +137,7 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
               
             </div>
           </div>
-        <
+        
          <h4>FICHA - <span class="badge badge-secondary">CUENTA</span></h4>
           <div class="container-fluid my-3">
             <div class="table table-responsive m-auto table-sm" id="verficha2">
@@ -121,93 +150,6 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
             <div class="table table-responsive m-auto table-sm" id="verobservaciones">
            </div>
           </div>
-
-
-        <h4>ACUERDO - <span class="badge badge-secondary">CUENTA</span></h4>
-          <div class=" container-fluid my-3">
-            <div class="table table-responsive m-auto table-sm" id="veracuerdo">
-           </div>
-          </div>
-
-         <div class="card-header text-white bg-info my-3">
-            REGISTRAR GESTIÓN
-        </div>
-
-        <div class="container-fluid">
-              <div class="form-row">
-                <div class="form-group col-md-5">
-                  <label for="inputCity">GESTIÓN</label>
-                  <textarea class="form-control" name="gestion"></textarea>
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="inputZip">FECHA</label>
-                  <input type="date" class="form-control" id="" name="fecha">
-                </div>
-                <div class="form-group col-md-2">
-                  <label for="inputZip">MONTO</label>
-                  <input type="text" class="form-control" id="" name="monto">
-                </div>
-                <div class="form-group col-md-2">
-                  <label for="">ESTADO</label>
-                  <select id="" class="form-control" name="estado">
-                    <option selected>SELECCIONA</option>
-                    <option value="0">EN ACUERDO</option>
-                    <option value="1">RENUENTE</option>
-                    <option value="2">INSOLVENTE</option>
-                    <option value="3">INCUMPLIMIENTO</option>
-                    <option value="4">ILOCALIZADO</option>
-                    <option value="5">VOLVAR A LLAMAR</option>
-                    <option value="6">AUDITORIA</option>
-                    <option value="7">FRAUDE</option>
-
-                  </select>
-                </div>
-                
-              </div>
-             
-        </div>
-
-
-        <div class="card-header text-white bg-info my-3">
-            REGISTRAR ACUERDO
-        </div>
-          <div class=" container-fluid row">
-            <div class="form-group col-md-3">
-              <label>TOTAL</label>
-              <input type="" name="" id="totalficha" readonly="" class="form-control ">
-            </div>
-            <div class="form-group col-md-3">
-              <label>PORCENTAJE</label>
-              <input type="number" name="porcentaje" id="porcentaje"  class="form-control " value="0">
-            </div>
-            <div class="form-group col-md-6">
-              <label>ACUERDO</label>
-              <textarea class="form-control"></textarea>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <button type="button" name="btn-total" class="btn btn-primary d-flex justify-content-sm-end my-2" id="btn_get_total2">CALCULAR TOTAL
-            </button>
-        </div>
-        <div class="col-12">
-            <div id="set_total2" class="mb-5 mt-3 text-center"></div>
-        </div>
-          
-          <br>
-   
-         <!-- SAVE ACUERDO -->
-            <div class="card-body text-center">
-                <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-                    <button type="submit" name="btn-save" class="btn btn-success">
-                        <i class="far fa-save"></i>
-                        GUARDAR
-                    </button>
-                    <a href="javascript:window.location.reload()" class="btn btn-danger">
-                        <i class="fas fa-window-close"></i>
-                        Cerrar
-                    </a>
-                </div>
-            </div>
         </form>
       </div>
       </div>
@@ -242,81 +184,6 @@ $sql = $cn->query("SELECT ficha.id, gestor.codigo, deudor.codigo as dcodigo, deu
     return false;
   }
 
-  // FUNCIÓN PARA VER MI TOTAL A COBRAR GESTOR
-  function set_total2(obj) {
-        var html = `<div class="table-responsive col-md-8 m-auto">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th class=" bg-info text-white">TOTAL INICIAL</th>
-            <th class="bg-info text-white">VALOR PORCENTAJE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>${obj.totalficha}</td>
-            
-            <td>${obj.get_porcentaje}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="row class = "col-md-6">
-        <div class="col-md-4  col-sm-12 my-2" style="display: flex;">
-          <label class ="col-md-12"><b>TOTAL A PAGAR: </b></label>
-        </div><input required type="text" name="total" readonly class="form-control col-md-4" value="${obj.total.toFixed(2)}">
-
-      </div>
-      
-    </div>`
-        document.getElementById('set_total2').innerHTML = html
-    }
-
-    function get_total2() {
-        var state = {}
-        var btn_total = document.getElementById('btn_get_total2')
-
-
-        if (btn_total) {
-            btn_total.addEventListener('click', function(e) {
-                // obteniendo input a traves del id
-                var $totalficha = document.getElementById('totalficha')
-                var $porcentaje = document.getElementById('porcentaje')
-                
-                var totalficha = 0
-                var por_porcentaje = 0
-                
-                var get_porcentaje = 0
-                var total = 0
-                var obj = {}
-
-                totalficha = $totalficha.value
-                por_porcentaje = $porcentaje.value
-                
-                if (!totalficha) {
-                    alert("SE REQUIERE EL VALOR TOTAL INICIAL")
-                    return false
-                }
-
-                //  parseando los datos a flotante
-                totalficha = parseFloat(totalficha.split(".").join(""))
-                por_porcentaje = parseFloat(por_porcentaje)
-                
-                get_porcentaje = (totalficha * por_porcentaje) /100
-                
-                total = totalficha + get_porcentaje 
-
-                obj = {
-                    get_porcentaje: get_porcentaje,
-                    total: total,
-                    // sub_total: sub_total,
-                    totalficha: totalficha,
-                    
-                }
-                return set_total2(obj)
-            })
-        }
-    }
-
-    get_total2()
+  
 </script>
 

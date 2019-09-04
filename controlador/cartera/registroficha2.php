@@ -45,6 +45,7 @@ if (isset($_POST['btn-enviar'])) {
     $titulo = $_POST['titulo'];
     $capital = $_POST['capital'];
     $interes = $_POST['interes'];
+    $meses = $_POST['meses'];
     $honorarios = $_POST['honorarios'];
     $gastos = $_POST['gastos'];
     $descuento = $_POST['descuento'];
@@ -86,8 +87,8 @@ if (isset($_POST['btn-enviar'])) {
                     VALUES ('{$cartera["id"]}', '{$deudor_id}', '{$gestor}')";
 
     $query_ficha = $cn->query("INSERT INTO 
-                    ficha(titulo, capital, interes, honorarios, gastos, descuento, sancion, total, id_deudor, id_cartera, estado) 
-                    VALUES ('{$titulo}','{$capital}','{$interes}','{$honorarios}','{$gastos}','{$descuento}','{$sancion}','{$total}','{$deudor_id}','{$cartera["id"]}', '1')");
+                    ficha(titulo, capital, interes, meses, honorarios, gastos, descuento, sancion, total, id_deudor, id_cartera, estado) 
+                    VALUES ('{$titulo}','{$capital}','{$interes}', '{$meses}','{$honorarios}','{$gastos}','{$descuento}','{$sancion}','{$total}','{$deudor_id}','{$cartera["id"]}', '1')");
 
 
     $id_ficha = mysqli_insert_id($cn);  

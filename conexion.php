@@ -1,6 +1,6 @@
 <?php
-// setlocale(LC_TIME, 'es_VE'); # Localiza en español es_Venezuela
-// date_default_timezone_set('America/Caracas');
+setlocale(LC_TIME, 'es_CO'); # Localiza en español es_Venezuela
+date_default_timezone_set('America/Bogota');
 $fecha = date("Y-m-d");
 $hora = date("g:i:s");
 

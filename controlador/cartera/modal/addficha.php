@@ -71,7 +71,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label for="inputState">TIPO DE DOCUMENTOo</label>
+                                        <label for="inputState">TIPO DE DOCUMENTO</label>
                                         <select id="inputState" class="form-control" name="tipodocumento_codeudor_1">
                                             <option selected>...</option>
                                             <option value="cc">CÉDULA DE CIUDADANIA</option>
@@ -358,6 +358,8 @@
         <thead>
           <tr>
             <th>CAPITAL</th>
+            <th>INTERÉS</th>
+            <th>MESES</th>
             <th>HONORARIOS</th>
             <th>GASTOS</th>
             <th>SANCION</th>
@@ -366,10 +368,10 @@
         <tbody>
           <tr>
 
-            <td>${obj.capital.toFixed(3)}</td>
             <td>${formatS(obj.capital)}</td>
-            <td>${obj.get_interes.toFixed(2)}</td>
-            <td>${obj.get_honorarios.toFixed(2)}</td>
+            <td>${obj.get_interes.toFixed()}</td>
+            <td>${obj.get_meses.toFixed()}</td>
+            <td>${obj.get_honorarios.toFixed()}</td>
             <td>${obj.get_gastos.toFixed(2)}</td>
             <td>${obj.get_sancion.toFixed(2)}</td>
           </tr>
@@ -413,6 +415,7 @@
                 var get_interes = 0
                 var get_honorarios = 0
                 var get_gastos = 0
+                var gastos2 = 0
                 // var get_descuento = 0
                 var get_sancion = 0
                 var total = 0
@@ -442,10 +445,11 @@
 
                 get_interes = (capital * por_interes) / 100
                 get_meses = (get_interes * meses) 
-                capital = capital + get_meses
+                capital = capital + get_meses 
 
                 get_honorarios = (capital * por_honorarios) / 100
-                get_gastos = (capital * por_gastos) / 100
+                gastos2 = capital + get_honorarios
+                get_gastos = (gastos2 * por_gastos) / 100
                 // get_descuento = (capital * por_descuento) / 100
                 get_sancion = (capital * por_sancion) / 100
 
@@ -456,6 +460,7 @@
                 // sub_total = total - get_descuento
                 obj = {
                     get_interes: get_interes,
+                    get_meses: get_meses,
                     get_honorarios: get_honorarios,
                     get_gastos: get_gastos,
                     // get_descuento: get_descuento,

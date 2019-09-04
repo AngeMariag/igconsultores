@@ -1,6 +1,6 @@
 <?php
 require("conexion.php");
-// $cn->query("SET NAMES 'utf8'");
+
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $cartera_token = isset($_GET['cartera']) ? $_GET['cartera'] : '';
 $acreedor = $cn->query("SELECT * FROM acreedor WHERE id = $id");
@@ -11,7 +11,7 @@ if ($cartera_token != '') {
   if (mysqli_num_rows($cartera) == 0) {
     return header("Location: menus.php?op=registro_cartera");
   }
-
+$cn->query("SET NAMES 'utf8'");
   $cartera = mysqli_fetch_assoc($cartera);
   $doc_cartera = $cn->query("SELECT * FROM documentos_cartera WHERE id_cartera={$cartera['id']}");
   
@@ -26,6 +26,7 @@ if ($cartera_token != '') {
     WHERE car.id_cartera='{$cartera["id"]}' and car.id_codeudor is NULL";
   
   $fichas = $cn->query($query_ficha);
+  
 }
 
 
